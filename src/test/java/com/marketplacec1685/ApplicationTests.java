@@ -1,4 +1,4 @@
-package com.marketplacec1685.com.marketplacec1685;
+package com.marketplacec1685;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
