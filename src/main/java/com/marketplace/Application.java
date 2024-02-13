@@ -1,4 +1,4 @@
-package com.marketplacec1685.com.marketplacec1685;
+package com.marketplacec1685;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
