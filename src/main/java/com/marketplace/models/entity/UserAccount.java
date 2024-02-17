@@ -31,7 +31,7 @@ public class UserAccount {
     @GeneratedValue
     private Long id;
     private Name name;
-    private LastName lastName;
+    private LastName lastname;
     private Age age;
     private Username username;
     private Password password;
