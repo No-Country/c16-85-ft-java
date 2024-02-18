@@ -1,3 +1,3 @@
-package com.marketplace.models.entity;
-public class CustomerProfile extends Profile{
-}
+//package com.marketplace.models.entity;
+//public class CustomerProfile extends Profile{
+//}

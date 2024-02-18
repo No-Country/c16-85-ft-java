@@ -7,10 +7,7 @@ import com.marketplace.models.valueobjets.Role;
 import com.marketplace.models.valueobjets.Username;
 import com.marketplace.models.valueobjets.Password;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,10 +27,15 @@ public class UserAccount {
     @Id
     @GeneratedValue
     private Long id;
+    @Embedded
     private Name name;
+    @Embedded
     private LastName lastname;
+    @Embedded
     private Age age;
+    @Embedded
     private Username username;
+    @Embedded
     private Password password;
     private List<Role> roles;
     private String photo;
