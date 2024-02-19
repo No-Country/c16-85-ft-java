@@ -2,7 +2,7 @@ package com.marketplace.service.impl;
 
 import com.marketplace.DTO.profession.ProfessionRequest;
 import com.marketplace.DTO.profession.ProfessionResponse;
-import com.marketplace.exceptions.professionExceptions.ProfessionTitleEx;
+import com.marketplace.exceptions.profession.ProfessionTitleEx;
 import com.marketplace.models.entity.Profession;
 import com.marketplace.models.mapper.IProfessionMapper;
 import com.marketplace.repository.IProfessionRepository;

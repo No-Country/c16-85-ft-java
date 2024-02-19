@@ -1,6 +1,6 @@
 package com.marketplace.models.valueobjets.profession;
 
-import com.marketplace.exceptions.professionExceptions.ProfessionTitleEx;
+import com.marketplace.exceptions.profession.ProfessionTitleEx;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
