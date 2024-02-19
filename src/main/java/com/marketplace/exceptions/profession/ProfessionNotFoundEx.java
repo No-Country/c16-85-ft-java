@@ -1,4 +1,4 @@
-package com.marketplace.exceptions.professionExceptions;
+package com.marketplace.exceptions.profession;
 
 public class ProfessionNotFoundEx extends RuntimeException{
 

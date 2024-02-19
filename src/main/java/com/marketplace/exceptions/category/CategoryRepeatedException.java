@@ -1,4 +1,4 @@
-package com.marketplace.exceptions.categoryExceptions;
+package com.marketplace.exceptions.category;
 
 public class CategoryRepeatedException extends RuntimeException{
 
