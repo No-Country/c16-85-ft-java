@@ -1,12 +1,13 @@
 import './App.css'
-
+import { StickyNavbar } from './componentes/Navbar/Navbar'
 
 function App() {
 
   return (
-    <>
-    <h1 className=' text-5xl bg-black text-red-600'>Hola Mundo </h1>
-    </>
+    <div>
+      <StickyNavbar/>
+    </div>
+    
   )
 }
 
