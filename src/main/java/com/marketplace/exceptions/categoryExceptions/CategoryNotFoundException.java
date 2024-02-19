@@ -1,4 +1,4 @@
-package com.marketplace.exceptions;
+package com.marketplace.exceptions.categoryExceptions;
 
 public class CategoryNotFoundException extends RuntimeException{
 

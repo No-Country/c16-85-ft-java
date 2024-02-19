@@ -1,7 +1,7 @@
 package com.marketplace.service.impl;
 
-import com.marketplace.exceptions.CategoryNotFoundException;
-import com.marketplace.exceptions.CategoryRepeatedException;
+import com.marketplace.exceptions.categoryExceptions.CategoryNotFoundException;
+import com.marketplace.exceptions.categoryExceptions.CategoryRepeatedException;
 import com.marketplace.models.entity.Category;
 import com.marketplace.repository.ICategoryRepository;
 import com.marketplace.service.ICategoryService;

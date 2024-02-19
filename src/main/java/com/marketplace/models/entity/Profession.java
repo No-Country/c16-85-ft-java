@@ -1,5 +1,7 @@
 package com.marketplace.models.entity;
 
+import com.marketplace.models.valueobjets.profession.ProfessionDetails;
+import com.marketplace.models.valueobjets.profession.ProfessionTitle;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,20 +15,24 @@ import java.util.UUID;
 @Data
 @Builder
 @NoArgsConstructor @AllArgsConstructor
-@Table(name = "professional_services")
-public class Professional {
+@Table(name = "professions")
+public class Profession {
 
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    @Column(name = "profession_name")
-    private String name;
-    private Long price;
-    private String details;
+    @Column(name = "profession_title")
+    @Embedded
+    private ProfessionTitle title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private Long price;
+
+    @Embedded
+    private ProfessionDetails details;
+
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
