@@ -3,6 +3,7 @@ package com.marketplace.security.auth;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,16 +23,18 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ) {
+        AuthenticationResponse response = service.register(request);
 
-        return ResponseEntity.ok(service.register(request));
-
+        if (response.getStatusCode() == 409)
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(service.register(request));
+        else
+            return ResponseEntity.ok(response);
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
-        //System.out.println(request.getEmail());
 
         return ResponseEntity.ok(service.authenticate(request));
 

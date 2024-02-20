@@ -7,10 +7,12 @@ import com.marketplace.security.config.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
@@ -29,13 +31,27 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-    //try-catch java.sql.SQLIntegrityConstraintViolationException
-        repository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-    //--
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+
+        try{
+            repository.save(user);
+
+            var jwtToken = jwtService.generateToken(user);
+
+            return AuthenticationResponse.builder()
+                    .token(jwtToken)
+                    .message("User Registered Successfully")
+                    .statusCode(200)
+                    .build();
+
+        }catch(DataIntegrityViolationException e){
+
+            return AuthenticationResponse.builder()
+                    .token("")
+                    .message("User Already Exists")
+                    .statusCode(409)
+                    .build();
+
+        }
 
     }
 
