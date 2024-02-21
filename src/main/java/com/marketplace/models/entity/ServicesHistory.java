@@ -41,4 +41,7 @@ public class ServicesHistory {
     @ManyToOne
     private ProfessionalService profesionalService;
 
+    @ManyToOne
+    private ProfessionalService professionalService;
+
 }

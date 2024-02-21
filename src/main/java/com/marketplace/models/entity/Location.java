@@ -30,5 +30,7 @@ public class Location {
 
     @OneToOne
     private ContractorProfile contractorProfile;
+    @OneToOne
+    private CostumerProfile costumerprofile;
 
 }

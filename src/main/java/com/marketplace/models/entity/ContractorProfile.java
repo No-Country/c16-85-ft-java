@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
-
+import com.marketplace.models.entity.UserAccount;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +23,15 @@ public class ContractorProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne
     private UserAccount userAccount;
+    @OneToOne
     private ProfessionalService profService;
+
     @OneToOne
     private Location location;
+    @OneToMany
     private final List<ServicesHistory> servicesHistory = new ArrayList<>();
     @Embedded
     private BusinessName businessName;

@@ -27,14 +27,19 @@ public class ProfessionalService {
     @Embedded
     private ProfessionTitle title;
 
-    @Column(nullable = false)
-    private Long price;
+    @OneToOne
+    private ContractorProfile contractorProfile;
 
     @Embedded
     private ProfessionDetails details;
 
+    @OneToMany
+    private ServicesHistory servicesHistory;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+
 
 }
