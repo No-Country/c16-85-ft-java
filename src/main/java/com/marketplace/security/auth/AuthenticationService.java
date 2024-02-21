@@ -1,9 +1,10 @@
 package com.marketplace.security.auth;
 
 import com.marketplace.repository.UserRepository;
-import com.marketplace.security.Role;
-import com.marketplace.security.UserAuth;
+import com.marketplace.security.userauth.Role;
+import com.marketplace.security.userauth.UserAuth;
 import com.marketplace.security.config.JwtService;
+import com.marketplace.security.userauth.UserAuthRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -18,15 +19,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private final UserRepository repository;
+    private final UserAuthRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     public AuthenticationResponse register(RegisterRequest request) {
 
         var user = UserAuth.builder()
-                .firstname(request.getFirstname())
-                .lastname(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)

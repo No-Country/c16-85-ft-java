@@ -1,4 +1,4 @@
-package com.marketplace.security;
+package com.marketplace.security.userauth;
 
 
 import jakarta.persistence.*;
@@ -18,13 +18,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name="users_authorizations")
 public class UserAuth implements UserDetails {
 
     @Id
     @GeneratedValue
     private Long id;
-    private String firstname;
-    private String lastname;
     @Column(unique = true)
     private String email;
     private String password;
