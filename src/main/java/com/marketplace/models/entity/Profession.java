@@ -27,9 +27,6 @@ public class Profession {
     @Embedded
     private ProfessionTitle title;
 
-    @Column(nullable = false)
-    private Long price;
-
     @Embedded
     private ProfessionDetails details;
 
