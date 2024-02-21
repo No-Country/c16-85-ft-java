@@ -1,3 +1,5 @@
+
+
 package com.marketplace.service.impl;
 
 import com.marketplace.models.entity.Location;
@@ -12,7 +14,6 @@ import java.util.UUID;
 
 @Service
 public class LocationServiceImpl implements LocationService {
-
 
     @Autowired
     LocationRepository locationrepository;
@@ -46,8 +47,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public void locationborrar(UUID id) {
-    locationrepository.deleteById(id);
+        locationrepository.deleteById(id);
     }
-
 
 }

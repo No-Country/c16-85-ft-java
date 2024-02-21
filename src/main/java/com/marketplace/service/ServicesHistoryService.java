@@ -5,15 +5,15 @@ import com.marketplace.models.entity.ServicesHistory;
 import java.util.List;
 import java.util.UUID;
 
-public interface ServicesHistoriService {
+public interface ServicesHistoryService {
 
     ServicesHistory agregarHistory(ServicesHistory newHistory);
 
     List<ServicesHistory> listaServicesHistory();
 
-    ServicesHistory buscarservicesHistory(UUID id);
+    ServicesHistory buscarservHisporId(UUID id);
 
-    ServicesHistory editarHistory(UUID id, ServicesHistory historiUpDate);
+    ServicesHistory editarHistory(UUID id, ServicesHistory historyUpDate);
 
 }
 
