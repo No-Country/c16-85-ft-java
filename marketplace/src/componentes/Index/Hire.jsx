@@ -12,9 +12,7 @@ const SearchJob = () => {
           <div className="max-w-xl mb-2">
          
             <h2 className="max-w-lg mb-2 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none text-center">
-            Ofrece Tus Servicios en Nuestro Marketplace
-           
-              
+            Ofrece Tus Servicios en Nuestro Marketplace              
             </h2>
             <p className="text-base text-gray-700 md:text-lg text-center">
             ¿Quieres ofrecer tus servicios? Únete a  nuestro Marketplace en donde podrás ofrecer tus habilidades en fontanería, albañilería y más.  ¡Regístrate ahora y comienza a ofrecer tus servicios en un entorno confiable con la oportunidad de atraer múltiples clientes!
@@ -71,12 +69,12 @@ const SearchService = () => {
             </p>
           </div>
           <div className="flex flex-col items-center md:flex-row justify-center">
-            <a
+                 <a
               href="/"
-              className="inline-flex items-center justify-center w-full h-12 px-6 mb-3 font-medium tracking-wide  transition duration-200 rounded shadow-lg md:w-auto  md:mb-0 bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none hover:bg-gray-200 bg-gray-300 border border-gray-400  "
+              className="inline-flex items-center justify-center w-full h-12 px-6 mb-3 font-medium tracking-wide  transition duration-200 rounded shadow-md md:w-auto  md:mb-0 bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none bg-white  text-gray-800    py-2  border border-gray-400  "
             >
-              <span className="m-auto  ">Regístrate</span>
-             
+              <span className="m-auto ">Regístrate</span>
+            
             </a>
           </div>
         </div>
