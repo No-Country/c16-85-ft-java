@@ -2,7 +2,7 @@ package com.marketplace.service.impl;
 
 import com.marketplace.DTO.profession.ProfessionRequest;
 import com.marketplace.DTO.profession.ProfessionResponse;
-import com.marketplace.exceptions.profession.ProfessionTitleEx;
+import com.marketplace.exceptions.profession.ProfessionNotFoundEx;
 import com.marketplace.models.entity.Profession;
 import com.marketplace.models.mapper.IProfessionMapper;
 import com.marketplace.repository.IProfessionRepository;
@@ -18,9 +18,13 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProfessionServiceImpl implements IProfessionService {
 
-    private static final String PROFESSION_NOT_FOUND = "Profession not found";
+    private static final String PROFESSION_NOT_FOUND = "No se encontró la profesión";
+
+    // --------------------------------
 
     private final IProfessionRepository professionRepository;
+
+    // --------------------------------
 
     @Override
     public Page<ProfessionResponse> findAll(Pageable pageable) {
@@ -30,7 +34,7 @@ public class ProfessionServiceImpl implements IProfessionService {
     @Override
     public ProfessionResponse findByUUID(UUID id) {
         return IProfessionMapper.INSTANCE.toDto(professionRepository.findById(id)
-                .orElseThrow(()-> new ProfessionTitleEx(PROFESSION_NOT_FOUND)));
+                .orElseThrow(()-> new ProfessionNotFoundEx(PROFESSION_NOT_FOUND)));
     }
 
     @Override
@@ -43,7 +47,7 @@ public class ProfessionServiceImpl implements IProfessionService {
     @Override
     public void update(UUID id, ProfessionRequest professionRequest) {
         Profession professionDB = professionRepository.findById(id)
-                .orElseThrow(()-> new ProfessionTitleEx(PROFESSION_NOT_FOUND));
+                .orElseThrow(()-> new ProfessionNotFoundEx(PROFESSION_NOT_FOUND));
 
         Profession professionUpdated = IProfessionMapper.INSTANCE.toEntity(professionRequest);
         professionUpdated.setId(id);

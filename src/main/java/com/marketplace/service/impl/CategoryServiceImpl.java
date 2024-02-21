@@ -15,13 +15,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements ICategoryService {
 
-    static String CATEGORY_NOT_FOUND = "La categoría no existe";
-    static String CATEGORY_REPEATED = "Ya existe esa categoría";
+    private static final String CATEGORY_NOT_FOUND = "No se encontró la categoría";
+    private static final String CATEGORY_REPEATED = "Ya existe una categoría con ese nombre";
 
     // --------------------------------
 
     private final ICategoryRepository categoryRepository;
-
 
     // --------------------------------
 
