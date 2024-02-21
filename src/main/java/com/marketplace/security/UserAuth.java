@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User implements UserDetails {
+public class UserAuth implements UserDetails {
 
     @Id
     @GeneratedValue
@@ -30,7 +30,6 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-
 
     //ROLES
     @Override
