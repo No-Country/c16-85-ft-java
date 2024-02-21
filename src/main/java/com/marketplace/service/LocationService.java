@@ -1,5 +1,7 @@
 package com.marketplace.service;
 
-public interface LocationService {
+import com.marketplace.models.entity.Location;
 
-}
+import java.util.List;
+import java.util.UUID;
+
