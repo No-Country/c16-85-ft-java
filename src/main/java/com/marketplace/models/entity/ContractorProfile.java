@@ -25,6 +25,8 @@ public class ContractorProfile {
     private Long id;
     private UserAccount userAccount;
     private ProfessionalService profService;
+
+    @ManyToOne
     private Location location;
     private List<ServicesHistory> servicesHistory;
     @Embedded
@@ -42,7 +44,7 @@ public class ContractorProfile {
         this.userAccount = userAccount;
         this.profService = profService;
         this.location = location;
-        this.servicesHistory = servicesHistory;
+        this.ServicesHistory = servicesHistory;
         this.businessName = new BusinessName(businessName);
         this.ceoName = new CeoName(ceoName);
         this.ceoLastName = new CeoLastName(ceoLastName);
