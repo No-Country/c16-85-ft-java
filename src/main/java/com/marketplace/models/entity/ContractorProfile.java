@@ -21,14 +21,13 @@ import java.util.List;
 public class ContractorProfile {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private UserAccount userAccount;
     private ProfessionalService profService;
-
-    @ManyToOne
+    @OneToOne
     private Location location;
-    private List<ServicesHistory> servicesHistory;
+    private final List<ServicesHistory> servicesHistory = new ArrayList<>();
     @Embedded
     private BusinessName businessName;
     @Embedded
@@ -38,30 +37,34 @@ public class ContractorProfile {
     @Enumerated(EnumType.STRING)
     private Available available;
 
-    public ContractorProfile(){};
-    public ContractorProfile(String businessName, String ceoName, String ceoLastName,UserAccount userAccount,
-                             ProfessionalService profService, Location location, ServicesHistory servicesHistory){
+    public ContractorProfile(){}
+    public ContractorProfile(UserAccount userAccount, ProfessionalService profService,
+                             Location location, BusinessName businessName, CeoName ceoName,
+                             CeoLastName ceoLastName, Available available){
         this.userAccount = userAccount;
         this.profService = profService;
         this.location = location;
-        this.ServicesHistory = servicesHistory;
-        this.businessName = new BusinessName(businessName);
-        this.ceoName = new CeoName(ceoName);
-        this.ceoLastName = new CeoLastName(ceoLastName);
+        this.businessName = businessName;
+        this.ceoName = ceoName;
+        this.ceoLastName = ceoLastName;
+        this.available = available;
     }
 
     public static ContractorProfile createNewContractorProfile(ContractorProfileRequest contractorDetails,
-                                                               UserAccount userAccount, ProfessionalService profService,
-                                                               Location location, ServicesHistory servicesHistory){
-        return new ContractorProfile(
-                userAccount,
-                profService,
-                location,
-                servicesHistory,
-                contractorDetails.businessName(),
-                contractorDetails.ceoName(),
-                contractorDetails.ceoLastName()
-        );
+                                                               UserAccount userAccount,
+                                                               ProfessionalService profService,
+                                                               Location location){
+        var businessName = new BusinessName(contractorDetails.businessName());
+        var ceoName = new CeoName(contractorDetails.ceoName());
+        var ceoLastName = new CeoLastName(contractorDetails.ceoLastName());
+        var available = Available.YES;
+
+        return new ContractorProfile(userAccount, profService, location,
+                businessName, ceoName, ceoLastName, available);
+    }
+
+    public void addServicesHistory(ServicesHistory servicesHistory) {
+        this.servicesHistory.add(servicesHistory);
     }
 
 }
