@@ -29,6 +29,6 @@ public class Location {
     private Addres addres;
 
     @OneToOne
-    private List<ContractorProfile> contractorProfile;
+    private ContractorProfile contractorProfile;
 
 }

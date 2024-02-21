@@ -39,6 +39,6 @@ public class ServicesHistory {
     private CostumerContractor costumerContractor;
 
     @ManyToOne
-    private Profession profesionalService;
+    private ProfessionalService profesionalService;
 
 }

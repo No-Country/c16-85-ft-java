@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor @AllArgsConstructor
 @Table(name = "professions")
-public class Profession {
+public class ProfessionalService {
 
     @Id
     @GeneratedValue(generator = "uuid2")
