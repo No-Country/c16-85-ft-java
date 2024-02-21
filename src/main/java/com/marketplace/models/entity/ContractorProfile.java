@@ -26,7 +26,7 @@ public class ContractorProfile {
     private UserAccount userAccount;
     private ProfessionalService profService;
 
-    @ManyToOne
+    @OneToOne
     private Location location;
     private List<ServicesHistory> servicesHistory;
     @Embedded

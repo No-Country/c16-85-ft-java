@@ -28,7 +28,7 @@ public class Location {
     @Embedded
     private Addres addres;
 
-    @OneToMany
-    private ContractorProfile contractorProfile;
+    @OneToOne
+    private List<ContractorProfile> contractorProfile;
 
 }
