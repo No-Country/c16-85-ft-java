@@ -27,6 +27,7 @@ public class Profession {
     @Embedded
     private ProfessionTitle title;
 
+    @Column(nullable = false)
     private Long price;
 
     @Embedded
@@ -35,8 +36,5 @@ public class Profession {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
-    @Enumerated(EnumType.STRING)
-    private Availability availability;
 
 }

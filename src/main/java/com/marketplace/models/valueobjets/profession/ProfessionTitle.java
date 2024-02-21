@@ -6,7 +6,7 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public record ProfessionTitle(String title) {
 
-    private static final String INVALID_NAME = "Invalid title";
+    private static final String INVALID_TITLE = "Title must be between 3 and 50 letters";
     private static final int MIN_LENGTH = 3;
     private static final int MAX_LENGTH = 30;
 
@@ -16,7 +16,7 @@ public record ProfessionTitle(String title) {
 
     public static void validateName(String title){
         if (title == null || title.length() < MIN_LENGTH || title.length() > MAX_LENGTH){
-            throw new ProfessionTitleEx(INVALID_NAME);
+            throw new ProfessionTitleEx(INVALID_TITLE);
         }
     }
 

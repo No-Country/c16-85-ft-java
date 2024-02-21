@@ -1,6 +1,5 @@
 package com.marketplace.DTO.profession;
 
-import com.marketplace.models.entity.Availability;
 import com.marketplace.models.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +16,5 @@ public class ProfessionResponse {
     private Long price;
     private String details;
     private Category category;
-    private Availability availability;
 
 }
