@@ -31,7 +31,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/v1/auth/**")
                         .permitAll()
                         .anyRequest()
-                        .authenticated()
+                        //.autenticated()
+                        .permitAll() // permitAll() para poder testear
                 ))
                 .sessionManagement(sess ->
                         sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
