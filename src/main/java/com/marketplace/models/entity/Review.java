@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "reviews")
@@ -23,10 +24,13 @@ public class Review {
     @Column
     @NotNull
     private String description;
-    private  Double score;
+    private Double score;
 
-    @OneToMany
-    private ServicesHistory servicesHistory;
+    @OneToMany(mappedBy = "review")
+    private List<ServicesHistory> servicesHistoryList;
+
+//    @OneToMany
+//    private ServicesHistory servicesHistory;
 
 
 }

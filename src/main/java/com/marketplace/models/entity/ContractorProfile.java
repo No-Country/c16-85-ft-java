@@ -24,20 +24,28 @@ public class ContractorProfile {
     private Long id;
 
     @OneToOne
+    @JoinColumn(name = "user_account_id")
     private UserAccount userAccount;
+
     @OneToOne
+    @JoinColumn(name = "prof_service_id")
     private ProfessionalService profService;
 
     @OneToOne
     private Location location;
+
     @OneToMany
     private final List<ServicesHistory> servicesHistory = new ArrayList<>();
+
     @Embedded
     private BusinessName businessName;
+
     @Embedded
     private CeoName ceoName;
+
     @Embedded
     private CeoLastName ceoLastName;
+
     @Enumerated(EnumType.STRING)
     private Available available;
 

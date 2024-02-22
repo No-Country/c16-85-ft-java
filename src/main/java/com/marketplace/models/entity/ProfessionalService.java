@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,19 +28,17 @@ public class ProfessionalService {
     @Embedded
     private ProfessionTitle title;
 
-    @OneToOne
+    @OneToOne(mappedBy = "profService")
     private ContractorProfile contractorProfile;
 
     @Embedded
     private ProfessionDetails details;
 
-    @OneToMany
-    private ServicesHistory servicesHistory;
+    @OneToMany(mappedBy = "professionalService")
+    private List<ServicesHistory> servicesHistoryList;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
-
 
 }

@@ -30,15 +30,16 @@ public class ServicesHistory {
     private BigDecimal price;
 
     @ManyToOne
+    @JoinColumn(name = "contractor_profile_id")
     private ContractorProfile contractorProfile;
 
     @ManyToOne
+    @JoinColumn(name = "review_id")
     private Review review;
 
     @ManyToOne
-    private ProfessionalService profesionalService;
-
-    @ManyToOne
+    @JoinColumn(name = "professional_service_id")
     private ProfessionalService professionalService;
+
 
 }
