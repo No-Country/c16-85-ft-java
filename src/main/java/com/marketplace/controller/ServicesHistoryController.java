@@ -28,7 +28,7 @@ public class ServicesHistoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ServicesHistory> getServicesHistoryById(@PathVariable UUID id) {
+    public ResponseEntity<ServicesHistory> getServicesHistoryById(@PathVariable Long id) {
         ServicesHistory servicesHistory = servicesHistoryService.buscarservHisporId(id);
         if (servicesHistory != null) {
             return new ResponseEntity<>(servicesHistory, HttpStatus.OK);
@@ -44,7 +44,7 @@ public class ServicesHistoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ServicesHistory> updateServicesHistory(@PathVariable UUID id,
+    public ResponseEntity<ServicesHistory> updateServicesHistory(@PathVariable Long id,
                                                                  @RequestBody ServicesHistory updatedServicesHistory) {
         ServicesHistory editedServicesHistory = servicesHistoryService.editarHistory(id, updatedServicesHistory);
         if (editedServicesHistory != null) {

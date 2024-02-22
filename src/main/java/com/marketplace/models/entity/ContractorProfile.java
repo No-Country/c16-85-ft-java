@@ -9,7 +9,6 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
 import com.marketplace.models.entity.UserAccount;
 import java.util.ArrayList;
 import java.util.List;

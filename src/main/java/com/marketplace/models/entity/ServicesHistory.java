@@ -21,8 +21,8 @@ public class ServicesHistory {
     @Id
     @Column
     @NotNull
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID serviceHistoryId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long serviceHistoryId;
 
     @Column
     @NotNull
@@ -34,9 +34,6 @@ public class ServicesHistory {
 
     @ManyToOne
     private Review review;
-
-    @ManyToOne
-    private CostumerContractor costumerContractor;
 
     @ManyToOne
     private ProfessionalService profesionalService;

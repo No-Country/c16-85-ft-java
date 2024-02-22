@@ -17,8 +17,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Location {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID locationId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long locationId;
 
     @Column
     @NotNull
@@ -30,7 +30,7 @@ public class Location {
 
     @OneToOne
     private ContractorProfile contractorProfile;
-    @OneToOne
-    private CostumerProfile costumerprofile;
+
+
 
 }

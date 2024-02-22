@@ -11,12 +11,12 @@ public interface LocationService {
 
     List<Location> listLocations();
 
-    Location buscarPorId(UUID id);
+    Location buscarPorId(Long id);
 
 
     Location guardarlocations(Location newlocation);
 
-    Location editarLocationPorID (UUID id, Location locationActulizada);
+    Location editarLocationPorID (Long id, Location locationActulizada);
 
-    void locationborrar (UUID id);
+    void locationborrar (Long id);
 }

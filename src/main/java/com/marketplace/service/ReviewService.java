@@ -9,12 +9,12 @@ import java.util.UUID;
 public interface ReviewService {
     List<Review> listReview();
 
-    Review buscarReviewPorId(UUID id);
+    Review buscarReviewPorId(Long id);
 
 
     Review guardarReview(Review newReview);
 
-    Review editarReviewPorID (UUID id, Review reviewUpDate);
+    Review editarReviewPorID (Long id, Review reviewUpDate);
 
 
 }

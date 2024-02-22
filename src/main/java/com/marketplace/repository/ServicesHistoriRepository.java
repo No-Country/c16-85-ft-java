@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface ServicesHistoriRepository extends JpaRepository<ServicesHistory, UUID> {
+public interface ServicesHistoriRepository extends JpaRepository<ServicesHistory, Long> {
 }

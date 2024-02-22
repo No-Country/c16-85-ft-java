@@ -11,9 +11,9 @@ public interface ServicesHistoryService {
 
     List<ServicesHistory> listaServicesHistory();
 
-    ServicesHistory buscarservHisporId(UUID id);
+    ServicesHistory buscarservHisporId(Long id);
 
-    ServicesHistory editarHistory(UUID id, ServicesHistory historyUpDate);
+    ServicesHistory editarHistory(Long id, ServicesHistory historyUpDate);
 
 }
 

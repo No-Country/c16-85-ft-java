@@ -28,13 +28,13 @@ public class ServicesHistoryServiceImpl implements ServicesHistoryService {
     }
 
     @Override
-    public ServicesHistory buscarservHisporId(UUID id) {
+    public ServicesHistory buscarservHisporId(Long id) {
         Optional<ServicesHistory> optionalServicesHistory = servicehistorirepository.findById(id);
         return optionalServicesHistory.orElse(null);
     }
 
     @Override
-    public ServicesHistory editarHistory(UUID id, ServicesHistory historiUpDate) {
+    public ServicesHistory editarHistory(Long id, ServicesHistory historiUpDate) {
         Optional<ServicesHistory> optionalServicesHistory = servicehistorirepository.findById(id);
         if (optionalServicesHistory.isPresent()) {
             ServicesHistory historyexistente = optionalServicesHistory.get();

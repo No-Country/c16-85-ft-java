@@ -24,7 +24,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review buscarReviewPorId(UUID id) {
+    public Review buscarReviewPorId(Long id) {
         Optional<Review> optionalReview = reviewrepository.findById(id);
         return optionalReview.orElse(null);
 
@@ -36,7 +36,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review editarReviewPorID(UUID id, Review reviewUpDate) {
+    public Review editarReviewPorID(Long id, Review reviewUpDate) {
         Optional<Review> optionalReview = reviewrepository.findById(id);
         if (optionalReview.isPresent()) {
             Review reviewexistente = optionalReview.get();

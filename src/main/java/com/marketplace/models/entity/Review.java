@@ -17,8 +17,8 @@ import java.util.UUID;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID reviewId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long reviewId;
 
     @Column
     @NotNull
