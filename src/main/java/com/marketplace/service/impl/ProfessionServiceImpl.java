@@ -28,7 +28,7 @@ public class ProfessionServiceImpl implements IProfessionService {
     }
 
     @Override
-    public ProfessionResponse findByUUID(UUID id) {
+    public ProfessionResponse findById(Long id) {
         return IProfessionMapper.INSTANCE.toDto(professionRepository.findById(id)
                 .orElseThrow(()-> new ProfessionTitleEx(PROFESSION_NOT_FOUND)));
     }
@@ -37,11 +37,13 @@ public class ProfessionServiceImpl implements IProfessionService {
     public void save(ProfessionRequest profession) {
         ProfessionalService newProfessionalService = IProfessionMapper.INSTANCE.toEntity(profession);
 
+        newProfessionalService.setAvailable(true);
+
         professionRepository.save(newProfessionalService);
     }
 
     @Override
-    public void update(UUID id, ProfessionRequest professionRequest) {
+    public void update(Long id, ProfessionRequest professionRequest) {
         ProfessionalService professionalServiceDB = professionRepository.findById(id)
                 .orElseThrow(()-> new ProfessionTitleEx(PROFESSION_NOT_FOUND));
 
@@ -51,8 +53,8 @@ public class ProfessionServiceImpl implements IProfessionService {
     }
 
     @Override
-    public void deleteByUUID(UUID id) {
-        findByUUID(id);
+    public void deleteById(Long id) {
+        findById(id);
         professionRepository.deleteById(id);
     }
 

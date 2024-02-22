@@ -7,10 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -20,9 +18,8 @@ import java.util.UUID;
 public class ProfessionalService {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "profession_title")
     @Embedded
@@ -33,6 +30,10 @@ public class ProfessionalService {
 
     @Embedded
     private ProfessionDetails details;
+
+    private Double price;
+    private boolean available;
+    private boolean atHome;
 
     @OneToMany(mappedBy = "professionalService")
     private List<ServicesHistory> servicesHistoryList;

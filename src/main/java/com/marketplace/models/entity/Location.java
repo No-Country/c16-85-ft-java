@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Location {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long locationId;
 
     @Column

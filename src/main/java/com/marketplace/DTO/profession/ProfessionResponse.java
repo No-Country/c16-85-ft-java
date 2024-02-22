@@ -5,16 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor @NoArgsConstructor
 public class ProfessionResponse {
 
-    private UUID id;
+    private Long id;
     private String title;
-    private Long price;
     private String details;
+    private Double price;
+    private boolean available;
+    private boolean atHome;
     private Category category;
 
 }

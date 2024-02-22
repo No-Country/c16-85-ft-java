@@ -21,7 +21,7 @@ public class ServicesHistory {
     @Id
     @Column
     @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long serviceHistoryId;
 
     @Column
