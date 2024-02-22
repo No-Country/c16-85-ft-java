@@ -53,8 +53,8 @@ const Faqs = () => {
                             </svg>
                         </div>
                         <div>
-                            <h4 class="text-xl font-bold text-gray-700">Repudiandae commodi perferendis et itaque?</h4>
-                            <p class="text-gray-600 my-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, dignissimos. Neque eos, dignissimos provident reiciendis debitis repudiandae commodi perferendis et itaque, similique fugiat cumque impedit iusto vitae dolorum. Nostrum, fugit!</p>
+                            <h4 class="text-xl font-bold text-gray-700">¿Cómo se establecen los precios de los servicios?</h4>
+                            <p class="text-gray-600 my-2">Los precios de los servicios son determinados por los propios proveedores y pueden variar según la complejidad del proyecto, la experiencia del proveedor y otros factores. Nuestro marketplace ofrece una amplia gama de opciones para adaptarse a diferentes presupuestos. Te recomendamos que compares varios proveedores y sus ofertas antes de tomar una decisión.</p>
                         </div>
                     </div>
                     <div class="flex space-x-8 mt-8">

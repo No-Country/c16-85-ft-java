@@ -52,7 +52,6 @@ const SearchService = () => {
               src={imgSearchService}
               alt=""
             />
-
           </div>
           <div className="mb-10 lg:max-w-lg lg:pr-5  3  lg:mb-0     lg:pl-10" >
             <div className="max-w-xl mb-2 pt-3">
@@ -85,7 +84,7 @@ const SearchService = () => {
 const Hire = () => {
   return (
     <>
-      <div style={{ margin: "auto", width: "80%" }}>
+      <div style={{ margin: "auto", width: "100%" }}>
         <SearchJob />
         <SearchService />
       </div>

@@ -1,13 +1,17 @@
 import imgService from '../../../public/img/service.jpg'
+import imgElectrician from '../../../public/img/electricista.webp'
+import imgPlumber from '../../../public/img/Plomero.webp'
+import imgCarpenter from '../../../public/img/Gasista.webp'
+import imgConstructionWorker from '../../../public/img/albañil.webp'
 
-
-const CardService = () => {
+const CardService = ({name , description , img }) => {
+  console.log(name);
   return (<>
     <div className="flex flex-col overflow-hidden rounded-lg shadow-lg">
       <div className="flex-shrink-0">
         <img
           className="object-cover w-full h-44 md:h-60"
-          src={imgService}
+          src={img}
           alt=""
         />
       </div>
@@ -15,16 +19,14 @@ const CardService = () => {
         <div className="flex-1">
           <p className="block mt-2">
             <p className="text-xl  font-sans  font-bold tracking-tight text-gray-900">
-              Servicio 1
+              {name}
             </p>
             <p className="mt-3 text-base text-gray-500">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Architecto accusantium praesentium eius, ut atque fuga culpa,
-              similique sequi cum eos quis dolorum.
+            {description}
             </p>
           </p>
           <a class="inline-block mt-5 w-auto bg-slate-600 hover:cursor-pointer hover:bg-slate-700 text-white font-semibold py-2 px-4 border border-sky-800 rounded text-center">
-            Buscar [NombreProfesión]</a>
+            Buscar {name}</a>
         </div>
       </div>
     </div>
@@ -33,9 +35,14 @@ const CardService = () => {
 
 const Service = () => {
 
-  const serviceDetails = ['Plomero', 'Electricista', 'Carpintero', 'Albañil']
-
-
+  const serviceDetails = [{name: 'Electricista' , description : '¡Soluciones eléctricas confiables al alcance de tu mano! Nuestro equipo de electricistas expertos ofrece servicios de instalación, reparación y mantenimiento eléctrico para hogares, negocios y proyectos industriales. ' 
+   , img: imgElectrician} ,
+   {name: 'Plomero' , description : '¿Problemas con tuberías? ¡Relájate! Somos tu solución. Nuestro equipo de fontaneros está listo para atender tus necesidades, desde pequeñas reparaciones hasta instalaciones completas.' ,
+  img: imgPlumber} , 
+   {name: 'Carpintero' , description: '¿Deseas darle vida a tus espacios con muebles únicos y de calidad? Entra en el mundo de la carpintería  con nosotros. Nuestro equipo de carpinteros expertos está listo para transformar tus ideas en piezas de arte. ' ,
+  img: imgCarpenter} , 
+   {name: 'Albañil' , description: '¿Quieres hacer realidad tus sueños de construcción? Nosotros te ayudamos. Nuestro equipo de albañiles expertos combina habilidad y pasión para crear estructuras sólidas y estéticamente impresionantes.' , img: imgConstructionWorker}]
+  
   return (<>
 
     <section className="bg-gradient-to-r from-slate-500 to-slate-800">
@@ -44,7 +51,7 @@ const Service = () => {
         <div className="relative mx-auto max-w-7xl">
           <div className="grid max-w-lg gap-5 mx-auto lg:grid-cols-2 lg:max-w-none w-[80%] ">
             {
-              serviceDetails.map(service => <CardService />)
+              serviceDetails.map(service => <CardService  name={service.name} description={service.description}  img={service.img}/>)
             }
           </div>
         </div>
