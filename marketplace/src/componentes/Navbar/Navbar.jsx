@@ -19,7 +19,7 @@ const Navbar = () => {
                             <Link spy={true} smooth={true} to="Inicio">
                                 <li className="hover:text-green-700 transition border-b-2 border-slate-600 hover:border-green-700 cursor-pointer">Inicio</li>
                             </Link>
-                            <Link spy={true} smooth={true} to="Servicios">
+                            <Link spy={true} smooth={true} to="/Servicios">
                                 <li className="hover:text-green-700 transition border-b-2 border-slate-600 hover:border-green-700 cursor-pointer">Servicios</li>
                             </Link>
                             <Link spy={true} smooth={true} to="Login">

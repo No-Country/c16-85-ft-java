@@ -5,7 +5,7 @@ import Footer from "./componentes/Footer/Footer";
 import Index from './pages';
 import Login from "./componentes/User/Login";
 import Register from './componentes/User/Register';
-
+import Servicios from "./componentes/Sv/Servicios"
 
 function App() {
   return (
@@ -13,9 +13,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}>
           <Route index element={<Index/>} />
-           <Route path="Registrarse" element={<Login/>} />
-           <Route path="Prueba" element={<Register/>} />
-      </Route>
+          <Route path="/Servicios" element={<Servicios/>} />
+          <Route path="Registrarse" element={<Login />} />
+        </Route>
+
+        
+        <Route path="Prueba" element={<Register/>} />
+
       </Routes>
     </Router>
   );
