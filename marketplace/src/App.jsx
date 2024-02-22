@@ -1,4 +1,3 @@
-import { FaQq } from 'react-icons/fa'
 import './App.css'
 import Header from './componentes/Index/Header'
 import Hire from './componentes/Index/Hire'
@@ -11,9 +10,7 @@ function App() {
 
   return (
     <>
-      <div>
-        <Navbar/>
-      </div>
+      <Navbar/>
       <Header/>
       <Hire />
       <Service />

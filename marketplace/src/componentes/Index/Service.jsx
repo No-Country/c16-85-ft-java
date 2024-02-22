@@ -33,7 +33,7 @@ const CardService = () => {
 
 const Service = () => {
 
-  const serviceDetails = ['Servicio 1', 'Servicio 2', 'Servicio 3', 'Servicio 4']
+  const serviceDetails = ['Plomero', 'Electricista', 'Carpintero', 'Albañil']
 
 
   return (<>
