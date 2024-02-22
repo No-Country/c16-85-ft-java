@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import Navbar from "./componentes/Navbar/Navbar";
 import Footer from "./componentes/Footer/Footer";
 import Index from './pages';
@@ -11,9 +11,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/Registrarse" element={<Login/>} />
-        <Route path="/Prueba" element={<Register/>} />
+        <Route path="/" element={<Home/>}>
+          <Route index element={<Index/>} />
+           <Route path="Registrarse" element={<Login/>} />
+           <Route path="Prueba" element={<Register/>} />
+      </Route>
       </Routes>
     </Router>
   );
@@ -24,7 +26,7 @@ function Home() {
   return (
     <div>
       <Navbar />
-      <Index />
+      <Outlet/>
       <Footer />
     </div>
   );
