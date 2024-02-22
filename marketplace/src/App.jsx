@@ -1,25 +1,31 @@
-import './App.css'
-import Header from './componentes/Index/Header'
-import Hire from './componentes/Index/Hire'
-import Service from './componentes/Index/Service'
-import Navbar from './componentes/Navbar/Navbar'
-import Faqs from './componentes/Index/Faqs'
-import Footer from './componentes/Footer/Footer'
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./componentes/Navbar/Navbar";
+import Footer from "./componentes/Footer/Footer";
+import Index from './pages';
+import Login from "./componentes/User/Login";
 
 function App() {
-
   return (
-    <>
-      <Navbar/>
-      <Header/>
-      <Hire />
-      <Service />
-      <Faqs/>
-      <Footer/>
-    </>
-
-
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/Registrarse" element={<Login />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+
+
+function Home() {
+  return (
+    <div>
+      <Navbar />
+      <Index />
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
