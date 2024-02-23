@@ -29,10 +29,10 @@ public class AuthenticationController {
     ) {
         AuthenticationResponse response = service.userRegister(request);
 
-        if (response.getStatusCode() == 409)
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(service.userRegister(request));
-        else
+        if (response.getStatusCode() == 200)
             return ResponseEntity.ok(response);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(service.userRegister(request));
     }
 
     @PostMapping("/authenticate")

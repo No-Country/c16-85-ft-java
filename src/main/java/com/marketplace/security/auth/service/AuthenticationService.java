@@ -1,5 +1,6 @@
 package com.marketplace.security.auth.service;
 
+import com.marketplace.exceptions.user.InvalidEmailException;
 import com.marketplace.security.auth.dto.AuthenticationRequest;
 import com.marketplace.security.auth.dto.AuthenticationResponse;
 import com.marketplace.security.auth.dto.RegisterRequest;
@@ -15,6 +16,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Pattern;
+
 import static com.marketplace.security.userauth.model.Role.USER;
 
 
@@ -27,6 +30,20 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     public AuthenticationResponse userRegister(RegisterRequest request) {
+
+        try{
+
+            validateEmail(request.getEmail());
+
+        }catch(InvalidEmailException e){
+
+            return AuthenticationResponse.builder()
+                    .token("")
+                    .message(e.getMessage())
+                    .statusCode(400)
+                    .build();
+        }
+
 
         var user = UserAuth.builder()
                 .email(request.getEmail())
@@ -50,9 +67,8 @@ public class AuthenticationService {
             return AuthenticationResponse.builder()
                     .token("")
                     .message("User Already Exists")
-                    .statusCode(409)
+                    .statusCode(400)
                     .build();
-
         }
 
     }
@@ -79,4 +95,16 @@ public class AuthenticationService {
 
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) {
     }
+
+    public void validateEmail(String email){
+
+        final String EMAIL_REGEX = "^[a-zA-Z0-9._]+@[a-zA-Z]+\\.com$";
+        final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
+
+        if (email == null || !EMAIL_PATTERN.matcher(email).matches()) {
+            throw new InvalidEmailException("Invalid email format: " + email);
+        }
+    }
 }
+
+
