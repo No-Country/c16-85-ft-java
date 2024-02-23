@@ -20,12 +20,10 @@ public class ServicesHistory {
 
     @Id
     @Column
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long serviceHistoryId;
 
     @Column
-    @NotNull
     private LocalDate date;
     private BigDecimal price;
 
