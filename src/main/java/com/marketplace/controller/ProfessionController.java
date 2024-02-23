@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 
 @RestController
 @RequestMapping("/professions")
@@ -27,8 +25,8 @@ public class ProfessionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProfessionResponse> findByUUID(@PathVariable UUID id){
-        return new ResponseEntity<>(professionService.findByUUID(id), HttpStatus.OK);
+    public ResponseEntity<ProfessionResponse> findByUUID(@PathVariable Long id){
+        return new ResponseEntity<>(professionService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping
@@ -38,15 +36,15 @@ public class ProfessionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable UUID id,
+    public ResponseEntity<Void> update(@PathVariable Long id,
                                        @RequestBody ProfessionRequest professionRequest){
         professionService.update(id, professionRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id){
-        professionService.deleteByUUID(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        professionService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

@@ -3,7 +3,7 @@ package com.marketplace.service.impl;
 import com.marketplace.DTO.profession.ProfessionRequest;
 import com.marketplace.DTO.profession.ProfessionResponse;
 import com.marketplace.exceptions.profession.ProfessionTitleEx;
-import com.marketplace.models.entity.Profession;
+import com.marketplace.models.entity.ProfessionalService;
 import com.marketplace.models.mapper.IProfessionMapper;
 import com.marketplace.repository.IProfessionRepository;
 import com.marketplace.service.IProfessionService;
@@ -28,31 +28,33 @@ public class ProfessionServiceImpl implements IProfessionService {
     }
 
     @Override
-    public ProfessionResponse findByUUID(UUID id) {
+    public ProfessionResponse findById(Long id) {
         return IProfessionMapper.INSTANCE.toDto(professionRepository.findById(id)
                 .orElseThrow(()-> new ProfessionTitleEx(PROFESSION_NOT_FOUND)));
     }
 
     @Override
     public void save(ProfessionRequest profession) {
-        Profession newProfession = IProfessionMapper.INSTANCE.toEntity(profession);
+        ProfessionalService newProfessionalService = IProfessionMapper.INSTANCE.toEntity(profession);
 
-        professionRepository.save(newProfession);
+        newProfessionalService.setAvailable(true);
+
+        professionRepository.save(newProfessionalService);
     }
 
     @Override
-    public void update(UUID id, ProfessionRequest professionRequest) {
-        Profession professionDB = professionRepository.findById(id)
+    public void update(Long id, ProfessionRequest professionRequest) {
+        ProfessionalService professionalServiceDB = professionRepository.findById(id)
                 .orElseThrow(()-> new ProfessionTitleEx(PROFESSION_NOT_FOUND));
 
-        Profession professionUpdated = IProfessionMapper.INSTANCE.toEntity(professionRequest);
-        professionUpdated.setId(id);
-        professionRepository.save(professionUpdated);
+        ProfessionalService professionalServiceUpdated = IProfessionMapper.INSTANCE.toEntity(professionRequest);
+        professionalServiceUpdated.setId(id);
+        professionRepository.save(professionalServiceUpdated);
     }
 
     @Override
-    public void deleteByUUID(UUID id) {
-        findByUUID(id);
+    public void deleteById(Long id) {
+        findById(id);
         professionRepository.deleteById(id);
     }
 

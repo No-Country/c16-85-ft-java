@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 public class ProfessionRequest {
 
     private String title;
-    private Long price;
+    private Double price;
     private String details;
+    private boolean atHome;
     private Long categoryId;
 
 }

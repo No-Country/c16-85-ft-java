@@ -7,31 +7,36 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
-import java.util.UUID;
+import java.util.List;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor @AllArgsConstructor
 @Table(name = "professions")
-public class Profession {
+public class ProfessionalService {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "profession_title")
     @Embedded
     private ProfessionTitle title;
 
-    @Column(nullable = false)
-    private Long price;
+    @OneToOne(mappedBy = "profService")
+    private ContractorProfile contractorProfile;
 
     @Embedded
     private ProfessionDetails details;
+
+    private Double price;
+    private boolean available;
+    private boolean atHome;
+
+    @OneToMany(mappedBy = "professionalService")
+    private List<ServicesHistory> servicesHistoryList;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

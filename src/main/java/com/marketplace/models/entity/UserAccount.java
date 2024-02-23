@@ -37,7 +37,7 @@ public class UserAccount {
     private Username username;
     @Embedded
     private Password password;
-    private List<Role> roles;
+//    private List<Role> roles;
     private String photo;
 
 }

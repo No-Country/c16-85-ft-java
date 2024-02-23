@@ -48,7 +48,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
 
                         .anyRequest()
-                        .authenticated()
+                        //.autenticated()
+                        .permitAll() // permitAll() para poder testear
                 ))
                 .sessionManagement(sess ->
                         sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
