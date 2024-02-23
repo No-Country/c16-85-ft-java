@@ -20,26 +20,26 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-
+    /*Este controlador trae toda la lista de la entidad Review */
     @GetMapping
     public List<Review> getAllReviews() {
         return reviewService.listReview();
     }
 
-
-    @GetMapping("/{id}")
+    /*Este controlador trae un elemento por su Id de la lista de la entidad Review */
+    @GetMapping("buscar/{id}")
     public Review getReviewById(@PathVariable Long reviewId) {
         return reviewService.buscarReviewPorId(reviewId);
     }
 
-
-    @PostMapping
+    /*Este controlador envia datos ala entidad Review */
+    @PostMapping("/send")
     public Review createReview(@RequestBody Review newReview) {
         return reviewService.guardarReview(newReview);
     }
 
-
-    @PutMapping("/{id}")
+    /*Este controlador actualiza un dato por Id de la entidad Review */
+    @PutMapping("update/{id}")
     public Review updateReview(@PathVariable Long reviewId, @RequestBody Review updatedReview) {
         return reviewService.editarReviewPorID(reviewId, updatedReview);
     }

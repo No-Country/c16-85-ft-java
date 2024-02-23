@@ -2,11 +2,16 @@ package com.marketplace.controller;
 
 
 import com.marketplace.models.entity.Location;
+import com.marketplace.DTO.location.LocationDTO;
 import com.marketplace.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
+
 
 
 @RestController
@@ -20,33 +25,57 @@ public class LocationController {
         this.locationService = locationService;
     }
 
+    @GetMapping("find/all")
+    public ResponseEntity<?> getAllLocations() {
+        List<LocationDTO> locationsList = locationService.listLocations()
+                .stream()
+                .map(location -> LocationDTO.builder()
+                        .locationId(location.getLocationId())
+                        .city(location.getCity())
+                        .country(location.getCity())
+                        .addres(location.getAddres())
+                        .build())
+                .toList();
+        return  ResponseEntity.ok(locationsList);
 
-    @GetMapping
-    public List<Location> getAllLocations() {
-        return locationService.listLocations();
+
     }
 
 
-    @GetMapping("/{id}")
-    public Location getLocationById(@PathVariable long locationId) {
-        return locationService.buscarPorId(locationId);
+    @GetMapping("find/{id}")
+    public ResponseEntity<?>getLocationById(@PathVariable Long locationId) {
+        Optional<Location> locationOptional = Optional.ofNullable(locationService.buscarPorId(locationId));
+
+        if(locationOptional.isPresent()){
+            Location location = locationOptional.get();
+            LocationDTO locatationDTO = LocationDTO.builder()
+                    .locationId(location.getLocationId())
+                    .city(location.getCity())
+                    .country(location.getCity())
+                    .addres(location.getAddres())
+                    .build();
+
+            return ResponseEntity.ok(locatationDTO);
+
+        }
+        return ResponseEntity.notFound().build();
     }
 
 
-    @PostMapping
+    @PostMapping("/create")
     public Location createLocation(@RequestBody Location newLocation) {
         return locationService.guardarlocations(newLocation);
     }
 
 
-    @PutMapping("/{id}")
-    public Location updateLocation(@PathVariable long locationId, @RequestBody Location updatedLocation) {
+    @PutMapping("/update{id}")
+    public Location updateLocation(@PathVariable Long locationId, @RequestBody Location updatedLocation) {
         return locationService.editarLocationPorID(locationId, updatedLocation);
     }
 
 
-    @DeleteMapping("/{id}")
-    public void deleteLocation(@PathVariable long locationId) {
+    @DeleteMapping("delete/{id}")
+    public void deleteLocation(@PathVariable Long locationId) {
         locationService.locationborrar(locationId);;
     }
 }
