@@ -13,7 +13,7 @@ import static com.marketplace.security.userauth.Permission.*;
 
 @RequiredArgsConstructor
 public enum Role {
-    USER(Collections.emptySet()), //CUSTOMER_READ
+    //USER(Collections.emptySet()), //CUSTOMER_READ
     ADMIN(
             Set.of(
                     ADMIN_READ,
@@ -21,10 +21,10 @@ public enum Role {
                     ADMIN_CREATE,
                     ADMIN_DELETE,
 
-                    CUSTOMER_READ,
-                    CUSTOMER_UPDATE,
-                    CUSTOMER_CREATE,
-                    CUSTOMER_DELETE,
+                    USER_READ,
+                    USER_UPDATE,
+                    USER_CREATE,
+                    USER_DELETE,
 
                     CONTRACTOR_READ,
                     CONTRACTOR_UPDATE,
@@ -32,14 +32,15 @@ public enum Role {
                     CONTRACTOR_DELETE
             )
     ),
-    CUSTOMER(
+    USER(
             Set.of(
-                    CUSTOMER_READ,
-                    CUSTOMER_UPDATE,
-                    CUSTOMER_CREATE,
-                    CUSTOMER_DELETE
+                    USER_READ,
+                    USER_UPDATE,
+                    USER_CREATE,
+                    USER_DELETE
             )
     ),
+
     CONTRACTOR(
             Set.of(
                     CONTRACTOR_READ,
@@ -59,7 +60,7 @@ public enum Role {
         var authorities = getPermissions()
                 .stream()
                 .map(permission -> new SimpleGrantedAuthority(permission.name()))
-                .toList();
+                .collect(Collectors.toList());
 
         authorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
 

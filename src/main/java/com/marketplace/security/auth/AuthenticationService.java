@@ -28,7 +28,7 @@ public class AuthenticationService {
         var user = UserAuth.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
+                .role(request.getRole())
                 .build();
 
         try{
