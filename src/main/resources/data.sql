@@ -12,7 +12,7 @@ INSERT INTO nocountry_db.categories
 (category_id, available, name)
 VALUES(1, 1, 'plomeria');
 INSERT INTO nocountry_db.categories
-(category_id, available, name)git
+(category_id, available, name)
 VALUES(2, 1, 'carpinteria');
 INSERT INTO nocountry_db.categories
 (category_id, available, name)
