@@ -27,10 +27,10 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ) {
-        AuthenticationResponse response = service.register(request);
+        AuthenticationResponse response = service.userRegister(request);
 
         if (response.getStatusCode() == 409)
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(service.register(request));
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(service.userRegister(request));
         else
             return ResponseEntity.ok(response);
     }

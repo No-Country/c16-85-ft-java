@@ -26,7 +26,7 @@ public class Application {
 					.password("1234")
 					.role(ADMIN)
 					.build();
-			System.out.println("Admin token: " + service.register(admin).getToken());
+			System.out.println("Admin token: " + service.userRegister(admin).getToken());
 
 			var user = RegisterRequest.builder()
 					.email("user@mail.com")
@@ -34,7 +34,7 @@ public class Application {
 					.role(USER)
 					.build();
 
-			System.out.println("Customer token: " + service.register(user).getToken());
+			System.out.println("Customer token: " + service.userRegister(user).getToken());
 
 			var contractor = RegisterRequest.builder()
 					.email("contractor@mail.com")
@@ -42,7 +42,7 @@ public class Application {
 					.role(CONTRACTOR)
 					.build();
 
-			System.out.println("Customer token: " + service.register(contractor).getToken());
+			System.out.println("Customer token: " + service.userRegister(contractor).getToken());
 		};
 	}
 }

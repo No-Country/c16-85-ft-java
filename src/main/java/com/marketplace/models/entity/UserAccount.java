@@ -1,19 +1,16 @@
 package com.marketplace.models.entity;
 
-import com.marketplace.models.valueobjets.Name;
-import com.marketplace.models.valueobjets.LastName;
-import com.marketplace.models.valueobjets.Age;
-import com.marketplace.models.valueobjets.Role;
-import com.marketplace.models.valueobjets.Username;
-import com.marketplace.models.valueobjets.Password;
+import com.marketplace.models.valueobjets.useraccount.Firstname;
+import com.marketplace.models.valueobjets.useraccount.Lastname;
+import com.marketplace.models.valueobjets.useraccount.Birthday;
+import com.marketplace.models.valueobjets.useraccount.Username;
+import com.marketplace.models.valueobjets.useraccount.Password;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 
 @Data
@@ -28,11 +25,11 @@ public class UserAccount {
     @GeneratedValue
     private Long id;
     @Embedded
-    private Name name;
+    private Firstname name;
     @Embedded
-    private LastName lastname;
+    private Lastname lastname;
     @Embedded
-    private Age age;
+    private Birthday age;
     @Embedded
     private Username username;
     @Embedded
