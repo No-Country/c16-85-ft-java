@@ -1,5 +1,9 @@
-package com.marketplace.security.auth;
+package com.marketplace.security.auth.controller;
 
+import com.marketplace.security.auth.service.AuthenticationService;
+import com.marketplace.security.auth.dto.RegisterRequest;
+import com.marketplace.security.auth.dto.AuthenticationRequest;
+import com.marketplace.security.auth.dto.AuthenticationResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

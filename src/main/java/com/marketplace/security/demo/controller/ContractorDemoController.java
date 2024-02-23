@@ -1,41 +1,40 @@
-package com.marketplace.security.demo;
+package com.marketplace.security.demo.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/admin")
-public class AdminDemoController {
+@RequestMapping("/contractors")
+public class ContractorDemoController {
 
     @GetMapping
     public ResponseEntity<String> findAll(){
 
-        return ResponseEntity.ok("GET: /admin");
+        return ResponseEntity.ok("GET: /contractors");
 
     }
     @GetMapping("/{id}")
     public ResponseEntity<String> find(){
 
-        return ResponseEntity.ok("GET: /admin/{id}");
+        return ResponseEntity.ok("GET: /contractors/{id}");
     }
 
     @PostMapping
     public ResponseEntity<String> save(){
 
-        return ResponseEntity.ok("POST: /admin");
+        return ResponseEntity.ok("POST: /contractors");
 
     }
     @PutMapping("/{id}")
     public ResponseEntity<String> update(){
 
-        return ResponseEntity.ok("PUT: /admin/{id}");
+        return ResponseEntity.ok("PUT: /contractors/{id}");
 
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(){
 
-        return ResponseEntity.ok("DELETE: /admin/{id}");
+        return ResponseEntity.ok("DELETE: /contractors/{id}");
 
     }
 }

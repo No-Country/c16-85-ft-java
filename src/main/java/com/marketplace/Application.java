@@ -1,13 +1,13 @@
 package com.marketplace;
 
-import com.marketplace.security.auth.AuthenticationService;
-import com.marketplace.security.auth.RegisterRequest;
+import com.marketplace.security.auth.service.AuthenticationService;
+import com.marketplace.security.auth.dto.RegisterRequest;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import static com.marketplace.security.userauth.Role.*;
+import static com.marketplace.security.userauth.model.Role.*;
 
 @SpringBootApplication
 public class Application {

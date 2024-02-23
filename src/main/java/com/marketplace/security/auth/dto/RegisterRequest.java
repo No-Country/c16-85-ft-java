@@ -1,6 +1,6 @@
-package com.marketplace.security.auth;
+package com.marketplace.security.auth.dto;
 
-import com.marketplace.security.userauth.Role;
+import com.marketplace.security.userauth.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.marketplace.security.userauth;
+package com.marketplace.security.userauth.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

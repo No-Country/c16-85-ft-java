@@ -1,10 +1,11 @@
-package com.marketplace.security.auth;
+package com.marketplace.security.auth.service;
 
-import com.marketplace.repository.UserRepository;
-import com.marketplace.security.userauth.Role;
-import com.marketplace.security.userauth.UserAuth;
-import com.marketplace.security.config.JwtService;
-import com.marketplace.security.userauth.UserAuthRepository;
+import com.marketplace.security.auth.dto.AuthenticationRequest;
+import com.marketplace.security.auth.dto.AuthenticationResponse;
+import com.marketplace.security.auth.dto.RegisterRequest;
+import com.marketplace.security.userauth.model.UserAuth;
+import com.marketplace.security.config.service.JwtService;
+import com.marketplace.security.userauth.repository.UserAuthRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

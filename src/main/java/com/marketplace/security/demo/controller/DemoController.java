@@ -1,4 +1,4 @@
-package com.marketplace.security.demo;
+package com.marketplace.security.demo.controller;
 
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;

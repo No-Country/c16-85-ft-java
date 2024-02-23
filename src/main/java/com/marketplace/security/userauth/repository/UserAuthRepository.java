@@ -1,5 +1,6 @@
-package com.marketplace.security.userauth;
+package com.marketplace.security.userauth.repository;
 
+import com.marketplace.security.userauth.model.UserAuth;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
