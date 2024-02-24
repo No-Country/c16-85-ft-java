@@ -26,14 +26,13 @@ public class ContractorProfile {
     private UserAccount userAccount;
 
     @OneToMany(mappedBy = "contractorProfile")
-    @JoinColumn(name = "prof_service_id")
     private final List<ProfessionalService> profService = new ArrayList<>();
 
     @OneToOne(mappedBy = "contractorProfile")
+    @JoinColumn(name = "location_id")
     private Location location;
 
     @OneToMany(mappedBy = "contractorProfile")
-    @JoinColumn(name = "serv_history_id")
     private final List<ServicesHistory> servicesHistory = new ArrayList<>();
 
     @Embedded
