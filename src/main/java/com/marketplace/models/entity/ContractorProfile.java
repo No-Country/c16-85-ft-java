@@ -21,7 +21,7 @@ public class ContractorProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "contractorProfile")
+    @OneToOne
     @JoinColumn(name = "user_account_id")
     private UserAccount userAccount;
 

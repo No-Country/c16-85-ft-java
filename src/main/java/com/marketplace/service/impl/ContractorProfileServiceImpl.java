@@ -18,10 +18,11 @@ public class ContractorProfileServiceImpl implements ContractorProfileService {
 
     @Override
     public ContractorProfileResponse createContractorProfile(ContractorProfileRequest contractorDetails) {
-        Location location = new Location();
+        /*Location location = new Location();
         ContractorProfile newContractor = createContractorProfile(contractorDetails,location,);
         contractorRepository.save(newContractor);
 
-        return mapper.mapContractorToResponse(newContractor);
+        return mapper.mapContractorToResponse(newContractor);*/
+        return null;
     }
 }
