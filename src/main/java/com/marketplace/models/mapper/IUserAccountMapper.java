@@ -19,7 +19,6 @@ public interface IUserAccountMapper {
     @Mapping(source="birthday", target = "birthday.birthday")
     @Mapping(source="mobile", target = "mobile.mobile")
     @Mapping(target="username", ignore = true)
-    //@Mapping(target="password", ignore = true)
     @Mapping(target="location", ignore = true)
     @Mapping(target="contractorProfile", ignore = true)
     @Mapping(target="servicesHistory", ignore = true)

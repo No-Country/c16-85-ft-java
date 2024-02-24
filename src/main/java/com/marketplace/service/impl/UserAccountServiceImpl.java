@@ -1,8 +1,8 @@
 package com.marketplace.service.impl;
 
-import com.marketplace.DTO.useraccount.UserAccountRequest;
 import com.marketplace.DTO.useraccount.UserAccountResponse;
 import com.marketplace.exceptions.user.CannotPersistUserException;
+import com.marketplace.exceptions.user.UserAccountNotFound;
 import com.marketplace.models.entity.UserAccount;
 import com.marketplace.models.mapper.IUserAccountMapper;
 import com.marketplace.repository.IUserAccountRepository;
@@ -22,12 +22,13 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
     @Override
     public Page<UserAccountResponse> findAll(Pageable pageable) {
-        return null;
+        return repository.findAll(pageable).map(IUserAccountMapper.INSTANCE::toDto);
     }
 
     @Override
     public UserAccountResponse findById(Long id) {
-        return null;
+        return IUserAccountMapper.INSTANCE.toDto(repository.findById(id)
+                .orElseThrow(UserAccountNotFound::new));
     }
 
     @Override
@@ -52,13 +53,21 @@ public class UserAccountServiceImpl implements IUserAccountService {
     }
 
     @Override
-    public void update(Long id, UserAccountRequest request) {
+    public void update(Long id, RegisterRequest request) {
+        var optionalUser = repository.findById(id);
+
+        if(optionalUser.isPresent()){
+            var user = IUserAccountMapper.INSTANCE.toEntity(request);
+            user.setId(id);
+            repository.save(user);
+        }
 
     }
 
     @Override
     public void delete(Long id) {
-
+        findById(id);
+        repository.deleteById(id);
     }
 
 }

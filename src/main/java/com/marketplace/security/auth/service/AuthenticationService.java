@@ -7,13 +7,12 @@ import com.marketplace.security.auth.dto.RegisterRequest;
 import com.marketplace.security.userauth.model.UserAuth;
 import com.marketplace.security.config.service.JwtService;
 import com.marketplace.security.userauth.repository.UserAuthRepository;
-import com.marketplace.repository.IUserAccountRepository;
+
 import com.marketplace.service.impl.UserAccountServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,7 +28,6 @@ import static com.marketplace.security.userauth.model.Role.USER;
 public class AuthenticationService {
 
     private final UserAuthRepository userAuthRepository;
-    private final IUserAccountRepository userAccountRepository;
     private final UserAccountServiceImpl userAccountService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;

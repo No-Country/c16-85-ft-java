@@ -1,5 +1,6 @@
 package com.marketplace.security.auth.dto;
 
+import com.marketplace.DTO.useraccount.UserAccountRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
+public class RegisterRequest extends UserAccountRequest {
 
     private String username;
     private String password;

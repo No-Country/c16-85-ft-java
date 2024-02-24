@@ -1,11 +1,9 @@
 package com.marketplace.service;
 
-import com.marketplace.DTO.useraccount.UserAccountRequest;
 import com.marketplace.DTO.useraccount.UserAccountResponse;
 import com.marketplace.models.entity.UserAccount;
 import com.marketplace.security.auth.dto.RegisterRequest;
 import com.marketplace.security.userauth.model.UserAuth;
-import com.marketplace.security.userauth.repository.UserAuthRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,7 +17,8 @@ public interface IUserAccountService {
 
     UserAccount save(RegisterRequest request, UserAuth userAuth);
 
-    void update(Long id, UserAccountRequest request);
+
+    void update(Long id, RegisterRequest request);
 
     void delete(Long id);
 }
