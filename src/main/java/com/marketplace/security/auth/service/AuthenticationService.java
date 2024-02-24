@@ -7,6 +7,8 @@ import com.marketplace.security.auth.dto.RegisterRequest;
 import com.marketplace.security.userauth.model.UserAuth;
 import com.marketplace.security.config.service.JwtService;
 import com.marketplace.security.userauth.repository.UserAuthRepository;
+import com.marketplace.repository.IUserAccountRepository;
+import com.marketplace.service.impl.UserAccountServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -25,15 +27,18 @@ import static com.marketplace.security.userauth.model.Role.USER;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private final UserAuthRepository repository;
+    private final UserAuthRepository userAuthRepository;
+    private final IUserAccountRepository userAccountRepository;
+    private final UserAccountServiceImpl userAccountService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
     public AuthenticationResponse userRegister(RegisterRequest request) {
 
         try{
+            validateEmail(request.getUsername());
 
-            validateEmail(request.getEmail());
 
         }catch(InvalidEmailException e){
 
@@ -45,16 +50,18 @@ public class AuthenticationService {
         }
 
 
-        var user = UserAuth.builder()
-                .email(request.getEmail())
+        var userAuth = UserAuth.builder()
+                .email(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(USER)
                 .build();
 
         try{
-            repository.save(user);
+            userAuthRepository.save(userAuth);
+            //implementar vinculacion de cuentas
+            userAccountService.save(request);
 
-            var jwtToken = jwtService.generateToken(user);
+            var jwtToken = jwtService.generateToken(userAuth);
 
             return AuthenticationResponse.builder()
                     .token(jwtToken)
@@ -64,6 +71,7 @@ public class AuthenticationService {
 
         }catch(DataIntegrityViolationException e){
 
+            //throw new DuplicatedUserException();
             return AuthenticationResponse.builder()
                     .token("")
                     .message("User Already Exists")
@@ -82,7 +90,7 @@ public class AuthenticationService {
                     )
             );
 
-        var user = repository.findByEmail(request.getEmail())
+        var user = userAuthRepository.findByEmail(request.getEmail())
                 .orElseThrow();
 
         var jwtToken = jwtService.generateToken(user);

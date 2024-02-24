@@ -29,7 +29,11 @@ public class Location {
     private Addres addres;
 
     @OneToOne
+    private UserAccount userAccount;
+
+    @OneToOne
     private ContractorProfile contractorProfile;
+
 
 
 

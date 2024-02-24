@@ -1,6 +1,7 @@
 package com.marketplace.security.userauth.model;
 
 
+import com.marketplace.models.entity.UserAccount;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,8 @@ public class UserAuth implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToOne
+    private UserAccount userAccount;
 
     //ROLES
     @Override

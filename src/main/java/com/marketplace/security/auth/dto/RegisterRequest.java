@@ -1,6 +1,5 @@
 package com.marketplace.security.auth.dto;
 
-import com.marketplace.security.userauth.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +11,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegisterRequest {
 
-//    private String firstname;
-//    private String lastname;
-    private String email;
+    private String username;
     private String password;
-    private Role role;
+    private String firstname;
+    private String lastname;
+    private String birthday;
+    private String mobile;
+    //private String address;
+    //private String city;
+//    private String province;
+//    private String country;
+//    private String coordinates;
+
+    //private Role role;
 }
