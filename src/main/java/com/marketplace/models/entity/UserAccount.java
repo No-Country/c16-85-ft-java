@@ -39,5 +39,8 @@ public class UserAccount {
     private Password password;
 //    private List<Role> roles;
     private String photo;
+    @OneToOne
+    @JoinColumn(name = "id_contractor")
+    private ContractorProfile contractorProfile;
 
 }
