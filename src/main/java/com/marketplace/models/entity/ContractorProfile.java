@@ -4,12 +4,10 @@ import com.marketplace.DTO.contractor.ContractorProfileRequest;
 import com.marketplace.models.valueobjets.contractor.BusinessName;
 import com.marketplace.models.valueobjets.contractor.CeoLastName;
 import com.marketplace.models.valueobjets.contractor.CeoName;
-import com.marketplace.utils.Available;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import com.marketplace.models.entity.UserAccount;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,18 +21,18 @@ public class ContractorProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "contractorProfile")
     @JoinColumn(name = "user_account_id")
     private UserAccount userAccount;
 
-    @OneToOne
-    @JoinColumn(name = "prof_service_id")
-    private ProfessionalService profService;
+    @OneToMany(mappedBy = "contractorProfile")
+    private final List<ProfessionalService> profService = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(mappedBy = "contractorProfile")
+    @JoinColumn(name = "location_id")
     private Location location;
 
-    @OneToMany
+    @OneToMany(mappedBy = "contractorProfile")
     private final List<ServicesHistory> servicesHistory = new ArrayList<>();
 
     @Embedded
@@ -46,37 +44,32 @@ public class ContractorProfile {
     @Embedded
     private CeoLastName ceoLastName;
 
-    @Enumerated(EnumType.STRING)
-    private Available available;
 
     public ContractorProfile(){}
-    public ContractorProfile(UserAccount userAccount, ProfessionalService profService,
-                             Location location, BusinessName businessName, CeoName ceoName,
-                             CeoLastName ceoLastName, Available available){
+    public ContractorProfile(UserAccount userAccount, Location location, BusinessName businessName,
+                             CeoName ceoName, CeoLastName ceoLastName){
         this.userAccount = userAccount;
-        this.profService = profService;
         this.location = location;
         this.businessName = businessName;
         this.ceoName = ceoName;
         this.ceoLastName = ceoLastName;
-        this.available = available;
     }
 
     public static ContractorProfile createNewContractorProfile(ContractorProfileRequest contractorDetails,
                                                                UserAccount userAccount,
-                                                               ProfessionalService profService,
                                                                Location location){
         var businessName = new BusinessName(contractorDetails.businessName());
         var ceoName = new CeoName(contractorDetails.ceoName());
         var ceoLastName = new CeoLastName(contractorDetails.ceoLastName());
-        var available = Available.YES;
 
-        return new ContractorProfile(userAccount, profService, location,
-                businessName, ceoName, ceoLastName, available);
+        return new ContractorProfile(userAccount, location,
+                businessName, ceoName, ceoLastName);
     }
 
     public void addServicesHistory(ServicesHistory servicesHistory) {
         this.servicesHistory.add(servicesHistory);
     }
-
+    public void addProfessionalService(ServicesHistory servicesHistory) {
+        this.servicesHistory.add(servicesHistory);
+    }
 }
