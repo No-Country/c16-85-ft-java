@@ -12,6 +12,7 @@ import com.marketplace.service.impl.UserAccountServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,9 +37,9 @@ public class AuthenticationService {
 
     public AuthenticationResponse userRegister(RegisterRequest request) {
 
+        //Email Validation (add request validation)
         try{
             validateEmail(request.getUsername());
-
 
         }catch(InvalidEmailException e){
 
@@ -49,17 +50,22 @@ public class AuthenticationService {
                     .build();
         }
 
-
-        var userAuth = UserAuth.builder()
-                .email(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(USER)
-                .build();
-
+        //UserAuth and UserAccount creation and persistence
         try{
+
+            var userAuth = UserAuth.builder()
+                    .username(request.getUsername())
+                    .password(passwordEncoder.encode(request.getPassword()))
+                    .role(USER)
+                    .build();
+
             userAuthRepository.save(userAuth);
-            //implementar vinculacion de cuentas
-            userAccountService.save(request);
+
+            var userAccount = userAccountService.save(request, userAuth);
+
+            userAuth.setUserAccount(userAccount);
+
+            userAuthRepository.save(userAuth);
 
             var jwtToken = jwtService.generateToken(userAuth);
 
@@ -69,7 +75,7 @@ public class AuthenticationService {
                     .statusCode(200)
                     .build();
 
-        }catch(DataIntegrityViolationException e){
+        }catch(DataAccessException e){
 
             //throw new DuplicatedUserException();
             return AuthenticationResponse.builder()
@@ -90,7 +96,7 @@ public class AuthenticationService {
                     )
             );
 
-        var user = userAuthRepository.findByEmail(request.getEmail())
+        var user = userAuthRepository.findByUsername(request.getEmail())
                 .orElseThrow();
 
         var jwtToken = jwtService.generateToken(user);

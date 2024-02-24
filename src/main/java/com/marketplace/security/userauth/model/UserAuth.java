@@ -17,18 +17,19 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="users_authorizations")
+@Table(name="user_auths")
 public class UserAuth implements UserDetails {
 
     @Id
     @GeneratedValue
     private Long id;
     @Column(unique = true)
-    private String email;
+    private String username;
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToOne
+    @JoinColumn(name = "user_account_id")
     private UserAccount userAccount;
 
     //ROLES
@@ -44,7 +45,7 @@ public class UserAuth implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override
