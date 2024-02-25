@@ -1,7 +1,8 @@
 package com.marketplace.controller;
 
-import com.marketplace.DTO.profession.ProfessionRequest;
+import com.marketplace.DTO.profession.ProfessionSaveRequest;
 import com.marketplace.DTO.profession.ProfessionResponse;
+import com.marketplace.DTO.profession.ProfessionUpdateRequest;
 import com.marketplace.service.IProfessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,15 +31,15 @@ public class ProfessionController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody ProfessionRequest professionRequest){
-        professionService.save(professionRequest);
+    public ResponseEntity<Void> save(@RequestBody ProfessionSaveRequest professionSaveRequest){
+        professionService.save(professionSaveRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id,
-                                       @RequestBody ProfessionRequest professionRequest){
-        professionService.update(id, professionRequest);
+                                       @RequestBody ProfessionUpdateRequest professionUpdateRequest){
+        professionService.update(id, professionUpdateRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

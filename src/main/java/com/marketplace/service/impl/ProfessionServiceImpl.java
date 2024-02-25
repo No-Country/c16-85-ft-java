@@ -1,7 +1,8 @@
 package com.marketplace.service.impl;
 
-import com.marketplace.DTO.profession.ProfessionRequest;
+import com.marketplace.DTO.profession.ProfessionSaveRequest;
 import com.marketplace.DTO.profession.ProfessionResponse;
+import com.marketplace.DTO.profession.ProfessionUpdateRequest;
 import com.marketplace.exceptions.profession.ProfessionTitleEx;
 import com.marketplace.models.entity.ProfessionalService;
 import com.marketplace.models.mapper.IProfessionMapper;
@@ -11,8 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -34,8 +33,8 @@ public class ProfessionServiceImpl implements IProfessionService {
     }
 
     @Override
-    public void save(ProfessionRequest profession) {
-        ProfessionalService newProfessionalService = IProfessionMapper.INSTANCE.toEntity(profession);
+    public void save(ProfessionSaveRequest profession) {
+        ProfessionalService newProfessionalService = IProfessionMapper.INSTANCE.saveDtoToEntity(profession);
 
         newProfessionalService.setAvailable(true);
 
@@ -43,11 +42,11 @@ public class ProfessionServiceImpl implements IProfessionService {
     }
 
     @Override
-    public void update(Long id, ProfessionRequest professionRequest) {
+    public void update(Long id, ProfessionUpdateRequest professionUpdateRequest) {
         ProfessionalService professionalServiceDB = professionRepository.findById(id)
                 .orElseThrow(()-> new ProfessionTitleEx(PROFESSION_NOT_FOUND));
 
-        ProfessionalService professionalServiceUpdated = IProfessionMapper.INSTANCE.toEntity(professionRequest);
+        ProfessionalService professionalServiceUpdated = IProfessionMapper.INSTANCE.updateDtoToEntity(professionUpdateRequest);
         professionalServiceUpdated.setId(id);
         professionRepository.save(professionalServiceUpdated);
     }

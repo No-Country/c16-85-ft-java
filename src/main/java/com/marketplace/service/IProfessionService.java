@@ -1,7 +1,8 @@
 package com.marketplace.service;
 
-import com.marketplace.DTO.profession.ProfessionRequest;
+import com.marketplace.DTO.profession.ProfessionSaveRequest;
 import com.marketplace.DTO.profession.ProfessionResponse;
+import com.marketplace.DTO.profession.ProfessionUpdateRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -12,9 +13,9 @@ public interface IProfessionService {
 
     ProfessionResponse findById(Long id);
 
-    void save(ProfessionRequest profession);
+    void save(ProfessionSaveRequest profession);
 
-    void update(Long id, ProfessionRequest professionRequest);
+    void update(Long id, ProfessionUpdateRequest professionUpdateRequest);
 
     void deleteById(Long id);
 
