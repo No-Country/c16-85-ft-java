@@ -19,7 +19,7 @@ jobs:
           java-version: 17
 
       - name: Unit Tests
-        run: mvn -B test -Dspring.profiles.active=ci-cd --file pom.xml
+        run: mvn -B test -Dspring.profiles.active=ci-cd --file pom.xml -e -X
 
       - name: Build the application
         run: |
