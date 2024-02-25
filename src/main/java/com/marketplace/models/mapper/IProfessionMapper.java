@@ -36,11 +36,4 @@ public interface IProfessionMapper {
     @Mapping(source = "contractorProfile.ceoLastName.lastName", target = "contractorProfile.ceoLastName")
     ProfessionResponse toDto(ProfessionalService professionalService);
 
-
-    // ------- Mapeo de ValueObjects -------
-
-    default String businessToString(BusinessName businessName){
-        return businessName != null ? businessName.businessName() : null;
-    }
-
 }

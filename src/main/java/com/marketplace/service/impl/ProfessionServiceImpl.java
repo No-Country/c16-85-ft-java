@@ -43,7 +43,7 @@ public class ProfessionServiceImpl implements IProfessionService {
 
     @Override
     public void update(Long id, ProfessionUpdateRequest professionUpdateRequest) {
-        ProfessionalService professionalServiceDB = professionRepository.findById(id)
+        professionRepository.findById(id)
                 .orElseThrow(()-> new ProfessionTitleEx(PROFESSION_NOT_FOUND));
 
         ProfessionalService professionalServiceUpdated = IProfessionMapper.INSTANCE.updateDtoToEntity(professionUpdateRequest);
