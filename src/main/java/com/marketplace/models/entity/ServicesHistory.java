@@ -1,7 +1,6 @@
 package com.marketplace.models.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.List;
 
 @Entity(name = "service_histories")
 @Getter
@@ -31,13 +30,11 @@ public class ServicesHistory {
     @JoinColumn(name = "contractor_profile_id")
     private ContractorProfile contractorProfile;
 
-    @ManyToOne
-    @JoinColumn(name = "review_id")
-    private Review review;
+    @OneToMany(mappedBy = "servicesHistory", cascade = CascadeType.ALL)
+    private List<Review> review;
 
     @ManyToOne
     @JoinColumn(name = "professional_service_id")
     private ProfessionalService professionalService;
-
 
 }

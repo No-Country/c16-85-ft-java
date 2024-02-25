@@ -26,11 +26,8 @@ public class Review {
     private String description;
     private Double score;
 
-    @OneToMany(mappedBy = "review")
-    private List<ServicesHistory> servicesHistoryList;
-
-//    @OneToMany
-//    private ServicesHistory servicesHistory;
-
+    @ManyToOne
+    @JoinColumn(name = "service_history_id")
+    private ServicesHistory servicesHistory;
 
 }
