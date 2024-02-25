@@ -21,12 +21,16 @@ jobs:
       - name: Setup MySQL
         uses: mirromutth/mysql-action@v1.1
         with:
-          host_port: 3308  # Cambiado de 'host-port' a 'host_port'
-          container_port: 3306  # Cambiado de 'container-port' a 'container_port'
-          character_set_server: utf8mb4
-          collation_server: utf8mb4_general_ci
-          mysql_version: 8.0.33  # Cambiado de 'mysql-version' a 'mysql_version'
-          mysql_root_password: root  # Cambiado de 'mysql-root-password' a 'mysql_root_password'
+          host-port: 3308
+          container-port: 3306
+          character-set-server: utf8mb4
+          collation-server: utf8mb4_general_ci
+          mysql-version: 8.0.33
+          mysql-database: nocountry_db
+          mysql-root-password: ${{ secrets.DB_ROOT_PASSWORD }}
+          mysql-user: dev
+          mysql-password: ${{ secrets.DB_PASSWORD }}
+
         env:
           MYSQL_DATABASE: nocountry_db
           MYSQL_USER: dev
