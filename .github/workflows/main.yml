@@ -30,7 +30,7 @@ jobs:
       - name: Build and run Docker Compose
         run: |
           docker-compose up -d db-nocountry
-          docker-compose run app mvn -B test --file pom.xml
+          docker-compose run db-nocountry mvn -B test --file pom.xml
           docker-compose down
 
       - name: Build the application
