@@ -1,7 +1,6 @@
 version: "3"
 
 services:
-  ### MySql database NO-COUNTRY
   db-nocountry:
     container_name: db-nocountry
     image: mysql:8.0.33
@@ -9,9 +8,12 @@ services:
     environment:
       MYSQL_DATABASE: nocountry_db
       MYSQL_USER: dev
-      MYSQL_PASSWORD: 1234
+      MYSQL_PASSWORD:  1234
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "3308:3306"
-    expose:
-      - 3308
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

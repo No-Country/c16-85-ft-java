@@ -30,7 +30,6 @@ jobs:
           mysql root password: ${{ secrets.DB_ROOT_PASSWORD }}
           mysql user: dev
           mysql password: ${{ secrets.DB_PASSWORD }}
-
         env:
           MYSQL_DATABASE: nocountry_db
           MYSQL_USER: dev
