@@ -3,8 +3,10 @@ package com.marketplace.service.impl;
 import com.marketplace.DTO.useraccount.UserAccountResponse;
 import com.marketplace.exceptions.user.CannotPersistUserException;
 import com.marketplace.exceptions.user.UserAccountNotFound;
+import com.marketplace.models.entity.Location;
 import com.marketplace.models.entity.UserAccount;
 import com.marketplace.models.mapper.IUserAccountMapper;
+import com.marketplace.models.valueobjets.address.Address;
 import com.marketplace.repository.IUserAccountRepository;
 import com.marketplace.security.auth.dto.RegisterRequest;
 import com.marketplace.security.userauth.model.UserAuth;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserAccountServiceImpl implements IUserAccountService {
     private final IUserAccountRepository repository;
+    private final LocationServiceImpl locationService;
 
     @Override
     public Page<UserAccountResponse> findAll(Pageable pageable) {
@@ -33,22 +36,26 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
     @Override
     public UserAccount save(RegisterRequest request, UserAuth userAuth){
+        var location = locationService.guardarlocations(
+                locationService.createMarDelPlataLocation(
+                new Address(request.getAddress())));
 
         var user = IUserAccountMapper.INSTANCE.toEntity(request);
         user.setUserAuth(userAuth);
+        user.setLocation(location);
 
-        try{
+        //try{
 
             repository.save(user);
             userAuth.setUserAccount(user);
 
             return user;
 
-        }catch(DataAccessException e){
+        //}catch(DataAccessException e){
 
-            throw new CannotPersistUserException();
+          //  throw new CannotPersistUserException();
 
-        }
+        //}
 
     }
 

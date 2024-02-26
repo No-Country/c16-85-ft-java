@@ -44,9 +44,9 @@ public class LocationServiceImpl implements LocationService {
 
     }
 
-    public void createMarDelPlataLocation(Address address){
+    public Location createMarDelPlataLocation(Address address){
 
-        var location = Location.builder()
+        return Location.builder()
                 .address(address)
                 .city("Mar del Plata")
                 .province("Buenos Aires")

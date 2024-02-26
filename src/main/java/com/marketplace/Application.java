@@ -19,15 +19,15 @@ public class Application {
 			AuthenticationService service
 	) {
 		return args -> {
-			var admin23 = RegisterRequest.builder()
-					.username("admin111@mail.com")
-					.password("1234")
-					.firstname("pepe")
-					.lastname("perez")
-					.birthday("02/02/1990")
-					.mobile("323666654")
-					.build();
-			System.out.println("Admin token: " + service.userRegister(admin23).getToken());
+//			var admin23 = RegisterRequest.builder()
+//					.username("admin111@mail.com")
+//					.password("1234")
+//					.firstname("pepe")
+//					.lastname("perez")
+//					.birthday("02/02/1990")
+//					.mobile("323666654")
+//					.build();
+//			System.out.println("Admin token: " + service.userRegister(admin23).getToken());
 
 //			var user = RegisterRequest.builder()
 //					.username("user@mail.com")

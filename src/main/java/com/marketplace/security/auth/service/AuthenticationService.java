@@ -49,7 +49,7 @@ public class AuthenticationService {
         }
 
         //UserAuth and UserAccount creation and persistence
-        try{
+        //try{
 
             var userAuth = UserAuth.builder()
                     .username(request.getUsername())
@@ -73,15 +73,15 @@ public class AuthenticationService {
                     .statusCode(200)
                     .build();
 
-        }catch(DataAccessException e){
+        //}catch(DataAccessException e){
 
             //throw new DuplicatedUserException();
-            return AuthenticationResponse.builder()
-                    .token("")
-                    .message("User Already Exists")
-                    .statusCode(400)
-                    .build();
-        }
+//            return AuthenticationResponse.builder()
+//                    .token("")
+//                    .message("User Already Exists")
+//                    .statusCode(400)
+//                    .build();
+        //}
 
     }
 
