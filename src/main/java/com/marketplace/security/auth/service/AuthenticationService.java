@@ -1,5 +1,6 @@
 package com.marketplace.security.auth.service;
 
+import com.marketplace.exceptions.user.DuplicatedUserException;
 import com.marketplace.exceptions.user.InvalidEmailException;
 import com.marketplace.security.auth.dto.AuthenticationRequest;
 import com.marketplace.security.auth.dto.AuthenticationResponse;
@@ -49,7 +50,7 @@ public class AuthenticationService {
         }
 
         //UserAuth and UserAccount creation and persistence
-        //try{
+        try{
 
             var userAuth = UserAuth.builder()
                     .username(request.getUsername())
@@ -73,15 +74,14 @@ public class AuthenticationService {
                     .statusCode(200)
                     .build();
 
-        //}catch(DataAccessException e){
+        }catch(DataAccessException e){
 
-            //throw new DuplicatedUserException();
-//            return AuthenticationResponse.builder()
-//                    .token("")
-//                    .message("User Already Exists")
-//                    .statusCode(400)
-//                    .build();
-        //}
+            return AuthenticationResponse.builder()
+                    .token("N/A")
+                    .message("User Already Exists")
+                    .statusCode(400)
+                    .build();
+        }
 
     }
 
@@ -102,6 +102,11 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
+
+    }
+
+    public void delete(Long id){
+
 
     }
 

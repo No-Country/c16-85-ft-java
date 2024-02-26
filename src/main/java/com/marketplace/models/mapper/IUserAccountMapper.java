@@ -8,6 +8,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface IUserAccountMapper {
 
@@ -25,7 +27,10 @@ public interface IUserAccountMapper {
     @Mapping(target="photo", ignore = true)
     UserAccount toEntity(RegisterRequest request);
 
-    @InheritInverseConfiguration
-    UserAccountResponse toDto(UserAccount userAccount);
+    @Mapping(source="username", target = "username")
+    @Mapping(source="firstname.firstname", target = "firstname")
+    @Mapping(source="lastname.lastname", target = "lastname")
+    UserAccountResponse toUserResponse(UserAccount userAccount);
+    List<UserAccountResponse>toUserResponseList(List<UserAccount> userAccounts);
 
 }

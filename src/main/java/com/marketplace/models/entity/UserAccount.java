@@ -28,8 +28,7 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
-    @Embedded
-    private Username username;
+    private String username;
     @Embedded
     private Firstname firstname;
     @Embedded
