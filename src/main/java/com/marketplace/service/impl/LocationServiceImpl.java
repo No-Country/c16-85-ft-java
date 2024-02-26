@@ -5,13 +5,11 @@ package com.marketplace.service.impl;
 import com.marketplace.models.entity.Location;
 import com.marketplace.repository.LocationRepository;
 import com.marketplace.service.LocationService;
-import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class LocationServiceImpl implements LocationService {
@@ -41,7 +39,7 @@ public class LocationServiceImpl implements LocationService {
             Location locationExistente = optionalLocation.get();
             locationExistente.setCity(locationActualizada.getCity());
             locationExistente.setCountry(locationActualizada.getCountry());
-            locationExistente.setAddres(locationActualizada.getAddres());
+            locationExistente.setAddress(locationActualizada.getAddress());
             return locationrepository.save(locationExistente);
         }
         return null;
