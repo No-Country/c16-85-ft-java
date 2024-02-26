@@ -20,7 +20,7 @@ jobs:
 
       - name: Run tests with Docker Compose
         run: |
-          docker-compose up -d db-nocountry
+          docker-compose up -d nocountry_db
           mvn -B test --file pom.xml
           docker-compose down
 
