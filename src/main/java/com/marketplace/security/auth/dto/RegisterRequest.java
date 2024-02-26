@@ -18,7 +18,7 @@ public class RegisterRequest extends UserAccountRequest {
     private String lastname;
     private String birthday;
     private String mobile;
-    //private String address;
+    private String address;
     //private String city;
 //    private String province;
 //    private String country;

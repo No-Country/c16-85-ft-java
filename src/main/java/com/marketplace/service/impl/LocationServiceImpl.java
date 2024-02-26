@@ -3,6 +3,7 @@
 package com.marketplace.service.impl;
 
 import com.marketplace.models.entity.Location;
+import com.marketplace.models.valueobjets.address.Address;
 import com.marketplace.repository.LocationRepository;
 import com.marketplace.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,34 @@ public class LocationServiceImpl implements LocationService {
     public Location buscarPorId(Long id) {
         Optional<Location> optionalLocation = locationrepository.findById(id);
         return optionalLocation.orElse(null);
+    }
+
+    public void createLocation(Address address, String city,
+                               String province, String country,
+                               String coordinates){
+
+        var location = Location.builder()
+                .address(address)
+                .city(city)
+                .province(province)
+                .country(country)
+                .coordinates(coordinates)
+                .build();
+
+        locationrepository.save(location);
+
+    }
+
+    public void createMarDelPlataLocation(Address address){
+
+        var location = Location.builder()
+                .address(address)
+                .city("Mar del Plata")
+                .province("Buenos Aires")
+                .country("Argentina")
+                .coordinates("")
+                .build();
+
     }
 
 
