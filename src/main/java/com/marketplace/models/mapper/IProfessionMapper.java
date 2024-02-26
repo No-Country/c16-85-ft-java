@@ -25,7 +25,6 @@ public interface IProfessionMapper {
     @Mapping(source = "title", target = "title.title")
     @Mapping(source = "details", target = "details.details")
     @Mapping(source = "categoryId", target = "category.id")
-    @Mapping(source = "contractorProfileId", target = "contractorProfile.id")
     ProfessionalService updateDtoToEntity(ProfessionUpdateRequest request);
 
     /** Este sirve para devolver los DTO en las respuestas */
