@@ -11,12 +11,12 @@ public class ProfessionUpdateRequest {
 
     /** DTO para EDITAR ProfessionalServices */
 
+    private Long id;
     private String title;
     private Double price;
     private String details;
     private boolean atHome;
     private boolean available;
-    private Long contractorProfileId;
     private Long categoryId;
 
 }
