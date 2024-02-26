@@ -52,16 +52,14 @@ jobs:
       - name: Run tests with Maven
         run: mvn -B test --file pom.xml
 
-      # Build Backend
-      - name: Build the application
+      # Build Backend and Frontend
+      - name: Build Backend and Frontend
         run: |
           mvn clean
           mvn -B package --file pom.xml
-
-      # Build Frontend
-      - name: Build Frontend
-        run: npm run build
-        working-directory: ./marketplace
+          cd marketplace
+          npm install
+          npm run build
 
       # Build Docker Image
       - name: Build Docker Image
