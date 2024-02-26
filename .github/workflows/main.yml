@@ -18,27 +18,6 @@ jobs:
           distribution: 'corretto'
           java-version:  17
 
-      - name: Shutdown Ubuntu MySQL (SUDO)
-        run: sudo service mysql stop
-
-      - name: Setup MySQL
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          host port:  3308
-          container port:  3306
-          character set server: utf8mb4
-          collation server: utf8mb4_general_ci
-          mysql version:  8.0.33
-          mysql database: nocountry_db
-          mysql root password: ${{ secrets.DB_ROOT_PASSWORD }}
-          mysql user: dev
-          mysql password: ${{ secrets.DB_PASSWORD }}
-        env:
-          MYSQL_DATABASE: nocountry_db
-          MYSQL_USER: dev
-          MYSQL_PASSWORD:  1234
-          MYSQL_ROOT_PASSWORD: root
-
       - name: Run tests with Docker Compose
         run: |
           docker-compose up -d db-nocountry
