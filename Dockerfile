@@ -1,7 +1,7 @@
 # Dockerfile
 
 # Etapa de construcción del frontend
-FROM node:14 AS frontend-builder
+FROM node:16 AS frontend-builder
 WORKDIR /app
 COPY ./marketplace/package.json ./marketplace/package-lock.json ./
 RUN npm install
