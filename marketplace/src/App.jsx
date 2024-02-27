@@ -6,6 +6,7 @@ import Index from './pages';
 import Login from "./componentes/User/Login";
 import Register from './componentes/User/Register';
 import Servicios from "./componentes/Sv/Servicios"
+import CardDetail from './componentes/Sv/CardDetail';
 
 function App() {
   return (
@@ -14,11 +15,11 @@ function App() {
         <Route path="/" element={<Home/>}>
           <Route index element={<Index/>} />
           <Route path="/Servicios" element={<Servicios/>} />
-   
+          <Route path="Registrarse" element={<Login />} />
+          
         </Route>
-
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register/>} />
+        <Route path="Detalle" element={<CardDetail/>} />
+        <Route path="Prueba" element={<Register/>} />
 
       </Routes>
     </Router>
