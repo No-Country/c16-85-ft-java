@@ -18,8 +18,8 @@ const SearchJob = () => {
               </p>
             </div>
             <div className="flex flex-col items-center md:flex-row justify-center">
-              <Link to="/register" className="inline-flex items-center justify-center w-full h-12 px-6 mb-3 font-medium tracking-wide transition duration-200 rounded shadow-md md:w-auto md:mb-0 focus:shadow-outline focus:outline-none bg-slate-600 text-stone-50 py-2 border hover:text-green-600">
-                <span className="m-auto">Ofrezca tus servicios</span>
+              <Link to="/Prueba" className="inline-flex items-center justify-center w-full h-12 px-6 mb-3 font-medium tracking-wide transition duration-200 rounded shadow-md md:w-auto md:mb-0 focus:shadow-outline focus:outline-none bg-slate-600 text-stone-50 py-2 border hover:text-green-600">
+                <span className="m-auto">Ofrece tus servicios</span>
               </Link>
             </div>
           </div>
