@@ -1,7 +1,7 @@
 # Dockerfile
 
 # Etapa de construcción del frontend
-FROM node:16.13.0 AS frontend-builder
+FROM node:14 AS frontend-builder
 WORKDIR /app
 COPY ./marketplace/package.json ./marketplace/package-lock.json ./
 RUN npm install
@@ -17,6 +17,6 @@ COPY ./target/com.market-place-c16-85-0.0.1-SNAPSHOT.jar ./springdemo.jar
 FROM openjdk:17-jdk
 WORKDIR /app
 COPY --from=backend-builder /app/springdemo.jar ./
-COPY --from=frontend-builder /app/build ./frontend
+COPY --from=frontend-builder /app/dist ./frontend
 EXPOSE 8080
 CMD ["java", "-jar", "springdemo.jar"]
