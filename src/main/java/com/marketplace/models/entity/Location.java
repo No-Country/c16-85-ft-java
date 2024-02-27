@@ -1,36 +1,49 @@
 package com.marketplace.models.entity;
 
-import com.marketplace.models.valueobjets.addres.Addres;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.marketplace.models.valueobjets.address.Address;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.UUID;
+
 
 @Entity(name = "locations")
-@Getter
+@ToString
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@EqualsAndHashCode
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long locationId;
 
-    @Column
-    @NotNull
-    private String city;
-    private String country;
+
+    private final String city ="Mar del Plata";
+    private final String province ="Buenos Aires";
+    private final String country = "Argentina";
+    private final String coordinates=null;
 
     @Embedded
-    private Addres addres;
+    private Address address;
 
     @OneToOne
+    @JsonIgnore
     private ContractorProfile contractorProfile;
 
+    @OneToOne
+    private UserAccount userAccount;
 
+    public Location(){}
 
+    public Location( Address address, ContractorProfile contractorProfile, UserAccount userAccount) {
+        this.address = address;
+        this.contractorProfile = contractorProfile;
+        this.userAccount = userAccount;
+    }
+
+    public static Location createLocation (ContractorProfile contractorProfile, String address, UserAccount userAccount){
+        var newAddress = new Address(address);
+        var newUserAccount = new UserAccount();
+        return new Location(newAddress,contractorProfile,newUserAccount);
+    }
 }

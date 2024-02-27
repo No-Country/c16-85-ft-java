@@ -14,43 +14,20 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class LocationServiceImpl implements LocationService {
+public class LocationServiceImpl implements LocationService {}
 
-    @Autowired
+  /*  @Autowired
     LocationRepository locationrepository;
-    @Override
-    public List<Location> listLocations() {
-        return locationrepository.findAll();
-    }
 
-    @Override
-    public Location buscarPorId(Long id) {
-        Optional<Location> optionalLocation = locationrepository.findById(id);
-        return optionalLocation.orElse(null);
-    }
-
-
-    @Override
-    public Location guardarlocations(Location newlocation) {
-        return locationrepository.save(newlocation);
-    }
-    @Override
     public Location editarLocationPorID(Long id, Location locationActualizada) {
         Optional<Location> optionalLocation = locationrepository.findById(id);
         if (optionalLocation.isPresent()) {
             Location locationExistente = optionalLocation.get();
-            locationExistente.setCity(locationActualizada.getCity());
-            locationExistente.setCountry(locationActualizada.getCountry());
-            locationExistente.setAddres(locationActualizada.getAddres());
+            locationExistente.setAddress(locationActualizada.getAddress());
             return locationrepository.save(locationExistente);
         }
         return null;
-    }
+    } */
 
-    @Override
-    public void locationborrar(Long id) {
-        locationrepository.deleteById(id);
 
-    }
 
-}

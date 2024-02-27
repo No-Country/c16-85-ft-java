@@ -30,8 +30,8 @@ public class ServicesHistory {
     @JoinColumn(name = "contractor_profile_id")
     private ContractorProfile contractorProfile;
 
-    @OneToMany(mappedBy = "servicesHistory", cascade = CascadeType.ALL)
-    private List<Review> review;
+    @OneToOne
+    private Review review;
 
     @ManyToOne
     @JoinColumn(name = "professional_service_id")

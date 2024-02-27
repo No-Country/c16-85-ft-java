@@ -18,13 +18,10 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    @Column
-    @NotNull
     private String description;
-    private Double score;
+    private Integer score;
 
-    @ManyToOne
-    @JoinColumn(name = "service_history_id")
+    @OneToOne
     private ServicesHistory servicesHistory;
 
 }
