@@ -1,6 +1,5 @@
 package com.marketplace.security.auth.service;
 
-import com.marketplace.exceptions.user.DuplicatedUserException;
 import com.marketplace.exceptions.user.InvalidEmailException;
 import com.marketplace.security.auth.dto.AuthenticationRequest;
 import com.marketplace.security.auth.dto.AuthenticationResponse;
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.regex.Pattern;
 
+import static com.marketplace.security.userauth.model.Role.ADMIN;
 import static com.marketplace.security.userauth.model.Role.USER;
 
 
@@ -85,16 +85,68 @@ public class AuthenticationService {
 
     }
 
+    //TEMPORAL - PRUEBAS
+    public AuthenticationResponse adminRegister(RegisterRequest request) {
+
+        //Email Validation (add request validation)
+        //try{
+            validateEmail(request.getUsername());
+
+        //}catch(InvalidEmailException e){
+
+//            return AuthenticationResponse.builder()
+//                    .token("")
+//                    .message(e.getMessage())
+//                    .statusCode(400)
+//                    .build();
+        //}
+
+        //UserAuth and UserAccount creation and persistence
+        try{
+
+            var userAuth = UserAuth.builder()
+                    .username(request.getUsername())
+                    .password(passwordEncoder.encode(request.getPassword()))
+                    .role(ADMIN)
+                    .build();
+
+            userAuthRepository.save(userAuth);
+
+            var userAccount = userAccountService.save(request, userAuth);
+
+            userAuth.setUserAccount(userAccount);
+
+            userAuthRepository.save(userAuth);
+
+            var jwtToken = jwtService.generateToken(userAuth);
+
+            return AuthenticationResponse.builder()
+                    .token(jwtToken)
+                    .message("User Registered Successfully")
+                    .statusCode(200)
+                    .build();
+
+        }catch(DataAccessException e){
+
+            return AuthenticationResponse.builder()
+                    .token("N/A")
+                    .message("User Already Exists")
+                    .statusCode(400)
+                    .build();
+        }
+
+    }
+
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            request.getEmail(),
+                            request.getUsername(),
                             request.getPassword()
                     )
             );
 
-        var user = userAuthRepository.findByUsername(request.getEmail())
+        var user = userAuthRepository.findByUsername(request.getUsername())
                 .orElseThrow();
 
         var jwtToken = jwtService.generateToken(user);
@@ -102,11 +154,6 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
-
-    }
-
-    public void delete(Long id){
-
 
     }
 

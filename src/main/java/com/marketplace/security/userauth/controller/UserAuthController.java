@@ -1,12 +1,39 @@
-//package com.marketplace.security.userauth;
-//
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.*;
-//
-//@RestController
-//@RequestMapping("/admin/users_auth")
-//public class UserAuthController {
-//
+package com.marketplace.security.userauth.controller;
+
+import com.marketplace.security.userauth.dto.UpdateUsernameRequest;
+import com.marketplace.security.userauth.dto.UpdatePasswordRequest;
+import com.marketplace.security.userauth.dto.DeleteUserRequest;
+import com.marketplace.security.userauth.service.UserAuthService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+
+@RequiredArgsConstructor
+@RestController
+public class UserAuthController {
+    private final UserAuthService service;
+
+    @PatchMapping("users/change-password") ResponseEntity<?> changePassword(
+           @RequestBody UpdatePasswordRequest request,
+           Principal connectedUser
+    ){
+        service.updatePassword(request, connectedUser);
+
+        return ResponseEntity.ok().build();
+
+   }
+
+    @PatchMapping("users/change-email") ResponseEntity<?> changeEmail(
+            @RequestBody UpdateUsernameRequest request,
+            Principal connectedUser
+    ){
+        service.updateEmail(request/*, connectedUser*/);
+
+        return ResponseEntity.ok().build();
+
+    }
 //    @GetMapping
 //    public ResponseEntity<String> findAll(){
 //
@@ -14,27 +41,16 @@
 //
 //    }
 //    @GetMapping("/{id}")
-//    public ResponseEntity<String> find(){
+//    public ResponseEntity<String> findById(Long id){
 //
 //        return ResponseEntity.ok("GET: /admin/{id}");
 //    }
 //
-//    @PostMapping
-//    public ResponseEntity<String> save(){
-//
-//        return ResponseEntity.ok("POST: /admin");
-//
-//    }
-//    @PutMapping("/{id}")
-//    public ResponseEntity<String> update(){
-//
-//        return ResponseEntity.ok("PUT: /admin/{id}");
-//
-//    }
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<String> delete(){
-//
-//        return ResponseEntity.ok("DELETE: /admin/{id}");
-//
-//    }
-//}
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@RequestBody DeleteUserRequest request){
+
+        return ResponseEntity.ok("DELETE: /admin/{id}");
+
+    }
+}

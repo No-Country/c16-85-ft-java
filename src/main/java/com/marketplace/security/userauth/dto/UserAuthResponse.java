@@ -1,2 +1,6 @@
-package com.marketplace.security.userauth.dto;public record UserAuthResponse() {
+package com.marketplace.security.userauth.dto;
+
+public record UserAuthResponse(Long id,
+                                String username
+                               ) {
 }

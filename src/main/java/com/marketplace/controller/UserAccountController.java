@@ -3,6 +3,7 @@ package com.marketplace.controller;
 import com.marketplace.DTO.useraccount.UserAccountResponse;
 import com.marketplace.security.auth.dto.RegisterRequest;
 import com.marketplace.security.auth.service.AuthenticationService;
+import com.marketplace.security.userauth.service.UserAuthService;
 import com.marketplace.service.IUserAccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ public class UserAccountController {
 
     private final IUserAccountService service;
     private final AuthenticationService authService;
+    private final UserAuthService userAuthService;
 
     @GetMapping
     public ResponseEntity<List<UserAccountResponse>> findAll(){
@@ -33,18 +35,18 @@ public class UserAccountController {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id,
-                                       @RequestBody RegisterRequest request){
-        service.update(id, request);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-
-        authService.delete(id);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-    }
+//    @PutMapping
+//    public ResponseEntity<Void> update(@RequestBody RegisterRequest request
+//                                        ){
+//        service.update(id, request);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> delete(@PathVariable Long id){
+//
+//        userAuthService.delete(id);
+//
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//
+//    }
 }

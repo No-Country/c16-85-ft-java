@@ -24,7 +24,7 @@ public class AuthenticationController {
     private final AuthenticationService service;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
+    public ResponseEntity<AuthenticationResponse> userRegister(
             @RequestBody RegisterRequest request
     ) {
         AuthenticationResponse response = service.userRegister(request);
@@ -34,6 +34,20 @@ public class AuthenticationController {
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(service.userRegister(request));
     }
+
+    //ubicacion temporal del metodo
+    @PostMapping("/admin/register")
+    public ResponseEntity<AuthenticationResponse> adminRegister(
+            @RequestBody RegisterRequest request
+    ) {
+        AuthenticationResponse response = service.adminRegister(request);
+
+        if (response.getStatusCode() == 200)
+            return ResponseEntity.ok(response);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(service.adminRegister(request));
+    }
+
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
