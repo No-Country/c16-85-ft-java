@@ -13,7 +13,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-28T13:51:21-0300",
+    date = "2024-02-28T13:54:18-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Private Build)"
 )
 public class IUserAccountMapperImpl implements IUserAccountMapper {
