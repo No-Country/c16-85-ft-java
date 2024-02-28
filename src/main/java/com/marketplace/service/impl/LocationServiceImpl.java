@@ -41,7 +41,6 @@ public class LocationServiceImpl implements LocationService {
             Location locationExistente = optionalLocation.get();
             locationExistente.setCity(locationActualizada.getCity());
             locationExistente.setCountry(locationActualizada.getCountry());
-            locationExistente.setAddres(locationActualizada.getAddres());
             return locationrepository.save(locationExistente);
         }
         return null;

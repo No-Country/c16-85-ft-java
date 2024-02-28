@@ -33,7 +33,6 @@ public class LocationController {
                         .locationId(location.getLocationId())
                         .city(location.getCity())
                         .country(location.getCity())
-                        .addres(location.getAddres())
                         .build())
                 .toList();
         return  ResponseEntity.ok(locationsList);
@@ -52,7 +51,6 @@ public class LocationController {
                     .locationId(location.getLocationId())
                     .city(location.getCity())
                     .country(location.getCity())
-                    .addres(location.getAddres())
                     .build();
 
             return ResponseEntity.ok(locatationDTO);
