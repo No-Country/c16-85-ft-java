@@ -31,16 +31,14 @@ public class GlobalHandlerException {
     }
 
     @ExceptionHandler(ContractorNotFound.class)
-    public ResponseEntity<Map<String,String>> contractorNotFound(HttpServletRequest req,
-                                                                 ContractorNotFound ex) {
+    public ResponseEntity<Map<String,String>> contractorNotFound(ContractorNotFound ex) {
         Map<String, String> resp = new HashMap<>();
         resp.put("ERROR", ex.getMessage());
         return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(CategoryNotFoundException.class)
-    public ResponseEntity<Map<String,String>> contractorNotFound(HttpServletRequest req,
-                                                                 CategoryNotFoundException ex) {
+    public ResponseEntity<Map<String,String>> contractorNotFound(CategoryNotFoundException ex) {
         Map<String, String> resp = new HashMap<>();
         resp.put("ERROR", ex.getMessage());
         return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);

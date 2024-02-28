@@ -3,11 +3,8 @@ package com.marketplace.service;
 import com.marketplace.DTO.profession.ProfessionSaveRequest;
 import com.marketplace.DTO.profession.ProfessionResponse;
 import com.marketplace.DTO.profession.ProfessionUpdateRequest;
-import com.marketplace.models.entity.ProfessionalService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 
 public interface IProfessionService {

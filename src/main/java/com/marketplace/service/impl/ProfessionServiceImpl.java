@@ -12,15 +12,12 @@ import com.marketplace.models.mapper.IProfessionMapper;
 import com.marketplace.repository.ContractorProfileRepository;
 import com.marketplace.repository.ICategoryRepository;
 import com.marketplace.repository.IProfessionRepository;
-import com.marketplace.service.ContractorProfileService;
 import com.marketplace.service.IProfessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 
 @Service
