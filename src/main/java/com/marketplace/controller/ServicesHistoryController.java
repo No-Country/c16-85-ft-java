@@ -8,10 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
+
 
 @RestController
-@RequestMapping("/api/services-history")
+@RequestMapping("/history")
 public class ServicesHistoryController {
 
     private final ServicesHistoryService servicesHistoryService;
@@ -21,15 +21,15 @@ public class ServicesHistoryController {
         this.servicesHistoryService = servicesHistoryService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<ServicesHistory>> getAllServicesHistory() {
-        List<ServicesHistory> servicesHistoryList = servicesHistoryService.listaServicesHistory();
+        List<ServicesHistory> servicesHistoryList = servicesHistoryService.listServicesHistory();
         return new ResponseEntity<>(servicesHistoryList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ServicesHistory> getServicesHistoryById(@PathVariable Long id) {
-        ServicesHistory servicesHistory = servicesHistoryService.buscarservHisporId(id);
+        ServicesHistory servicesHistory = servicesHistoryService.searchHistorybyId(id);
         if (servicesHistory != null) {
             return new ResponseEntity<>(servicesHistory, HttpStatus.OK);
         } else {
@@ -37,22 +37,27 @@ public class ServicesHistoryController {
         }
     }
 
-    @PostMapping
+    @PutMapping("edit/{id}")
     public ResponseEntity<ServicesHistory> createServicesHistory(@RequestBody ServicesHistory newServicesHistory) {
-        ServicesHistory savedServicesHistory = servicesHistoryService.agregarHistory(newServicesHistory);
+        ServicesHistory savedServicesHistory = servicesHistoryService.addHistory(newServicesHistory);
         return new ResponseEntity<>(savedServicesHistory, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<ServicesHistory> updateServicesHistory(@PathVariable Long id,
                                                                  @RequestBody ServicesHistory updatedServicesHistory) {
-        ServicesHistory editedServicesHistory = servicesHistoryService.editarHistory(id, updatedServicesHistory);
+        ServicesHistory editedServicesHistory = servicesHistoryService.editHistory(id, updatedServicesHistory);
         if (editedServicesHistory != null) {
             return new ResponseEntity<>(editedServicesHistory, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-
     }
-}
+
+
+        @DeleteMapping("/delete/{id}")
+        public ResponseEntity<Void> deleteHistory(@PathVariable Long id){
+            servicesHistoryService.deleteHistory(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }

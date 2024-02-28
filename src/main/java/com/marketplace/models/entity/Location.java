@@ -43,7 +43,6 @@ public class Location {
 
     public static Location createLocation (ContractorProfile contractorProfile, String address, UserAccount userAccount){
         var newAddress = new Address(address);
-        var newUserAccount = new UserAccount();
-        return new Location(newAddress,contractorProfile,newUserAccount);
+        return new Location(newAddress,contractorProfile,userAccount);
     }
 }

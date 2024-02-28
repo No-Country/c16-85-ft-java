@@ -7,13 +7,15 @@ import java.util.UUID;
 
 public interface ServicesHistoryService {
 
-    ServicesHistory agregarHistory(ServicesHistory newHistory);
+    ServicesHistory addHistory(ServicesHistory newHistory);
 
-    List<ServicesHistory> listaServicesHistory();
+    List<ServicesHistory> listServicesHistory();
 
-    ServicesHistory buscarservHisporId(Long id);
+    ServicesHistory searchHistorybyId(Long id);
 
-    ServicesHistory editarHistory(Long id, ServicesHistory historyUpDate);
+    ServicesHistory editHistory(Long id, ServicesHistory historyUpDate);
+
+    void deleteHistory (Long id);
 
 }
 

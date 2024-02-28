@@ -20,7 +20,7 @@ public class ServicesHistory {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serviceHistoryId;
+    private Long id;
 
     @Column
     private LocalDate date;

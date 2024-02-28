@@ -3,7 +3,5 @@ package com.marketplace.repository;
 import com.marketplace.models.entity.ServicesHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.UUID;
-
-public interface ServicesHistoriRepository extends JpaRepository<ServicesHistory, Long> {
+public interface ServicesHistoryRepository extends JpaRepository<ServicesHistory, Long> {
 }
