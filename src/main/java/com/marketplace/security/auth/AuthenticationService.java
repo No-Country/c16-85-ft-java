@@ -4,8 +4,6 @@ import com.marketplace.repository.UserRepository;
 import com.marketplace.security.Role;
 import com.marketplace.security.UserAuth;
 import com.marketplace.security.config.JwtService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,7 +25,7 @@ public class AuthenticationService {
         var user = UserAuth.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
-                .email(request.getEmail())
+                .username(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
@@ -75,6 +73,4 @@ public class AuthenticationService {
 
     }
 
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) {
-    }
 }

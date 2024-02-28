@@ -74,6 +74,6 @@ public class LocationController {
 
     @DeleteMapping("delete/{id}")
     public void deleteLocation(@PathVariable Long locationId) {
-        locationService.locationborrar(locationId);;
+        locationService.locationborrar(locationId);
     }
 }
