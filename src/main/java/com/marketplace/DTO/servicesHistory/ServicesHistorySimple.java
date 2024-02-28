@@ -2,6 +2,7 @@ package com.marketplace.DTO.servicesHistory;
 
 import com.marketplace.models.entity.Review;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ServicesHistorySimple {
 
     /** Este DTO no devuelve relaciones con otras entidades. */

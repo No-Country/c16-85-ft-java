@@ -34,12 +34,12 @@ public class ServicesHistoryServiceImpl implements ServicesHistoryService {
     }
 
     @Override
-    public ServicesHistory editHistory(Long id, ServicesHistory historiUpDate) {
+    public ServicesHistory editHistory(Long id, ServicesHistory historyUpDate) {
         Optional<ServicesHistory> optionalServicesHistory = servicesHistoryRepository.findById(id);
         if (optionalServicesHistory.isPresent()) {
             ServicesHistory historyexistente = optionalServicesHistory.get();
-            historyexistente.setDate(historiUpDate.getDate());
-            historyexistente.setReview(historiUpDate.getReview());
+            historyexistente.setDate( historyUpDate.getDate());
+            historyexistente.setReview( historyUpDate.getReview());
             return servicesHistoryRepository.save(historyexistente);
         }
         return null;
