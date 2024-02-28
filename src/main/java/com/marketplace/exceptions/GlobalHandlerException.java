@@ -1,8 +1,11 @@
 package com.marketplace.exceptions;
 
 
+import com.marketplace.exceptions.category.CategoryNotFoundException;
+import com.marketplace.exceptions.contractor.ContractorNotFound;
 import com.marketplace.exceptions.contractor.InvalidBusinessNameException;
 import com.marketplace.exceptions.contractor.InvalidCeoNameException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,4 +29,21 @@ public class GlobalHandlerException {
         resp.put("CEO_NAME_ERROR", ex.getMessage());
         return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ContractorNotFound.class)
+    public ResponseEntity<Map<String,String>> contractorNotFound(HttpServletRequest req,
+                                                                 ContractorNotFound ex) {
+        Map<String, String> resp = new HashMap<>();
+        resp.put("ERROR", ex.getMessage());
+        return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<Map<String,String>> contractorNotFound(HttpServletRequest req,
+                                                                 CategoryNotFoundException ex) {
+        Map<String, String> resp = new HashMap<>();
+        resp.put("ERROR", ex.getMessage());
+        return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
+    }
+
 }
