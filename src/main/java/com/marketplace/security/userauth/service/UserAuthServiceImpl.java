@@ -2,6 +2,7 @@ package com.marketplace.security.userauth.service;
 
 import com.marketplace.exceptions.user.UserAccountNotFound;
 import com.marketplace.models.mapper.IUserAuthMapper;
+import com.marketplace.security.userauth.dto.DeleteUserRequest;
 import com.marketplace.security.userauth.dto.UpdateUsernameRequest;
 import com.marketplace.security.userauth.dto.UpdatePasswordRequest;
 import com.marketplace.security.userauth.dto.UserAuthResponse;
@@ -44,15 +45,6 @@ public class UserAuthServiceImpl implements UserAuthService {
         else{
             throw new UserAccountNotFound();
         }
-    }
-
-    @Override
-    public void update(Long id) {
-
-    }
-    @Override
-    public void delete(Long id) {
-
     }
 
     //falta validacion de contrasenia vieja
@@ -135,6 +127,24 @@ public class UserAuthServiceImpl implements UserAuthService {
     }
 
     //changeMailAndPassword
+
+    //delete user
+    @Override
+    public void delete(DeleteUserRequest request, Principal connectedUser){
+
+        var userAuth = (UserAuth) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+
+        if(!passwordEncoder.matches(request.password(), (userAuth.getPassword()))){
+            throw new IllegalStateException("Wrong password"); //agregar excepcion personalizada
+        }
+
+        var user = repository.findByUsername(userAuth.getUsername());
+
+        if(user.isPresent()){
+            repository.deleteById(userAuth.getId());
+        }
+
+    }
 
 }
 

@@ -1,5 +1,6 @@
 package com.marketplace.security.userauth.service;
 
+import com.marketplace.security.userauth.dto.DeleteUserRequest;
 import com.marketplace.security.userauth.dto.UpdateUsernameRequest;
 import com.marketplace.security.userauth.dto.UpdatePasswordRequest;
 import com.marketplace.security.userauth.dto.UserAuthResponse;
@@ -13,9 +14,6 @@ public interface UserAuthService {
 
     List<UserAuthResponse> findAll();
     UserAuthResponse findById(Long id);
-    void update(Long id);
-
-    void delete(Long id);
 
     void updatePassword(UpdatePasswordRequest request, Principal connectedUser);
 
@@ -23,4 +21,6 @@ public interface UserAuthService {
     void updateEmail(UpdateUsernameRequest request);
 
     void updateEmail(UpdateUsernameRequest request, Principal connectedUser);
+
+    void delete(DeleteUserRequest request, Principal connectedUser);
 }

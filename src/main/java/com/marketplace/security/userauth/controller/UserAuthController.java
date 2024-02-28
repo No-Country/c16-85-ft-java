@@ -47,10 +47,13 @@ public class UserAuthController {
 //    }
 //
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@RequestBody DeleteUserRequest request){
+    @DeleteMapping("users/delete")
+    public ResponseEntity<?> delete(@RequestBody DeleteUserRequest request,
+                                    Principal connectedUser){
 
-        return ResponseEntity.ok("DELETE: /admin/{id}");
+        service.delete(request, connectedUser);
+
+        return ResponseEntity.noContent().build();
 
     }
 }
