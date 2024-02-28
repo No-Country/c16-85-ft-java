@@ -25,8 +25,7 @@ public class UserAuth implements UserDetails {
     private Long id;
     private String firstname;
     private String lastname;
-    @Column(unique = true)
-    private String email;
+    private String username;
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -44,7 +43,7 @@ public class UserAuth implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override
