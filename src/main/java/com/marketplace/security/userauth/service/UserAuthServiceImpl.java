@@ -9,6 +9,8 @@ import com.marketplace.security.userauth.dto.UserAuthResponse;
 import com.marketplace.security.userauth.model.UserAuth;
 import com.marketplace.security.userauth.repository.UserAuthRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,17 +23,15 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserAuthServiceImpl implements UserAuthService {
+public class UserAuthServiceImpl implements IUserAuthService {
 
     private final UserAuthRepository repository;
     //private final UserAuthMapper mapper;
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public List<UserAuthResponse> findAll() {
-        List<UserAuth> users = repository.findAll();
-
-        return IUserAuthMapper.INSTANCE.toResponseList(users);
+    public Page<UserAuthResponse> findAll(Pageable pageable) {
+        return repository.findAll(pageable).map(IUserAuthMapper.INSTANCE::toResponse);
     }
 
     @Override

@@ -17,6 +17,8 @@ public interface IUserAuthMapper {
     UserAuth toEntity(RegisterRequest request);
     @Mapping(target="id", source="id")
     @Mapping(target="username", source="username")
+    @Mapping(target="role", source="role")
+    @Mapping(target="userAccount.id", source="userAccountId")
     UserAuthResponse toResponse(UserAuth userAuth);
 
     List<UserAuthResponse> toResponseList(List<UserAuth> userAuths);

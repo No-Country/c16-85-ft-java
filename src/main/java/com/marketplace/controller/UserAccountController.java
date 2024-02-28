@@ -1,13 +1,10 @@
 package com.marketplace.controller;
 
 import com.marketplace.DTO.useraccount.UserAccountResponse;
-import com.marketplace.security.auth.dto.RegisterRequest;
 import com.marketplace.security.auth.service.AuthenticationService;
-import com.marketplace.security.userauth.service.UserAuthService;
+import com.marketplace.security.userauth.service.IUserAuthService;
 import com.marketplace.service.IUserAccountService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +18,7 @@ public class UserAccountController {
 
     private final IUserAccountService service;
     private final AuthenticationService authService;
-    private final UserAuthService userAuthService;
+    private final IUserAuthService userAuthService;
 
     @GetMapping
     public ResponseEntity<List<UserAccountResponse>> findAll(){
