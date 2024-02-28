@@ -1,12 +1,11 @@
 import { MdOutlineLabel } from "react-icons/md";
 
 
-// Prueba
 const SelectProfession = () => {
   return (<>
-  <div className="sm:hidden ml-4 ">
+  <div className="sm:hidden ml-4 mr-2 ">
   <select required
-                class="text-black/70 bg-white px-3 py-1 transition-all cursor-pointer  border border-gray-200 rounded-lg w-[140px] ">
+   className="text-black/70 bg-white px-3 py-1 transition-all cursor-pointer  border border-gray-200 rounded-lg w-[140px] ">
           <option value="" >Profesión</option>
           <option value="option-1">Electricista</option>
           <option value="option-2">Plomero</option>
@@ -21,19 +20,22 @@ const SelectProfession = () => {
 
 
 
+
+
+
+
 const SideBar = () => {
     return (<>
 
-     {/* Prueba: flex sm:block  flex-wrap */}
+ 
     <ul className="space-y-1 sm:mt-10  mt-2 flex sm:block  flex-wrap justify-center  ">
-     {/* Prueba: w-[20%]  sm:w-[100%]*/}
+
     <li className="w-[20%]  sm:w-[100%] ">
-    <a href="#" className="flex   items-center gap-2 rounded-lg  px-4 py-1 text-gray-700">
-        <p className="text-lg font-medium   w-[100%] text-center m-auto"> Buscar </p>
+    <a href="#" className="flex   items-center gap-2 rounded-lg  px-2   py-1 text-gray-700">
+        <p className="text-lg font-medium   w-[100%]  m-auto  text-center"> Buscar </p>
       </a>
     </li>
-         {/* Prueba: w-[75%] m-auto */}
-    <li className="w-[75%] m-auto">
+    <li className=" ">
       <form className="flex items-center max-w-sm mx-auto">
   
     <div className="relative w-full">
@@ -71,17 +73,17 @@ const SideBar = () => {
   </form>
   
       </li>
-   {/* Prueba: hidden sm:block*/}
+
     <li  className="hidden sm:block">
     <a href="#" className="flex items-center gap-2 rounded-lg  px-4 py-2 text-gray-700">
         <p className="text-lg font-medium  w-[100%] text-center"> Filtros </p>
       </a>
     </li>
-    {/* Prueba */}
+
     <li>
      <SelectProfession/>
     </li>
-      {/* Prueba: hidden sm:block*/}
+     
     <li  className="hidden sm:block">
       <a
         href="#"
@@ -92,7 +94,7 @@ const SideBar = () => {
         <span className="text-sm font-medium"> Electricista </span>
       </a>
     </li>
-     {/* Prueba: hidden sm:block*/}
+
     <li  className="hidden sm:block" >
       <a
         href="#"
@@ -103,7 +105,7 @@ const SideBar = () => {
         <span className="text-sm font-medium"> Plomero </span>
       </a>
     </li>
-         {/* Prueba: hidden sm:block*/}
+ 
     <li  className="hidden sm:block" >
       <a
         href="#"
@@ -114,7 +116,7 @@ const SideBar = () => {
         <span className="text-sm font-medium"> Carpintero </span>
       </a>
     </li>
-       {/* Prueba: hidden sm:block*/}
+    
     <li   className="hidden sm:block">
       <a
         href="#"
@@ -127,9 +129,16 @@ const SideBar = () => {
     </li>
   
     <li>
-      
+
+
+    <button to="/register" className="sm:mt-2   sm:w-full sm:m-auto sm:mb-2 sm:h-[40px]  duration-200    md:py-2   sm: m-auto  ml-4 mr-2 py-1  md:mb-0 focus:shadow-outline   transition flex items-center justify-center  px-4  shadow-md font-medium tracking-wide  focus:outline-none  hover:text-green-600 rounded-2xl border bg-slate-600 text-stone-50 ">
+                  <span className="m-auto">Crear publicación</span>
+                
+      </button>
     </li>
   </ul>
+
+   
     </>)
   }
 

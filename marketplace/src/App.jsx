@@ -6,6 +6,7 @@ import Index from './pages';
 import Login from "./componentes/User/Login";
 import Register from './componentes/User/Register';
 import Servicios from "./componentes/Sv/Servicios"
+import Review from "./componentes/Sv/Review"
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register/>} />
-
+        <Route path="/review" element={<Review/>} />
       </Routes>
     </Router>
   );
