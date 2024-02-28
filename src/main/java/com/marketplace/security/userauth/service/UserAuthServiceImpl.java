@@ -74,34 +74,6 @@ public class UserAuthServiceImpl implements IUserAuthService {
 
     //falta validacion de email viejo
     @Override
-    public void updateEmail(UpdateUsernameRequest request){
-        //Obtain current context security authentication
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if(authentication == null || !authentication.isAuthenticated())
-            throw new IllegalStateException("User not authenticated");
-
-        String currentUsername = authentication.getName();
-
-        if(!request.currentUsername().equals(currentUsername)){
-            throw new IllegalStateException("Current email does not match");
-        }
-
-        var requestedUser = repository.findByUsername(currentUsername);
-
-        if(requestedUser.isPresent()){
-            var user = requestedUser.get();
-            //update email
-            user.setUsername(request.newUsername());
-            //update the new email
-            repository.save(user);
-        } else {
-            throw new UserAccountNotFound();
-        }
-
-    }
-
-    @Override
     public void updateEmail(UpdateUsernameRequest request, Principal connectedUser) {
         //Assures User is authenticated
         var user = (UserAuth) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();

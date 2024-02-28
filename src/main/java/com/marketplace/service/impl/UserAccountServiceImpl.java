@@ -27,13 +27,6 @@ public class UserAccountServiceImpl implements IUserAccountService {
     private final UserAuthRepository userAuthRepository;
     private final LocationServiceImpl locationService;
 
-    @Override
-    public List<UserAccountResponse> findAll() {
-        IUserAccountMapper userAccountMapper = IUserAccountMapper.INSTANCE;
-        List<UserAccount> users = repository.findAll();
-
-        return userAccountMapper.toUserResponseList(users);
-    }
 
     @Override
     public Page<UserAccountResponse> findAll(Pageable pageable) {
@@ -100,13 +93,6 @@ public class UserAccountServiceImpl implements IUserAccountService {
             user.setId(id);
             repository.save(user);
         }
-
-    }
-
-    @Override
-    public void delete(Long id) {
-        findById(id);
-        repository.deleteById(id);
     }
 
 }

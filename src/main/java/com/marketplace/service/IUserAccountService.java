@@ -13,16 +13,11 @@ import java.util.List;
 @Service
 public interface IUserAccountService {
 
-    List<UserAccountResponse> findAll();
-
-    Page<UserAccountResponse> findAll(Pageable pageable);
+   Page<UserAccountResponse> findAll(Pageable pageable);
 
     UserAccountResponse findById(Long id);
 
     UserAccount save(RegisterRequest request, UserAuth userAuth);
 
-
     void update(Long id, RegisterRequest request);
-
-    void delete(Long id);
 }

@@ -20,8 +20,6 @@ public interface IUserAuthService {
     void updatePassword(UpdatePasswordRequest request, Principal connectedUser);
 
     //falta validacion de email viejo
-    void updateEmail(UpdateUsernameRequest request);
-
     void updateEmail(UpdateUsernameRequest request, Principal connectedUser);
 
     void delete(DeleteUserRequest request, Principal connectedUser);
