@@ -6,8 +6,7 @@ import Index from './pages';
 import Login from "./componentes/User/Login";
 import Register from './componentes/User/Register';
 import Servicios from "./componentes/Sv/Servicios"
-import CardDetail from './componentes/Sv/CardDetail';
-import ChargeService from './componentes/Sv/ChargeService';
+import Review from "./componentes/Sv/Review"
 
 function App() {
   return (
@@ -20,11 +19,10 @@ function App() {
           <Route path="Inicio" element={<Login />} />
           <Route path="Carga-del-servicio" element={<ChargeService/>} />
         </Route>
-        
-        <Route path="Detalle" element={<CardDetail/>} />
-        <Route path="Registro" element={<Register/>} />
-        
 
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="/review" element={<Review/>} />
       </Routes>
     </Router>
   );
