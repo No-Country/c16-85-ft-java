@@ -47,7 +47,7 @@ public class UserAuthController {
             @RequestBody UpdateUsernameRequest request,
             Principal connectedUser
     ){
-        service.updateEmail(request/*, connectedUser*/);
+        service.updateEmail(request);
 
         return ResponseEntity.ok().build();
 

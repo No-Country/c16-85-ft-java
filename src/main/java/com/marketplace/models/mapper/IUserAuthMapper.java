@@ -18,7 +18,7 @@ public interface IUserAuthMapper {
     @Mapping(target="id", source="id")
     @Mapping(target="username", source="username")
     @Mapping(target="role", source="role")
-    @Mapping(target="userAccount.id", source="userAccountId")
+    @Mapping(target="userAccountId", source="userAccount.id")
     UserAuthResponse toResponse(UserAuth userAuth);
 
     List<UserAuthResponse> toResponseList(List<UserAuth> userAuths);

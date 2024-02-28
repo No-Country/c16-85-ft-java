@@ -4,7 +4,7 @@ import com.marketplace.models.valueobjets.useraccount.Role;
 
 public record UserAuthResponse(Long id,
                                String username,
-                               Role role,
+                               String role,
                                Long userAccountId
                                ) {
 }
