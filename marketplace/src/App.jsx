@@ -7,19 +7,23 @@ import Login from "./componentes/User/Login";
 import Register from './componentes/User/Register';
 import Servicios from "./componentes/Sv/Servicios"
 import CardDetail from './componentes/Sv/CardDetail';
+import ChargeService from './componentes/Sv/ChargeService';
 
 function App() {
   return (
     <Router>
+
       <Routes>
         <Route path="/" element={<Home/>}>
           <Route index element={<Index/>} />
           <Route path="/Servicios" element={<Servicios/>} />
-          <Route path="Registrarse" element={<Login />} />
-          
+          <Route path="Inicio" element={<Login />} />
+          <Route path="Carga-del-servicio" element={<ChargeService/>} />
         </Route>
+        
         <Route path="Detalle" element={<CardDetail/>} />
-        <Route path="Prueba" element={<Register/>} />
+        <Route path="Registro" element={<Register/>} />
+        
 
       </Routes>
     </Router>

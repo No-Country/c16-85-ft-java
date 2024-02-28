@@ -22,10 +22,10 @@ const Navbar = () => {
                             <Link spy={true} smooth={true} to="/Servicios">
                                 <li className="hover:text-green-700 transition border-b-2 border-slate-600 hover:border-green-700 cursor-pointer">Servicios</li>
                             </Link>
-                            <Link spy={true} smooth={true} to="Login">
+                            <Link spy={true} smooth={true} to="Inicio">
                                 <li className="bg-black bg-opacity-50 rounded-xl py-1 px-2 hover:text-green-700  cursor-pointer">Sign In</li>
                             </Link>
-                            <Link spy={true} smooth={true} to="Register">
+                            <Link spy={true} smooth={true} to="Registro">
                                 <li className="bg-black bg-opacity-50 rounded-xl py-1 px-2 hover:text-green-700  cursor-pointer">Sign Up</li>
                             </Link>
                         </ul>
