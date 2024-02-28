@@ -18,12 +18,8 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
-
-    @Column
-    @NotNull
     private String description;
     private Double score;
-
     @OneToMany(mappedBy = "review")
     private List<ServicesHistory> servicesHistoryList;
 

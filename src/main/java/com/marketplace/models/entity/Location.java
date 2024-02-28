@@ -16,14 +16,10 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long locationId;
-
-    @Column
-    @NotNull
     private String city;
     private String country;
-
     @Embedded
-    private Addres addres;
+    private Addres address;
 
     @OneToOne
     private ContractorProfile contractorProfile;

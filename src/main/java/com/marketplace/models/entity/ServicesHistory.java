@@ -17,20 +17,13 @@ import java.util.UUID;
 public class ServicesHistory {
 
     @Id
-    @Column
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long serviceHistoryId;
-
-    @Column
-    @NotNull
     private LocalDate date;
     private BigDecimal price;
-
     @ManyToOne
     @JoinColumn(name = "contractor_profile_id")
     private ContractorProfile contractorProfile;
-
     @ManyToOne
     @JoinColumn(name = "review_id")
     private Review review;
