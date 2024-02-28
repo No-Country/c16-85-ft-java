@@ -37,7 +37,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
     @Override
     public Page<UserAccountResponse> findAll(Pageable pageable) {
-        return null;
+        return repository.findAll(pageable).map(IUserAccountMapper.INSTANCE::toUserResponse);
     }
 
     @Override

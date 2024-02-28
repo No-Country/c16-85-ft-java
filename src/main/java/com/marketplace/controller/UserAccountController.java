@@ -5,6 +5,8 @@ import com.marketplace.security.auth.service.AuthenticationService;
 import com.marketplace.security.userauth.service.IUserAuthService;
 import com.marketplace.service.IUserAccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +23,9 @@ public class UserAccountController {
     private final IUserAuthService userAuthService;
 
     @GetMapping
-    public ResponseEntity<List<UserAccountResponse>> findAll(){
+    public ResponseEntity<Page<UserAccountResponse>> findAll(Pageable pageable){
 
-        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(service.findAll(pageable), HttpStatus.OK);
 
     }
     @GetMapping("/{id}")
