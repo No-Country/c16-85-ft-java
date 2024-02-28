@@ -26,8 +26,29 @@ public class ProfessionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProfessionResponse> findByUUID(@PathVariable Long id){
+    public ResponseEntity<ProfessionResponse> findById(@PathVariable Long id){
         return new ResponseEntity<>(professionService.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/category/{name}")
+    public ResponseEntity<Page<ProfessionResponse>> findByCategoryName(Pageable pageable,
+                                                                     @PathVariable String name){
+        return new ResponseEntity<>(professionService
+                .findByCategoryName(pageable, name), HttpStatus.OK);
+    }
+
+    @GetMapping("/contractor/{id}")
+    public ResponseEntity<Page<ProfessionResponse>> findByContractorId(Pageable pageable,
+                                                                       @PathVariable Long id){
+        return new ResponseEntity<>(professionService
+                .findByContractorId(pageable, id), HttpStatus.OK);
+    }
+
+    @GetMapping("/title/{title}")
+    public ResponseEntity<Page<ProfessionResponse>> findByTitle(Pageable pageable,
+                                                                @PathVariable String title){
+        return new ResponseEntity<>(professionService
+                .findByTitle(pageable, title), HttpStatus.OK);
     }
 
     @PostMapping
