@@ -1,7 +1,7 @@
 const CardReview = () => {
   return (
     <>
-      <div className="mb-8 sm:break-inside-avoid w-full  max-w-[290px]  sm:max-w-[350px] m-auto ">
+      <div className="mb-8 sm:break-inside-avoid w-full  max-w-[290px]  sm:max-w-[350px] m-auto md:shadow-2xl md:rounded-xl">
         <blockquote className="rounded-lg bg-gray-50  p-5 shadow-sm sm:p-8">
           <div className="flex flex-col   items-center gap-4   sm:flex-row">
             <img

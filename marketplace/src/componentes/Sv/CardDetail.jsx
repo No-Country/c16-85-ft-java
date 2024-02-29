@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { FaTimes } from 'react-icons/fa';
-import { TiArrowRightThick } from "react-icons/ti";
+import { TbPointFilled } from "react-icons/tb";
+
 
 
 // Importa las imágenes
@@ -72,19 +73,32 @@ const CardDetail = () => {
                         {description === 'Gasista' && <p>Precio: $250usd</p>}
                     </div>
                     <hr className='mt-3 border-slate-600' />
-                    <div>
-                        <h2 className=' mt-3 font-semibold text-2xl md:text-3xl'>Sobre mi</h2>
-                        <div className='p-4'>
-                            <p className='flex items-center gap-3 text-gray-900 text-base md:text-lg'><TiArrowRightThick />Carlos Gonzalez</p>
-                            <p className='flex items-center gap-3 text-gray-900 text-base md:text-lg '><TiArrowRightThick />Datos de ubicacion</p>
-                            <div className='flex ml-7 mt-3'>
-                                <ul className=''>
-                                    <li className='flex items-center gap-3 p-2'><TiArrowRightThick />Calle: </li>
-                                    <li className='flex items-center gap-3 p-2'><TiArrowRightThick />Numero:</li>
-                                    <li className='flex items-center gap-3 p-2'><TiArrowRightThick />Departamento:</li>
+                    <div className=' md:rounded-lg bg-slate-600 m-4 p-2'>
+                        <h2 className='flex justify-center mt-3 font-semibold text-2xl md:text-3xl text-stone-50'>Mi perfil</h2>
+                        <div className='flex flex-row justify-around m-4'>
+                            <div className=''>
+                                <h4 className='text-xl  font-semibold text-stone-50 text-center sm:text-left m-2'>Datos del perfil</h4>
+                                <ul className='flex flex-col items-start'>
+                                    <li className='flex justify-center items-center text-stone-50'><TbPointFilled/>Raul Carlos</li>
+                                    <li className='flex justify-center items-center text-stone-50 '><TbPointFilled/>12/12/2020</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className='text-xl  font-semibold text-stone-50 text-center sm:text-left m-2'>Datos de contacto</h4>
+                                <ul className='flex flex-col items-start'>
+                                    <li className='flex justify-center items-center text-stone-50'><TbPointFilled/>correo@gmail.com</li>
+                                    <li className='flex justify-center items-center text-stone-50'><TbPointFilled/>+54 264515132</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className='text-xl  font-semibold text-stone-50 text-center sm:text-left m-2'>Datos de ubicacion</h4>
+                                <ul className='flex flex-col items-start'>
+                                    <li className='flex justify-center items-center text-stone-50'><TbPointFilled/>Los Alamos 123 oeste</li>
+                                    <li className='flex justify-center items-center text-stone-50'><TbPointFilled/>Barrio x - Mar del plata</li>
                                 </ul>
                             </div>
                         </div>
+                        
                     </div>
                     <hr className='mt-3 border-slate-600'/>
                     <Review/>
