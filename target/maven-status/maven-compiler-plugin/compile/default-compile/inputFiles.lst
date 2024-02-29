@@ -38,6 +38,7 @@
 /home/bruno/Documents/Development/Java/c16-85-ft-java/src/main/java/com/marketplace/DTO/contractor/ContractorProfileResponse.java
 /home/bruno/Documents/Development/Java/c16-85-ft-java/src/main/java/com/marketplace/security/demo/controller/UserDemoController.java
 /home/bruno/Documents/Development/Java/c16-85-ft-java/src/main/java/com/marketplace/exceptions/user/DuplicatedUserException.java
+/home/bruno/Documents/Development/Java/c16-85-ft-java/src/main/java/com/marketplace/security/config/WebConfig.java
 /home/bruno/Documents/Development/Java/c16-85-ft-java/src/main/java/com/marketplace/service/LocationService.java
 /home/bruno/Documents/Development/Java/c16-85-ft-java/src/main/java/com/marketplace/Application.java
 /home/bruno/Documents/Development/Java/c16-85-ft-java/src/main/java/com/marketplace/security/auth/controller/AuthenticationController.java

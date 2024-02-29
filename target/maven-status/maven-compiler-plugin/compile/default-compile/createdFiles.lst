@@ -15,6 +15,7 @@ com/marketplace/DTO/servicesHistory/ServicesHistorySimple.class
 com/marketplace/repository/IProfessionRepository.class
 com/marketplace/models/valueobjets/contractor/BusinessName.class
 com/marketplace/security/demo/controller/ContractorDemoController.class
+com/marketplace/security/config/WebConfig.class
 com/marketplace/security/auth/dto/RegisterRequest$RegisterRequestBuilder.class
 com/marketplace/service/ServicesHistoryService.class
 com/marketplace/models/mapper/IProfessionMapper.class
