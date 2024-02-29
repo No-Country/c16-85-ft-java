@@ -38,7 +38,7 @@ public class AuthenticationService {
 
         //Email Validation (add request validation)
         try{
-            validateEmail(request.getUsername());
+            validateEmail(request.username());
 
         }catch(InvalidEmailException e){
 
@@ -53,8 +53,8 @@ public class AuthenticationService {
         try{
 
             var userAuth = UserAuth.builder()
-                    .username(request.getUsername())
-                    .password(passwordEncoder.encode(request.getPassword()))
+                    .username(request.username())
+                    .password(passwordEncoder.encode(request.password()))
                     .role(USER)
                     .build();
 
@@ -90,7 +90,7 @@ public class AuthenticationService {
 
         //Email Validation (add request validation)
         //try{
-            validateEmail(request.getUsername());
+            validateEmail(request.username());
 
         //}catch(InvalidEmailException e){
 
@@ -105,8 +105,8 @@ public class AuthenticationService {
         try{
 
             var userAuth = UserAuth.builder()
-                    .username(request.getUsername())
-                    .password(passwordEncoder.encode(request.getPassword()))
+                    .username(request.username())
+                    .password(passwordEncoder.encode(request.password()))
                     .role(ADMIN)
                     .build();
 

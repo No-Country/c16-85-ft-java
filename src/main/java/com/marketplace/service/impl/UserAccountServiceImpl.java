@@ -60,7 +60,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
     public UserAccount save(RegisterRequest request, UserAuth userAuth){
         var location = locationService.guardarlocations(
                 locationService.createMarDelPlataLocation(
-                new Address(request.getAddress())));
+                new Address(request.address())));
 
         var user = IUserAccountMapper.INSTANCE.toEntity(request);
         user.setUserAuth(userAuth);
