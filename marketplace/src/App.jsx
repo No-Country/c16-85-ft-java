@@ -7,6 +7,9 @@ import Login from "./componentes/User/Login";
 import Register from './componentes/User/Register';
 import Servicios from "./componentes/Sv/Servicios"
 import Review from "./componentes/Sv/Review"
+import ChargeService from './componentes/Sv/ChargeService';
+import CardDetail from './componentes/Sv/CardDetail';
+
 
 function App() {
   return (
@@ -23,6 +26,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register/>} />
         <Route path="/review" element={<Review/>} />
+        <Route path="/Detalle" element={<CardDetail/>} />
       </Routes>
     </Router>
   );

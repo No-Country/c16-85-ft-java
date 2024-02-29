@@ -8,6 +8,7 @@ import { TiArrowRightThick } from "react-icons/ti";
 import imageUrl from "../../../public/img/electricista.webp";
 import imageUrl2 from "../../../public/img/albañil.webp";
 import imageUrl3 from "../../../public/img/Gasista.webp";
+import Review from './Review';
 
 const CardDetail = () => {
     // Estado para controlar la descripción mostrada debajo de cada botón
@@ -82,10 +83,11 @@ const CardDetail = () => {
                                     <li className='flex items-center gap-3 p-2'><TiArrowRightThick />Numero:</li>
                                     <li className='flex items-center gap-3 p-2'><TiArrowRightThick />Departamento:</li>
                                 </ul>
-                            </div>  
+                            </div>
                         </div>
-                        
                     </div>
+                    <hr className='mt-3 border-slate-600'/>
+                    <Review/>
                 </div>
             </div>
         </div>
