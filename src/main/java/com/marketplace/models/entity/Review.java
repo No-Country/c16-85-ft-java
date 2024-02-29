@@ -1,36 +1,38 @@
 package com.marketplace.models.entity;
 
+import com.marketplace.models.valueobjets.address.Address;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.List;
-import java.util.UUID;
+import lombok.*;
 
 @Entity(name = "reviews")
-@Getter
+@ToString
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@EqualsAndHashCode
 public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    @Column
     @NotNull
     private String description;
-    private Double score;
 
-    @OneToMany(mappedBy = "review")
-    private List<ServicesHistory> servicesHistoryList;
+    private int score;
 
-//    @OneToMany
-//    private ServicesHistory servicesHistory;
+    @OneToOne
+    private ServicesHistory servicesHistory;
 
+    public Review() {}
 
+    public Review(String description, int score, ServicesHistory servicesHistory) {
+        this.description = description;
+        this.score = score;
+        this.servicesHistory = servicesHistory;
+    }
+
+    public static Review createReview(String description, int score, ServicesHistory servicesHistory) {
+        return new Review(description, score, servicesHistory);
+    }
 }

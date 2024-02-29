@@ -1,4 +1,8 @@
 package com.marketplace.DTO.contractor;
 
-public record ContractorProfileResponse() {
+public record ContractorProfileResponse(
+        String businessName,
+        String ceoName,
+        String ceoLastName
+) {
 }

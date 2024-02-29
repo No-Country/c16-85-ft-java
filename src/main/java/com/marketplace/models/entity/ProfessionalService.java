@@ -25,7 +25,8 @@ public class ProfessionalService {
     @Embedded
     private ProfessionTitle title;
 
-    @OneToOne(mappedBy = "profService")
+    @ManyToOne
+    @JoinColumn(name = "contractor_profile_id")
     private ContractorProfile contractorProfile;
 
     @Embedded

@@ -41,7 +41,7 @@ public class UserAccount {
     @OneToOne
     @JoinColumn(name = "user_auth_id")
     private UserAuth userAuth;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "contractor_profile_id")
     private ContractorProfile contractorProfile;
     @OneToMany(mappedBy = "userAccount")

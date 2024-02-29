@@ -58,9 +58,8 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
     @Override
     public UserAccount save(RegisterRequest request, UserAuth userAuth){
-        var location = locationService.guardarlocations(
-                locationService.createMarDelPlataLocation(
-                new Address(request.address())));
+        var location = locationService.createMarDelPlataLocation(
+                new Address(request.address()));
 
         var user = IUserAccountMapper.INSTANCE.toEntity(request);
         user.setUserAuth(userAuth);

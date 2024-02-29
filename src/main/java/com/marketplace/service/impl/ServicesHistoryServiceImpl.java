@@ -1,47 +1,57 @@
 package com.marketplace.service.impl;
 
 import com.marketplace.models.entity.ServicesHistory;
-import com.marketplace.repository.ServicesHistoriRepository;
+import com.marketplace.repository.ServicesHistoryRepository;
 import com.marketplace.service.ServicesHistoryService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class ServicesHistoryServiceImpl implements ServicesHistoryService {
 
     @Autowired
-    ServicesHistoriRepository servicehistorirepository;
+    ServicesHistoryRepository servicesHistoryRepository;
 
 
     @Override
-    public ServicesHistory agregarHistory(ServicesHistory newHistory) {
-        return servicehistorirepository.save(newHistory);
+    public ServicesHistory addHistory(ServicesHistory newHistory) {
+        return servicesHistoryRepository.save(newHistory);
     }
 
     @Override
-    public List<ServicesHistory> listaServicesHistory() {
-        return servicehistorirepository.findAll();
+    public List<ServicesHistory> listServicesHistory() {
+        return servicesHistoryRepository.findAll();
     }
 
     @Override
-    public ServicesHistory buscarservHisporId(Long id) {
-        Optional<ServicesHistory> optionalServicesHistory = servicehistorirepository.findById(id);
+    public ServicesHistory searchHistorybyId(Long id) {
+        Optional<ServicesHistory> optionalServicesHistory = servicesHistoryRepository.findById(id);
         return optionalServicesHistory.orElse(null);
     }
 
     @Override
-    public ServicesHistory editarHistory(Long id, ServicesHistory historiUpDate) {
-        Optional<ServicesHistory> optionalServicesHistory = servicehistorirepository.findById(id);
+    public ServicesHistory editHistory(Long id, ServicesHistory historyUpDate) {
+        Optional<ServicesHistory> optionalServicesHistory = servicesHistoryRepository.findById(id);
         if (optionalServicesHistory.isPresent()) {
             ServicesHistory historyexistente = optionalServicesHistory.get();
-            historyexistente.setDate(historiUpDate.getDate());
-            historyexistente.setReview(historiUpDate.getReview());
-            return servicehistorirepository.save(historyexistente);
+            historyexistente.setDate( historyUpDate.getDate());
+            historyexistente.setReview( historyUpDate.getReview());
+            return servicesHistoryRepository.save(historyexistente);
         }
         return null;
+
+
     }
+
+    @Override
+    public void deleteHistory(Long id) {
+        servicesHistoryRepository.deleteById(id);
+    }
+
 }
+
+
