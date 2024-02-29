@@ -141,12 +141,12 @@ public class AuthenticationService {
 
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            request.getUsername(),
-                            request.getPassword()
+                            request.username(),
+                            request.password()
                     )
             );
 
-        var user = userAuthRepository.findByUsername(request.getUsername())
+        var user = userAuthRepository.findByUsername(request.username())
                 .orElseThrow();
 
         var jwtToken = jwtService.generateToken(user);

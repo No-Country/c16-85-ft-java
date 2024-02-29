@@ -1,4 +1,4 @@
 package com.marketplace.DTO.useraccount;
 
-public class UserAccountRequest {
+public record UserAccountRequest (){
 }
