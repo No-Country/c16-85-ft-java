@@ -22,7 +22,7 @@ function App() {
           <Route path="Inicio" element={<Login />} />
           <Route path="Carga-del-servicio" element={<ChargeService/>} />
         </Route>
-
+        <Route path="/Detalle" element={<CardDetail/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register/>} />
         <Route path="/review" element={<Review/>} />
