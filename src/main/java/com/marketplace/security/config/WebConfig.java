@@ -8,9 +8,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/auth")
-                .allowedOrigins("http://localhost:5173") // Reemplaza con la dirección IP del equipo de frontend
-                .allowedMethods("GET", "POST", "PUT","PATCH", "DELETE")
-                .allowedHeaders("*");
+        registry.addMapping("/**");
+//                .allowedOrigins("http://localhost:5173") // Reemplaza con la dirección IP del equipo de frontend
+//                .allowedMethods("GET", "POST", "PUT","PATCH", "DELETE")
+//                .allowedHeaders("*");
     }
 }
