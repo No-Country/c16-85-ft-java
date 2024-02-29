@@ -1,4 +1,4 @@
-package com.marketplace.security.config;
+package com.marketplace.security.config.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

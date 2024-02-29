@@ -22,6 +22,10 @@ public class ServicesHistory {
     private LocalDate date;
     private BigDecimal price;
     @ManyToOne
+    @JoinColumn(name = "user_account_id")
+    private UserAccount userAccount;
+
+    @ManyToOne
     @JoinColumn(name = "contractor_profile_id")
     private ContractorProfile contractorProfile;
     @ManyToOne

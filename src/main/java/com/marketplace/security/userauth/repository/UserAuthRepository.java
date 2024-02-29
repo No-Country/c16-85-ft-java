@@ -1,6 +1,5 @@
-package com.marketplace.repository;
+package com.marketplace.security.userauth.repository;
 
-import com.marketplace.models.entity.UserAccount;
 import com.marketplace.security.userauth.model.UserAuth;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -8,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserAccount, Long> {
+public interface UserAuthRepository extends JpaRepository<UserAuth, Long> {
     Optional<UserAuth> findByUsername(String username);
 }

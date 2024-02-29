@@ -1,12 +1,12 @@
 package com.marketplace.models.entity;
 
-import com.marketplace.models.valueobjets.Name;
-import com.marketplace.models.valueobjets.LastName;
-import com.marketplace.models.valueobjets.Age;
-import com.marketplace.models.valueobjets.Role;
-import com.marketplace.models.valueobjets.Username;
-import com.marketplace.models.valueobjets.Password;
+import com.marketplace.models.valueobjets.useraccount.Firstname;
+import com.marketplace.models.valueobjets.useraccount.Lastname;
+import com.marketplace.models.valueobjets.useraccount.Birthday;
+import com.marketplace.models.valueobjets.useraccount.Username;
+import com.marketplace.models.valueobjets.useraccount.Mobile;
 
+import com.marketplace.security.userauth.model.UserAuth;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,20 +27,26 @@ public class UserAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
+    private String username;
     @Embedded
-    private Name name;
+    private Firstname firstname;
     @Embedded
-    private LastName lastname;
+    private Lastname lastname;
     @Embedded
-    private Age age;
+    private Birthday birthday;
     @Embedded
-    private Username username;
-    @Embedded
-    private Password password;
-//    private List<Role> roles;
-    private String photo;
+    private Mobile mobile;
     @OneToOne
-    @JoinColumn(name = "id_contractor")
+    private Location location;
+    @OneToOne
+    @JoinColumn(name = "user_auth_id")
+    private UserAuth userAuth;
+    @OneToOne
+    @JoinColumn(name = "contractor_profile_id")
     private ContractorProfile contractorProfile;
+    @OneToMany(mappedBy = "userAccount")
+    private List<ServicesHistory> servicesHistory;
+    private String photo;
 
 }

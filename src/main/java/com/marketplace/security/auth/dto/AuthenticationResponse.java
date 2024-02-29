@@ -1,0 +1,13 @@
+package com.marketplace.security.auth.dto;
+
+import lombok.Builder;
+
+@Builder
+public record AuthenticationResponse (String token,
+                                      String message,
+                                      int statusCode){
+
+
+
+
+}

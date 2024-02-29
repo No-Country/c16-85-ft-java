@@ -1,5 +1,6 @@
 package com.marketplace.security.config;
 
+import com.marketplace.security.config.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -3,9 +3,9 @@
 package com.marketplace.service.impl;
 
 import com.marketplace.models.entity.Location;
+import com.marketplace.models.valueobjets.address.Address;
 import com.marketplace.repository.LocationRepository;
 import com.marketplace.service.LocationService;
-import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +28,34 @@ public class LocationServiceImpl implements LocationService {
         return optionalLocation.orElse(null);
     }
 
+    public void createLocation(Address address, String city,
+                               String province, String country,
+                               String coordinates){
+
+        var location = Location.builder()
+                .address(address)
+                .city(city)
+                .province(province)
+                .country(country)
+                .coordinates(coordinates)
+                .build();
+
+        locationrepository.save(location);
+
+    }
+
+    public Location createMarDelPlataLocation(Address address){
+
+        return Location.builder()
+                .address(address)
+                .city("Mar del Plata")
+                .province("Buenos Aires")
+                .country("Argentina")
+                .coordinates("")
+                .build();
+
+    }
+
 
     @Override
     public Location guardarlocations(Location newlocation) {
@@ -40,6 +68,7 @@ public class LocationServiceImpl implements LocationService {
             Location locationExistente = optionalLocation.get();
             locationExistente.setCity(locationActualizada.getCity());
             locationExistente.setCountry(locationActualizada.getCountry());
+            locationExistente.setAddress(locationActualizada.getAddress());
             return locationrepository.save(locationExistente);
         }
         return null;

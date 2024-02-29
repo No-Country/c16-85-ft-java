@@ -1,39 +1,41 @@
-package com.marketplace.security;
+package com.marketplace.security.userauth.model;
 
 
+import com.marketplace.models.entity.UserAccount;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name="user_auths")
 public class UserAuth implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
-    private String firstname;
-    private String lastname;
-    private String email;
+    @Column(unique = true)
+    private String username;
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_account_id")
+    private UserAccount userAccount;
 
     //ROLES
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return role.getAuthorities();
     }
 
     @Override
@@ -43,7 +45,7 @@ public class UserAuth implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override
