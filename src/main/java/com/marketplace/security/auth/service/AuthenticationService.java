@@ -152,6 +152,8 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
 
         return AuthenticationResponse.builder()
+                .username(user.getUsername())
+                .role(String.valueOf(user.getRole()))
                 .token(jwtToken)
                 .build();
 
