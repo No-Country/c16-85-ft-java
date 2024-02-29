@@ -24,9 +24,9 @@ const Register = () => {
         const { name, value } = e.target
         const valueForm = { ...form, [name]: value };
         setForm(valueForm)
-
-
     }
+
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(form);
