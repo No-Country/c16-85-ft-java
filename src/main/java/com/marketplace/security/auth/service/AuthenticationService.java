@@ -36,18 +36,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse userRegister(RegisterRequest request) {
 
-        //Email Validation (add request validation)
-        try{
-            validateEmail(request.username());
-
-        }catch(InvalidEmailException e){
-
-            return AuthenticationResponse.builder()
-                    .token("")
-                    .message(e.getMessage())
-                    .statusCode(400)
-                    .build();
-        }
+        validateEmail(request.username());
 
         //UserAuth and UserAccount creation and persistence
         try{

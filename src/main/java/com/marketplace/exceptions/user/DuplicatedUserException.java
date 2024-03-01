@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @StandardException
 @ResponseStatus(value = HttpStatus.BAD_REQUEST,reason = "User Email already exists")
-public class DuplicatedUserException extends DataIntegrityViolationException {
+public class DuplicatedUserException extends UserAccountPersistenceException {
 }

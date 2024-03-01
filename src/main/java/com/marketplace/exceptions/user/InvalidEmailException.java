@@ -6,5 +6,5 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @StandardException
 @ResponseStatus(value= HttpStatus.BAD_REQUEST, reason="Invalid email format")
-public class InvalidEmailException extends IllegalArgumentException{
+public class InvalidEmailException extends UserAccountPersistenceException{
 }
