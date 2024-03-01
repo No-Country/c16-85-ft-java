@@ -25,7 +25,7 @@ const Navbar = () => {
                             <Link spy={true} smooth={true} to="Inicio">
                                 <li className="bg-black bg-opacity-50 rounded-xl py-1 px-2 hover:text-green-700  cursor-pointer">Sign In</li>
                             </Link>
-                            <Link spy={true} smooth={true} to="Registro">
+                            <Link spy={true} smooth={true} to="register">
                                 <li className="bg-black bg-opacity-50 rounded-xl py-1 px-2 hover:text-green-700  cursor-pointer">Sign Up</li>
                             </Link>
                         </ul>
@@ -44,7 +44,7 @@ const Navbar = () => {
                                 <Link spy={true} smooth={true} to="Login">
                                     <li className="my-4 py-4 border-b border-slate-500 hover:bg-slate-500">Sign In</li>
                                 </Link>
-                                <Link spy={true} smooth={true} to="Register">
+                                <Link spy={true} smooth={true} to="register">
                                     <li className="my-4 py-4 border-b border-slate-500 hover:bg-slate-500">Sign Up</li>
                                 </Link>
                             </ul>
