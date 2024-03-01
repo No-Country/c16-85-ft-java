@@ -30,6 +30,7 @@ public interface IUserAccountMapper {
     @Mapping(source="username", target = "username")
     @Mapping(source="firstname.firstname", target = "firstname")
     @Mapping(source="lastname.lastname", target = "lastname")
+    @Mapping(target = "role", expression = "java(userAccount.getUserAuth().getRole().toString())")
     UserAccountResponse toUserResponse(UserAccount userAccount);
     List<UserAccountResponse>toUserResponseList(List<UserAccount> userAccounts);
 

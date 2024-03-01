@@ -30,7 +30,8 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
     @Override
     public Page<UserAccountResponse> findAll(Pageable pageable) {
-        return repository.findAll(pageable).map(IUserAccountMapper.INSTANCE::toUserResponse);
+        return repository.findAll(pageable)
+                .map(IUserAccountMapper.INSTANCE::toUserResponse);
     }
 
     @Override
@@ -40,19 +41,11 @@ public class UserAccountServiceImpl implements IUserAccountService {
         if(requestedUser.isPresent()){
             var user = requestedUser.get();
 
-            return UserAccountResponse.builder()
-                    .username(user.getUsername())
-                    .firstname(user.getFirstname().toString())
-                    .lastname(user.getLastname().toString())
-                    .build();
-
+            return IUserAccountMapper.INSTANCE.toUserResponse(user);
         }
 
-        else{
-            throw new UserAccountNotFound();
-        }
-
-
+        else
+            throw new UserAccountNotFound("User not found");
 
     }
 
@@ -77,7 +70,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
             userAuthRepository.deleteById(userAuth.getId());
 
-            throw new CannotPersistUserException();
+            throw new CannotPersistUserException("User cannot being saved. Internal Error");
 
         }
 
@@ -91,7 +84,8 @@ public class UserAccountServiceImpl implements IUserAccountService {
             var user = IUserAccountMapper.INSTANCE.toEntity(request);
             user.setId(id);
             repository.save(user);
-        }
+        } else
+            throw new UserAccountNotFound("User not found");
     }
 
 }

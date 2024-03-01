@@ -1,8 +1,6 @@
 package com.marketplace.security.auth.service;
 
-import com.marketplace.exceptions.user.DuplicatedUserException;
-import com.marketplace.exceptions.user.InvalidEmailException;
-import com.marketplace.exceptions.user.UserAccountNotFound;
+import com.marketplace.exceptions.user.*;
 import com.marketplace.security.auth.dto.AuthenticationRequest;
 import com.marketplace.security.auth.dto.AuthenticationResponse;
 import com.marketplace.security.auth.dto.RegisterRequest;
@@ -16,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -60,6 +59,8 @@ public class AuthenticationService {
             var jwtToken = jwtService.generateToken(userAuth);
 
             return AuthenticationResponse.builder()
+                    .username(userAuth.getUsername())
+                    .role(String.valueOf(userAuth.getRole()))
                     .token(jwtToken)
                     .message("User Registered Successfully")
                     .statusCode(200)
@@ -93,6 +94,8 @@ public class AuthenticationService {
             var jwtToken = jwtService.generateToken(userAuth);
 
             return AuthenticationResponse.builder()
+                    .username(userAuth.getUsername())
+                    .role(String.valueOf(userAuth.getRole()))
                     .token(jwtToken)
                     .message("User Registered Successfully")
                     .statusCode(200)
@@ -106,6 +109,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
+        try{
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             request.username(),
@@ -113,8 +117,14 @@ public class AuthenticationService {
                     )
             );
 
+        }catch(BadCredentialsException ex){
+
+            throw new IncorrectEmailOrPasswordException("Email or password are incorrect");
+        }
+
+
         var user = userAuthRepository.findByUsername(request.username())
-                .orElseThrow();
+                .orElseThrow(() -> new EmailNotFoundException("Email not found: " + request.username()));
 
         var jwtToken = jwtService.generateToken(user);
 
