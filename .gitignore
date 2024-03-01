@@ -1,10 +1,6 @@
 HELP.md
-#remover para deploy
-target/
+
 !.mvn/wrapper/maven-wrapper.jar
-#remover ambos para deploy
-!**/src/main/**/target/
-!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
