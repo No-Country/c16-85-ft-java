@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.net.ConnectException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class GlobalHandlerException {
     }
 
     @ExceptionHandler(UserAccountPersistenceException.class)
-    public ResponseEntity<ErrorResponse> userAccountPersistenceException(UserAccountPersistenceException ex){
+    public ResponseEntity<ErrorResponse> handleUserAccountPersistenceException(UserAccountPersistenceException ex){
         ErrorResponse errorResponse;
 
         if(ex instanceof InvalidEmailException){
@@ -53,7 +54,7 @@ public class GlobalHandlerException {
 
     @ResponseBody
     @ExceptionHandler(EmailNotFoundException.class)
-    public ResponseEntity<ErrorResponse> emailNotFoundExceptionHandler(EmailNotFoundException ex){
+    public ResponseEntity<ErrorResponse> handleEmailNotFoundException(EmailNotFoundException ex){
 
         ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.NOT_FOUND, ex.getMessage());
 
@@ -64,7 +65,7 @@ public class GlobalHandlerException {
     //UserWrongEmailOrPasswordException
     @ResponseBody
     @ExceptionHandler(IncorrectEmailOrPasswordException.class)
-    public ResponseEntity<ErrorResponse> incorrectEmailOrPasswordException(IncorrectEmailOrPasswordException ex){
+    public ResponseEntity<ErrorResponse> handleIncorrectEmailOrPasswordException(IncorrectEmailOrPasswordException ex){
 
         ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.FORBIDDEN, ex.getMessage());
 
@@ -78,4 +79,9 @@ public class GlobalHandlerException {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
+    @ExceptionHandler(ConnectException.class)
+    public ResponseEntity<ErrorResponse> handleConnectException(ConnectException ex) {
+        ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR, "Connection Refused");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
 }
