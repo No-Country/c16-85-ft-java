@@ -1,5 +1,6 @@
 package com.marketplace.security.auth.service;
 
+import com.marketplace.exceptions.user.DuplicatedUserException;
 import com.marketplace.exceptions.user.InvalidEmailException;
 import com.marketplace.security.auth.dto.AuthenticationRequest;
 import com.marketplace.security.auth.dto.AuthenticationResponse;
@@ -64,31 +65,14 @@ public class AuthenticationService {
                     .build();
 
         }catch(DataAccessException e){
-
-            return AuthenticationResponse.builder()
-                    .token("N/A")
-                    .message("User Already Exists")
-                    .statusCode(400)
-                    .build();
+            throw new DuplicatedUserException("User Already Exists");
         }
-
     }
 
     //TEMPORAL - PRUEBAS
     public AuthenticationResponse adminRegister(RegisterRequest request) {
 
-        //Email Validation (add request validation)
-        //try{
-            validateEmail(request.username());
-
-        //}catch(InvalidEmailException e){
-
-//            return AuthenticationResponse.builder()
-//                    .token("")
-//                    .message(e.getMessage())
-//                    .statusCode(400)
-//                    .build();
-        //}
+        validateEmail(request.username());
 
         //UserAuth and UserAccount creation and persistence
         try{
@@ -104,9 +88,7 @@ public class AuthenticationService {
             var userAccount = userAccountService.save(request, userAuth);
 
             userAuth.setUserAccount(userAccount);
-
             userAuthRepository.save(userAuth);
-
             var jwtToken = jwtService.generateToken(userAuth);
 
             return AuthenticationResponse.builder()
@@ -116,12 +98,7 @@ public class AuthenticationService {
                     .build();
 
         }catch(DataAccessException e){
-
-            return AuthenticationResponse.builder()
-                    .token("N/A")
-                    .message("User Already Exists")
-                    .statusCode(400)
-                    .build();
+            throw new DuplicatedUserException("User Already Exists");
         }
 
     }
