@@ -29,10 +29,8 @@ public class AuthenticationController {
     ) {
         AuthenticationResponse response = service.userRegister(request);
 
-        if (response.statusCode() == 200)
-            return ResponseEntity.ok(response);
-        else
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(service.userRegister(request));
+        return ResponseEntity.ok(response);
+
     }
 
     //ubicacion temporal del metodo
@@ -42,10 +40,8 @@ public class AuthenticationController {
     ) {
         AuthenticationResponse response = service.adminRegister(request);
 
-        if (response.statusCode() == 200)
-            return ResponseEntity.ok(response);
-        else
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(service.adminRegister(request));
+        return ResponseEntity.ok(response);
+
     }
 
 

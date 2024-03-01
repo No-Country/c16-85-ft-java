@@ -2,6 +2,7 @@ package com.marketplace.security.auth.service;
 
 import com.marketplace.exceptions.user.DuplicatedUserException;
 import com.marketplace.exceptions.user.InvalidEmailException;
+import com.marketplace.exceptions.user.UserAccountNotFound;
 import com.marketplace.security.auth.dto.AuthenticationRequest;
 import com.marketplace.security.auth.dto.AuthenticationResponse;
 import com.marketplace.security.auth.dto.RegisterRequest;
