@@ -63,7 +63,6 @@ public class AuthenticationService {
                     .role(String.valueOf(userAuth.getRole()))
                     .token(jwtToken)
                     .message("User Registered Successfully")
-                    .statusCode(200)
                     .build();
 
         }catch(DataAccessException e){
@@ -98,7 +97,6 @@ public class AuthenticationService {
                     .role(String.valueOf(userAuth.getRole()))
                     .token(jwtToken)
                     .message("User Registered Successfully")
-                    .statusCode(200)
                     .build();
 
         }catch(DataAccessException e){
@@ -132,6 +130,7 @@ public class AuthenticationService {
                 .username(user.getUsername())
                 .role(String.valueOf(user.getRole()))
                 .token(jwtToken)
+                .message("User Authenticated")
                 .build();
 
     }
