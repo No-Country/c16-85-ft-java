@@ -16,8 +16,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-29T20:09:09-0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Private Build)"
+    date = "2024-03-02T14:38:04-0300",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 public class IProfessionMapperImpl implements IProfessionMapper {
 
