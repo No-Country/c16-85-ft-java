@@ -78,4 +78,11 @@ public class GlobalHandlerException {
         return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
     }
 
+
+    @ExceptionHandler(TokenNotFoundException.class)
+    public ResponseEntity<Map<String,String>> tokenNotFoundExceptionHandler(TokenNotFoundException ex){
+        Map<String,String> resp = new HashMap<>();
+        resp.put("TOKEN_NOT_FOUND", ex.getMessage());
+        return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
+    }
 }

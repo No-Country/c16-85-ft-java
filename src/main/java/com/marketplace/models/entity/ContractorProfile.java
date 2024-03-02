@@ -70,7 +70,7 @@ public class ContractorProfile {
     public void addServicesHistory(ServicesHistory servicesHistory) {
         this.servicesHistory.add(servicesHistory);
     }
-    public void addProfessionalService(ServicesHistory servicesHistory) {
-        this.servicesHistory.add(servicesHistory);
+    public void addProfessionalService(ProfessionalService profesionalService) {
+        this.profService.add(profesionalService);
     }
 }

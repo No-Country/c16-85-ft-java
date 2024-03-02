@@ -16,7 +16,6 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    @NotNull
     private String description;
 
     private int score;

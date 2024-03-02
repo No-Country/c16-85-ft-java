@@ -32,15 +32,5 @@ public class Location {
     @JsonIgnore
     private ContractorProfile contractorProfile;
 
-//    public Location(){}
-//
-//    public Location( Address address, ContractorProfile contractorProfile) {
-//        this.address = address;
-//        this.contractorProfile = contractorProfile;
-//    }
-//
-//    public static Location createLocation (ContractorProfile contractorProfile, String address){
-//        var newAddress = new Address(address);
-//        return new Location(newAddress,contractorProfile);
-//    }
+
 }
