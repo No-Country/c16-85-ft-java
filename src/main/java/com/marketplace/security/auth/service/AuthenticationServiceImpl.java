@@ -6,6 +6,7 @@ import com.marketplace.security.auth.dto.AuthenticationResponse;
 import com.marketplace.security.auth.dto.RegisterRequest;
 import com.marketplace.security.userauth.model.UserAuth;
 import com.marketplace.security.config.service.JwtService;
+import com.marketplace.security.userauth.model.valueobjects.Username;
 import com.marketplace.security.userauth.repository.UserAuthRepository;
 
 import com.marketplace.service.impl.UserAccountServiceImpl;
@@ -27,7 +28,7 @@ import static com.marketplace.security.userauth.model.Role.USER;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationService {
+public class AuthenticationServiceImpl {
 
     private final UserAuthRepository userAuthRepository;
     private final UserAccountServiceImpl userAccountService;
@@ -43,7 +44,7 @@ public class AuthenticationService {
         try{
 
             var userAuth = UserAuth.builder()
-                    .username(request.username())
+                    .username(new Username(request.username()))
                     .password(passwordEncoder.encode(request.password()))
                     .role(USER)
                     .build();
@@ -79,7 +80,7 @@ public class AuthenticationService {
         try{
 
             var userAuth = UserAuth.builder()
-                    .username(request.username())
+                    .username(new Username(request.username()))
                     .password(passwordEncoder.encode(request.password()))
                     .role(ADMIN)
                     .build();
@@ -121,7 +122,7 @@ public class AuthenticationService {
         }
 
 
-        var user = userAuthRepository.findByUsername(request.username())
+        var user = userAuthRepository.findByUsername(new Username(request.username()))
                 .orElseThrow(() -> new EmailNotFoundException("Email not found: " + request.username()));
 
         var jwtToken = jwtService.generateToken(user);

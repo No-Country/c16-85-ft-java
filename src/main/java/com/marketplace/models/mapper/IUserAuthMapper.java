@@ -3,6 +3,7 @@ package com.marketplace.models.mapper;
 import com.marketplace.security.auth.dto.RegisterRequest;
 import com.marketplace.security.userauth.dto.UserAuthResponse;
 import com.marketplace.security.userauth.model.UserAuth;
+import com.marketplace.security.userauth.model.valueobjects.Username;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -22,5 +23,8 @@ public interface IUserAuthMapper {
     UserAuthResponse toResponse(UserAuth userAuth);
 
     List<UserAuthResponse> toResponseList(List<UserAuth> userAuths);
+    default Username map(String value){
+        return new Username(value);
+    }
 
 }

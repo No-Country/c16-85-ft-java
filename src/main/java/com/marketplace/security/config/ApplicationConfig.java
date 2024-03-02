@@ -1,5 +1,6 @@
 package com.marketplace.security.config;
 
+import com.marketplace.security.userauth.model.valueobjects.Username;
 import com.marketplace.security.userauth.repository.UserAuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +23,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService(){
 
-        return username -> repository.findByUsername(username)
+        return username -> repository.findByUsername(new Username(username))
                 .orElseThrow(()-> new UsernameNotFoundException("User not found"));
     }
 

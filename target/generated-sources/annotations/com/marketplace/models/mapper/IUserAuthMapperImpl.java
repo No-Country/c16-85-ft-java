@@ -10,7 +10,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-29T23:30:11-0300",
+    date = "2024-03-01T23:16:56-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Private Build)"
 )
 public class IUserAuthMapperImpl implements IUserAuthMapper {
@@ -23,7 +23,7 @@ public class IUserAuthMapperImpl implements IUserAuthMapper {
 
         UserAuth.UserAuthBuilder userAuth = UserAuth.builder();
 
-        userAuth.username( request.username() );
+        userAuth.username( map( request.username() ) );
         userAuth.password( request.password() );
 
         return userAuth.build();

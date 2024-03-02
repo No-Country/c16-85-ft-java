@@ -7,6 +7,7 @@ import com.marketplace.security.userauth.dto.UpdateUsernameRequest;
 import com.marketplace.security.userauth.dto.UpdatePasswordRequest;
 import com.marketplace.security.userauth.dto.UserAuthResponse;
 import com.marketplace.security.userauth.model.UserAuth;
+import com.marketplace.security.userauth.model.valueobjects.Username;
 import com.marketplace.security.userauth.repository.UserAuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -35,13 +36,12 @@ public class UserAuthServiceImpl implements IUserAuthService {
     public UserAuthResponse findById(Long id) {
         Optional<UserAuth> requestedUser = repository.findById(id);
 
-        if(requestedUser.isPresent()){
+        if(requestedUser.isPresent())
             return IUserAuthMapper.INSTANCE.toResponse(requestedUser.get());
-        }
 
-        else{
+        else
             throw new UserAccountNotFound();
-        }
+
     }
 
     //falta validacion de contrasenia vieja
@@ -53,13 +53,15 @@ public class UserAuthServiceImpl implements IUserAuthService {
         var user = (UserAuth) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
 
         //check if current password is correct
-        if(!passwordEncoder.matches(request.currentPassword(), user.getPassword())){
+        if(!passwordEncoder.matches(request.currentPassword(), user.getPassword()))
             throw new IllegalStateException("Wrong password");//agregar excepcion personalizada
-        }
+
         //check if the two new password are the same
-        if(!request.newPassword().equals(request.confirmationPassword())){
+        if(!request.newPassword().equals(request.confirmationPassword()))
             throw new IllegalStateException("Passwords are not the same");//agregar excepcion personalizada
-        }
+
+        if(!request.currentPassword().equals(request.newPassword()))
+            throw new IllegalStateException("Old and new passwords could not be the same");
 
         //update password
         user.setPassword(passwordEncoder.encode(request.newPassword()));
@@ -68,31 +70,32 @@ public class UserAuthServiceImpl implements IUserAuthService {
         repository.save(user);
 
     }
-
-    //falta validacion de email viejo
+    //revisar refresh token
     @Override
     public void updateEmail(UpdateUsernameRequest request, Principal connectedUser) {
         //Assures User is authenticated
-        var user = (UserAuth) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+        var userAuth = (UserAuth) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
 
         //check if current password is correct
-        if(!passwordEncoder.matches(request.password(), user.getPassword())){
+        if(!passwordEncoder.matches(request.password(), userAuth.getPassword()))
             throw new IllegalStateException("Wrong password");//agregar excepcion personalizada
-        }
+
         //check if current email is correct
-        if(!request.currentUsername().equals( user.getUsername())){
+        if(!request.currentUsername().equals(userAuth.getUsername()))
             throw new IllegalStateException("Wrong email");//agregar excepcion personalizada
-        }
+
         //check if the two new email are the same
-        if(!request.newUsername().equals(request.confirmUsername())){
-            throw new IllegalStateException("Emails are not the same");//agregar excepcion personalizada
-        }
+        if(!request.newUsername().equals(request.confirmUsername()))
+            throw new IllegalStateException("New email and confirmation email are not the same");//agregar excepcion personalizada
+
+        if(request.currentUsername().equals(request.newUsername()))
+            throw new IllegalStateException("Old email and new email are repeated");
 
         //update email
-        user.setUsername(request.newUsername());
+        userAuth.setUsername(new Username(request.newUsername()));
 
         //update the new email
-        repository.save(user);
+        repository.save(userAuth);
     }
 
     //changeMailAndPassword
@@ -103,15 +106,16 @@ public class UserAuthServiceImpl implements IUserAuthService {
 
         var userAuth = (UserAuth) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
 
-        if(!passwordEncoder.matches(request.password(), (userAuth.getPassword()))){
+        if(!passwordEncoder.matches(request.password(), (userAuth.getPassword())))
             throw new IllegalStateException("Wrong password"); //agregar excepcion personalizada
-        }
 
-        var user = repository.findByUsername(userAuth.getUsername());
 
-        if(user.isPresent()){
+        var user = repository.findByUsername(new Username(userAuth.getUsername()));
+
+        if(user.isPresent())
             repository.deleteById(userAuth.getId());
-        }
+        else
+            throw new UserAccountNotFound();
 
     }
 
