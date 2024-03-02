@@ -19,8 +19,17 @@ public class ProfessionController {
 
     private final IProfessionService professionService;
 
-    /** Recibe un Page & Size */
+
+    /** Recibe un Page & Size.
+     * Usar en vista de cliente */
     @GetMapping
+    public ResponseEntity<Page<ProfessionResponse>> findAllAvailable(Pageable pageable){
+        return new ResponseEntity<>(professionService.findAllAvailable(pageable), HttpStatus.OK);
+    }
+
+    /** Recibe un Page & Size.
+     * Usar en vista de administrador o contractor */
+    @GetMapping("/all")
     public ResponseEntity<Page<ProfessionResponse>> findAll(Pageable pageable){
         return new ResponseEntity<>(professionService.findAll(pageable), HttpStatus.OK);
     }

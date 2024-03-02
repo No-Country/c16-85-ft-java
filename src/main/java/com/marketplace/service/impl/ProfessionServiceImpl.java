@@ -36,7 +36,16 @@ public class ProfessionServiceImpl implements IProfessionService {
 
     @Override
     public Page<ProfessionResponse> findAll(Pageable pageable) {
-        return professionRepository.findAll(pageable).map(IProfessionMapper.INSTANCE::toDto);
+        return professionRepository
+                .findAll(pageable)
+                .map(IProfessionMapper.INSTANCE::toDto);
+    }
+
+    @Override
+    public Page<ProfessionResponse> findAllAvailable(Pageable pageable) {
+        return professionRepository
+                .findAllByAvailableIsTrue(pageable)
+                .map(IProfessionMapper.INSTANCE::toDto);
     }
 
     @Override
@@ -48,21 +57,21 @@ public class ProfessionServiceImpl implements IProfessionService {
     @Override
     public Page<ProfessionResponse> findByCategoryName(Pageable pageable, String categoryName) {
         return professionRepository
-                .findByCategoryName(pageable, categoryName)
+                .findByCategoryNameAndAvailableIsTrue(pageable, categoryName)
                 .map(IProfessionMapper.INSTANCE::toDto);
     }
 
     @Override
     public Page<ProfessionResponse> findByTitle(Pageable pageable, String keyword) {
         return professionRepository
-                .findByTitleTitleContaining(pageable, keyword)
+                .findByTitleTitleContainingAndAvailableIsTrue(pageable, keyword)
                 .map(IProfessionMapper.INSTANCE::toDto);
     }
 
     @Override
     public Page<ProfessionResponse> findByContractorId(Pageable pageable, Long contractorId) {
         return professionRepository
-                .findByContractorProfileId(pageable, contractorId)
+                .findByContractorProfileIdAndAvailableIsTrue(pageable, contractorId)
                 .map(IProfessionMapper.INSTANCE::toDto);
     }
 

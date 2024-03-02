@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IProfessionRepository extends JpaRepository<ProfessionalService, Long> {
 
-    Page<ProfessionalService> findByCategoryName(Pageable pageable, String categoryName);
+    Page<ProfessionalService> findByCategoryNameAndAvailableIsTrue(Pageable pageable, String categoryName);
 
-//    Page<ProfessionalService> buscar por titulo.
+    Page<ProfessionalService> findAllByAvailableIsTrue(Pageable pageable);
 
-    Page<ProfessionalService> findByTitleTitleContaining(Pageable pageable, String keyword);
+    Page<ProfessionalService> findByTitleTitleContainingAndAvailableIsTrue(Pageable pageable, String keyword);
 
-    Page<ProfessionalService> findByContractorProfileId(Pageable pageable, Long id);
+    Page<ProfessionalService> findByContractorProfileIdAndAvailableIsTrue(Pageable pageable, Long id);
 
 }
