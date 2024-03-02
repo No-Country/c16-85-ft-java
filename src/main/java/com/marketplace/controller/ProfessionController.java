@@ -19,15 +19,45 @@ public class ProfessionController {
 
     private final IProfessionService professionService;
 
-    /** Recibe un Page & Size */
+
+    /** Recibe un Page & Size.
+     * Usar en vista de cliente */
     @GetMapping
+    public ResponseEntity<Page<ProfessionResponse>> findAllAvailable(Pageable pageable){
+        return new ResponseEntity<>(professionService.findAllAvailable(pageable), HttpStatus.OK);
+    }
+
+    /** Recibe un Page & Size.
+     * Usar en vista de administrador o contractor */
+    @GetMapping("/all")
     public ResponseEntity<Page<ProfessionResponse>> findAll(Pageable pageable){
         return new ResponseEntity<>(professionService.findAll(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProfessionResponse> findByUUID(@PathVariable Long id){
+    public ResponseEntity<ProfessionResponse> findById(@PathVariable Long id){
         return new ResponseEntity<>(professionService.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/category/{name}")
+    public ResponseEntity<Page<ProfessionResponse>> findByCategoryName(Pageable pageable,
+                                                                     @PathVariable String name){
+        return new ResponseEntity<>(professionService
+                .findByCategoryName(pageable, name), HttpStatus.OK);
+    }
+
+    @GetMapping("/contractor/{id}")
+    public ResponseEntity<Page<ProfessionResponse>> findByContractorId(Pageable pageable,
+                                                                       @PathVariable Long id){
+        return new ResponseEntity<>(professionService
+                .findByContractorId(pageable, id), HttpStatus.OK);
+    }
+
+    @GetMapping("/title/{title}")
+    public ResponseEntity<Page<ProfessionResponse>> findByTitle(Pageable pageable,
+                                                                @PathVariable String title){
+        return new ResponseEntity<>(professionService
+                .findByTitle(pageable, title), HttpStatus.OK);
     }
 
     @PostMapping
