@@ -4,10 +4,7 @@ package com.marketplace.exceptions;
 import com.marketplace.exceptions.contractor.InvalidBusinessNameException;
 import com.marketplace.exceptions.contractor.InvalidCeoNameException;
 import com.marketplace.exceptions.user.*;
-import com.marketplace.exceptions.user.authenticationexceptions.DuplicatedEmailException;
-import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
-import com.marketplace.exceptions.user.authenticationexceptions.MismatchedEmailException;
-import com.marketplace.exceptions.user.authenticationexceptions.UserAuthenticationException;
+import com.marketplace.exceptions.user.authenticationexceptions.*;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +44,12 @@ public class GlobalHandlerException {
 
             errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, ex.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
-        }else
+
+        } else if(ex instanceof InvalidPasswordException) {
+            errorResponse = ErrorResponse.of(HttpStatus.FORBIDDEN, ex.getMessage());
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
+        }
+        else
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
     @ExceptionHandler(UserAccountPersistenceException.class)

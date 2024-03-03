@@ -3,6 +3,7 @@ package com.marketplace.security.userauth.service;
 import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
 import com.marketplace.exceptions.user.UserAccountNotFound;
 import com.marketplace.exceptions.user.authenticationexceptions.DuplicatedEmailException;
+import com.marketplace.exceptions.user.authenticationexceptions.InvalidPasswordException;
 import com.marketplace.exceptions.user.authenticationexceptions.MismatchedEmailException;
 import com.marketplace.models.mapper.IUserAuthMapper;
 import com.marketplace.security.userauth.dto.DeleteUserRequest;
@@ -57,7 +58,7 @@ public class UserAuthServiceImpl implements IUserAuthService {
 
         //check if current password is correct
         if(!passwordEncoder.matches(request.currentPassword(), user.getPassword()))
-            throw new InvalidEmailException("Wrong password");//agregar excepcion personalizada
+            throw new InvalidPasswordException("Wrong password");//agregar excepcion personalizada
 
         //check if the two new password are the same
         if(!request.newPassword().equals(request.confirmationPassword()))
@@ -81,7 +82,7 @@ public class UserAuthServiceImpl implements IUserAuthService {
 
         //check if current password is correct
         if(!passwordEncoder.matches(request.password(), userAuth.getPassword()))
-            throw new IllegalStateException("Wrong password");
+            throw new InvalidPasswordException("Wrong password");
 
         //check if current email is correct
         if(!request.currentUsername().equals(userAuth.getUsername()))
