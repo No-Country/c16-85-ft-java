@@ -81,18 +81,18 @@ public class UserAuthServiceImpl implements IUserAuthService {
 
         //check if current password is correct
         if(!passwordEncoder.matches(request.password(), userAuth.getPassword()))
-            throw new IllegalStateException("Wrong password");//agregar excepcion personalizada
+            throw new IllegalStateException("Wrong password");
 
         //check if current email is correct
         if(!request.currentUsername().equals(userAuth.getUsername()))
-            throw new InvalidEmailException("Wrong email");//agregar excepcion personalizada
+            throw new InvalidEmailException("Wrong email");
 
         //check if the two new email are the same
         if(!request.newUsername().equals(request.confirmUsername()))
-            throw new MismatchedEmailException("New email and confirmation email are not the same");//agregar excepcion personalizada
+            throw new MismatchedEmailException("New email and confirmation email are not the same");
 
         if(request.currentUsername().equals(request.newUsername()))
-            throw new IllegalStateException("Old email and new email are repeated");
+            throw new DuplicatedEmailException("Old email and new email are repeated");
 
         if(repository.findByUsername(new Username(request.newUsername())).isPresent())
             throw new DuplicatedEmailException("New email already registered!");

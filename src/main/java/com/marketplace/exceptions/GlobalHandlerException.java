@@ -4,6 +4,7 @@ package com.marketplace.exceptions;
 import com.marketplace.exceptions.contractor.InvalidBusinessNameException;
 import com.marketplace.exceptions.contractor.InvalidCeoNameException;
 import com.marketplace.exceptions.user.*;
+import com.marketplace.exceptions.user.authenticationexceptions.DuplicatedEmailException;
 import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
 import com.marketplace.exceptions.user.authenticationexceptions.MismatchedEmailException;
 import com.marketplace.exceptions.user.authenticationexceptions.UserAuthenticationException;
@@ -41,7 +42,8 @@ public class GlobalHandlerException {
         ErrorResponse errorResponse= errorResponse = ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
 
         if(ex instanceof InvalidEmailException ||
-            ex instanceof MismatchedEmailException){
+            ex instanceof MismatchedEmailException ||
+            ex instanceof DuplicatedEmailException){
 
             errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, ex.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
