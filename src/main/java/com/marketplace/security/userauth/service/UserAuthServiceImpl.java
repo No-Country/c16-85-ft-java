@@ -1,6 +1,7 @@
 package com.marketplace.security.userauth.service;
 
 import com.marketplace.exceptions.user.UserAccountNotFound;
+import com.marketplace.exceptions.user.authenticationexceptions.DuplicatedEmailException;
 import com.marketplace.models.mapper.IUserAuthMapper;
 import com.marketplace.security.userauth.dto.DeleteUserRequest;
 import com.marketplace.security.userauth.dto.UpdateUsernameRequest;
@@ -91,6 +92,9 @@ public class UserAuthServiceImpl implements IUserAuthService {
         if(request.currentUsername().equals(request.newUsername()))
             throw new IllegalStateException("Old email and new email are repeated");
 
+        if(repository.findByUsername(new Username(request.newUsername())).isPresent())
+            throw new DuplicatedEmailException("New email already registered!");
+
         //update email
         userAuth.setUsername(new Username(request.newUsername()));
 
@@ -120,4 +124,3 @@ public class UserAuthServiceImpl implements IUserAuthService {
     }
 
 }
-
