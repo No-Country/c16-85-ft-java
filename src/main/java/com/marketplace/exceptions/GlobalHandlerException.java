@@ -4,6 +4,8 @@ package com.marketplace.exceptions;
 import com.marketplace.exceptions.contractor.InvalidBusinessNameException;
 import com.marketplace.exceptions.contractor.InvalidCeoNameException;
 import com.marketplace.exceptions.user.*;
+import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
+import com.marketplace.exceptions.user.authenticationexceptions.UserAuthenticationException;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,17 +34,22 @@ public class GlobalHandlerException {
         resp.put("CEO_NAME_ERROR", ex.getMessage());
         return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
     }
-
-    @ExceptionHandler(UserAccountPersistenceException.class)
-    public ResponseEntity<ErrorResponse> handleUserAccountPersistenceException(UserAccountPersistenceException ex){
-        ErrorResponse errorResponse;
+    //
+    @ExceptionHandler(UserAuthenticationException.class)
+    public ResponseEntity<ErrorResponse> handleUserAuthenticationException(UserAuthenticationException ex){
+        ErrorResponse errorResponse= errorResponse = ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
 
         if(ex instanceof InvalidEmailException){
             errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, ex.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
-        }
+        }else
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
+    @ExceptionHandler(UserAccountPersistenceException.class)
+    public ResponseEntity<ErrorResponse> handleUserAccountPersistenceException(UserAccountPersistenceException ex){
+        ErrorResponse errorResponse;
 
-        else if(ex instanceof DuplicatedUserException){
+        if(ex instanceof DuplicatedUserException){
             errorResponse = ErrorResponse.of(HttpStatus.CONFLICT, ex.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         }

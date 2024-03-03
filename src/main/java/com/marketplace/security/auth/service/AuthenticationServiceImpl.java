@@ -1,6 +1,7 @@
 package com.marketplace.security.auth.service;
 
 import com.marketplace.exceptions.user.*;
+import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
 import com.marketplace.security.auth.dto.AuthenticationRequest;
 import com.marketplace.security.auth.dto.AuthenticationResponse;
 import com.marketplace.security.auth.dto.RegisterRequest;

@@ -1,6 +1,6 @@
 package com.marketplace.security.userauth.model.valueobjects;
 
-import com.marketplace.exceptions.user.InvalidEmailException;
+import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
 import jakarta.persistence.Embeddable;
 
 import java.util.regex.Pattern;
