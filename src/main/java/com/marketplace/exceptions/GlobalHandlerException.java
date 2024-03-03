@@ -5,6 +5,7 @@ import com.marketplace.exceptions.contractor.InvalidBusinessNameException;
 import com.marketplace.exceptions.contractor.InvalidCeoNameException;
 import com.marketplace.exceptions.user.*;
 import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
+import com.marketplace.exceptions.user.authenticationexceptions.MismatchedEmailException;
 import com.marketplace.exceptions.user.authenticationexceptions.UserAuthenticationException;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,9 @@ public class GlobalHandlerException {
     public ResponseEntity<ErrorResponse> handleUserAuthenticationException(UserAuthenticationException ex){
         ErrorResponse errorResponse= errorResponse = ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
 
-        if(ex instanceof InvalidEmailException){
+        if(ex instanceof InvalidEmailException ||
+            ex instanceof MismatchedEmailException){
+
             errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, ex.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }else

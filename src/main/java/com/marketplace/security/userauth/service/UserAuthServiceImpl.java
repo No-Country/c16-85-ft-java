@@ -3,6 +3,7 @@ package com.marketplace.security.userauth.service;
 import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
 import com.marketplace.exceptions.user.UserAccountNotFound;
 import com.marketplace.exceptions.user.authenticationexceptions.DuplicatedEmailException;
+import com.marketplace.exceptions.user.authenticationexceptions.MismatchedEmailException;
 import com.marketplace.models.mapper.IUserAuthMapper;
 import com.marketplace.security.userauth.dto.DeleteUserRequest;
 import com.marketplace.security.userauth.dto.UpdateUsernameRequest;
@@ -88,7 +89,7 @@ public class UserAuthServiceImpl implements IUserAuthService {
 
         //check if the two new email are the same
         if(!request.newUsername().equals(request.confirmUsername()))
-            throw new IllegalStateException("New email and confirmation email are not the same");//agregar excepcion personalizada
+            throw new MismatchedEmailException("New email and confirmation email are not the same");//agregar excepcion personalizada
 
         if(request.currentUsername().equals(request.newUsername()))
             throw new IllegalStateException("Old email and new email are repeated");
