@@ -1,10 +1,7 @@
 package com.marketplace.security.userauth.service;
 
-import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
+import com.marketplace.exceptions.user.authenticationexceptions.*;
 import com.marketplace.exceptions.user.UserAccountNotFound;
-import com.marketplace.exceptions.user.authenticationexceptions.DuplicatedEmailException;
-import com.marketplace.exceptions.user.authenticationexceptions.InvalidPasswordException;
-import com.marketplace.exceptions.user.authenticationexceptions.MismatchedEmailException;
 import com.marketplace.models.mapper.IUserAuthMapper;
 import com.marketplace.security.userauth.dto.DeleteUserRequest;
 import com.marketplace.security.userauth.dto.UpdateUsernameRequest;
@@ -62,10 +59,10 @@ public class UserAuthServiceImpl implements IUserAuthService {
 
         //check if the two new password are the same
         if(!request.newPassword().equals(request.confirmationPassword()))
-            throw new IllegalStateException("Passwords are not the same");//agregar excepcion personalizada
+            throw new MismatchedPasswordException("New Password and confirmation are not the same");//agregar excepcion personalizada
 
         if(request.currentPassword().equals(request.newPassword()))
-            throw new IllegalStateException("Old and new passwords could not be the same");
+            throw new DuplicatedPasswordException("Old and new passwords could not be the same");
 
         //update password
         user.setPassword(passwordEncoder.encode(request.newPassword()));

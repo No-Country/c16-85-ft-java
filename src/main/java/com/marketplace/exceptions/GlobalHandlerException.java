@@ -40,7 +40,9 @@ public class GlobalHandlerException {
 
         if(ex instanceof InvalidEmailException ||
             ex instanceof MismatchedEmailException ||
-            ex instanceof DuplicatedEmailException){
+            ex instanceof DuplicatedEmailException ||
+            ex instanceof DuplicatedPasswordException ||
+            ex instanceof MismatchedPasswordException){
 
             errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, ex.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
