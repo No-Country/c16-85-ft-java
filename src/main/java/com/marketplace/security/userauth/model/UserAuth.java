@@ -31,7 +31,7 @@ public class UserAuth implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "userAuth")
     private List<Token> tokens;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_account_id")

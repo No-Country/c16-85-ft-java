@@ -10,7 +10,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-03T20:32:02-0300",
+    date = "2024-03-04T19:50:46-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Private Build)"
 )
 public class IUserAuthMapperImpl implements IUserAuthMapper {
