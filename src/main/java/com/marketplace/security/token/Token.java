@@ -1,5 +1,6 @@
 package com.marketplace.security.token;
 
+import com.marketplace.security.userauth.model.UserAuth;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,4 +22,7 @@ public class Token {
     private TokenType tokenType;
     private boolean expired;
     private boolean revoked;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private UserAuth userAuth;
 }
