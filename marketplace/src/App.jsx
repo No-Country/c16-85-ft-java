@@ -9,7 +9,7 @@ import Servicios from "./componentes/Sv/Servicios"
 import Review from "./componentes/Sv/Review"
 import ChargeService from './componentes/Sv/ChargeService';
 import CardDetail from './componentes/Sv/CardDetail';
-
+import UserProvider from './context/UserProvider'
 
 function App() {
   return (
@@ -21,10 +21,12 @@ function App() {
           <Route path="/Servicios" element={<Servicios/>} />
           <Route path="Inicio" element={<Login />} />
           <Route path="Carga-del-servicio" element={<ChargeService/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/login" element={<Login />} />
         </Route>
         <Route path="/Detalle" element={<CardDetail/>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register/>} />
+      
+
         <Route path="/review" element={<Review/>} />
         <Route path="/Detalle" element={<CardDetail/>} />
       </Routes>
