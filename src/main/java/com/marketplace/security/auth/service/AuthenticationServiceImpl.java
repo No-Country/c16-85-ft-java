@@ -1,7 +1,9 @@
 package com.marketplace.security.auth.service;
 
-import com.marketplace.exceptions.user.*;
 import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
+import com.marketplace.exceptions.user.persistenceexceptions.DuplicatedUserException;
+import com.marketplace.exceptions.user.persistenceexceptions.EmailNotFoundException;
+import com.marketplace.exceptions.user.persistenceexceptions.InvalidEmailOrPasswordException;
 import com.marketplace.security.auth.dto.AuthenticationRequest;
 import com.marketplace.security.auth.dto.AuthenticationResponse;
 import com.marketplace.security.auth.dto.RegisterRequest;
@@ -119,7 +121,7 @@ public class AuthenticationServiceImpl {
 
         }catch(BadCredentialsException ex){
 
-            throw new IncorrectEmailOrPasswordException("Email or password are incorrect");
+            throw new InvalidEmailOrPasswordException("Email or password are incorrect");
         }
 
 

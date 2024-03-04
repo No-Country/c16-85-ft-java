@@ -1,4 +1,4 @@
-package com.marketplace.exceptions.user;
+package com.marketplace.exceptions.user.persistenceexceptions;
 
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.StandardException;

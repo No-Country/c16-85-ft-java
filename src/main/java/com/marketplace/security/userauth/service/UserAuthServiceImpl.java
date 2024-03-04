@@ -1,7 +1,7 @@
 package com.marketplace.security.userauth.service;
 
 import com.marketplace.exceptions.user.authenticationexceptions.*;
-import com.marketplace.exceptions.user.UserAccountNotFound;
+import com.marketplace.exceptions.user.persistenceexceptions.UserAccountNotFound;
 import com.marketplace.models.mapper.IUserAuthMapper;
 import com.marketplace.security.userauth.dto.DeleteUserRequest;
 import com.marketplace.security.userauth.dto.UpdateUsernameRequest;

@@ -3,8 +3,11 @@ package com.marketplace.exceptions;
 
 import com.marketplace.exceptions.contractor.InvalidBusinessNameException;
 import com.marketplace.exceptions.contractor.InvalidCeoNameException;
-import com.marketplace.exceptions.user.*;
 import com.marketplace.exceptions.user.authenticationexceptions.*;
+import com.marketplace.exceptions.user.persistenceexceptions.DuplicatedUserException;
+import com.marketplace.exceptions.user.persistenceexceptions.EmailNotFoundException;
+import com.marketplace.exceptions.user.persistenceexceptions.InvalidEmailOrPasswordException;
+import com.marketplace.exceptions.user.persistenceexceptions.UserAccountPersistenceException;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +50,8 @@ public class GlobalHandlerException {
             errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, ex.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 
-        } else if(ex instanceof InvalidPasswordException) {
+        } else if(ex instanceof InvalidPasswordException ||
+                    ex instanceof InvalidEmailOrPasswordException) {
             errorResponse = ErrorResponse.of(HttpStatus.FORBIDDEN, ex.getMessage());
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
         }
@@ -62,32 +66,17 @@ public class GlobalHandlerException {
             errorResponse = ErrorResponse.of(HttpStatus.CONFLICT, ex.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         }
+        if(ex instanceof EmailNotFoundException){
+            errorResponse = ErrorResponse.of(HttpStatus.NOT_FOUND, ex.getMessage());
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+
         else {
             errorResponse = ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
-
-    }
-
-    @ResponseBody
-    @ExceptionHandler(EmailNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleEmailNotFoundException(EmailNotFoundException ex){
-
-        ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.NOT_FOUND, ex.getMessage());
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-
-    }
-
-    //UserWrongEmailOrPasswordException
-    @ResponseBody
-    @ExceptionHandler(IncorrectEmailOrPasswordException.class)
-    public ResponseEntity<ErrorResponse> handleIncorrectEmailOrPasswordException(IncorrectEmailOrPasswordException ex){
-
-        ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.FORBIDDEN, ex.getMessage());
-
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
 
     }
 

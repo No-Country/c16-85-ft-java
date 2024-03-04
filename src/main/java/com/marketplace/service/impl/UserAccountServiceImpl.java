@@ -1,8 +1,8 @@
 package com.marketplace.service.impl;
 
 import com.marketplace.DTO.useraccount.UserAccountResponse;
-import com.marketplace.exceptions.user.CannotPersistUserException;
-import com.marketplace.exceptions.user.UserAccountNotFound;
+import com.marketplace.exceptions.user.persistenceexceptions.CannotPersistUserException;
+import com.marketplace.exceptions.user.persistenceexceptions.UserAccountNotFound;
 import com.marketplace.models.entity.UserAccount;
 import com.marketplace.models.mapper.IUserAccountMapper;
 import com.marketplace.models.valueobjets.address.Address;
@@ -17,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
