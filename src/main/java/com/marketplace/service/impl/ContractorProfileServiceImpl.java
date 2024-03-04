@@ -3,17 +3,15 @@ package com.marketplace.service.impl;
 import com.marketplace.DTO.contractor.ContractorProfileRequest;
 import com.marketplace.DTO.contractor.ContractorProfileResponse;
 import com.marketplace.exceptions.TokenNotFoundException;
-import com.marketplace.exceptions.user.UserAccountNotFound;
 import com.marketplace.models.entity.ContractorProfile;
-import com.marketplace.models.entity.Location;
 import com.marketplace.models.entity.UserAccount;
 import com.marketplace.models.mapper.contractor.ContractorMapper;
 import com.marketplace.models.valueobjets.address.Address;
 import com.marketplace.repository.ContractorProfileRepository;
-import com.marketplace.repository.IUserAccountRepository;
 import com.marketplace.repository.LocationRepository;
 import com.marketplace.security.config.service.JwtService;
 import com.marketplace.security.userauth.model.UserAuth;
+import com.marketplace.security.userauth.model.valueobjects.Username;
 import com.marketplace.security.userauth.repository.UserAuthRepository;
 import com.marketplace.service.ContractorProfileService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,7 +44,7 @@ public class ContractorProfileServiceImpl implements ContractorProfileService {
 
         var token = getHeader.substring(7);
         var username = jwtService.extractUsername(token);
-        UserAuth findUserAuth = userAuthRepository.findByUsername(username)
+        UserAuth findUserAuth = userAuthRepository.findByUsername(new Username(username))
                  .orElseThrow(()-> new UsernameNotFoundException("Username not found"));
 
         UserAccount userAccount = findUserAuth.getUserAccount();
