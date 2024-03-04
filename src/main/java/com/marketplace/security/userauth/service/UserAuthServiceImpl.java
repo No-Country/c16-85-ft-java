@@ -55,11 +55,11 @@ public class UserAuthServiceImpl implements IUserAuthService {
 
         //check if current password is correct
         if(!passwordEncoder.matches(request.currentPassword(), user.getPassword()))
-            throw new InvalidPasswordException("Wrong password");//agregar excepcion personalizada
+            throw new InvalidPasswordException("Wrong password");
 
         //check if the two new password are the same
         if(!request.newPassword().equals(request.confirmationPassword()))
-            throw new MismatchedPasswordException("New Password and confirmation are not the same");//agregar excepcion personalizada
+            throw new MismatchedPasswordException("New Password and confirmation are not the same");
 
         if(request.currentPassword().equals(request.newPassword()))
             throw new DuplicatedPasswordException("Old and new passwords could not be the same");
