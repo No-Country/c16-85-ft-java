@@ -4,7 +4,6 @@ import com.marketplace.DTO.profession.ProfessionSaveRequest;
 import com.marketplace.DTO.profession.ProfessionResponse;
 import com.marketplace.DTO.profession.ProfessionUpdateRequest;
 import com.marketplace.models.entity.ProfessionalService;
-import com.marketplace.models.valueobjets.contractor.BusinessName;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -18,7 +17,6 @@ public interface IProfessionMapper {
     @Mapping(source = "title", target = "title.title")
     @Mapping(source = "details", target = "details.details")
     @Mapping(source = "categoryId", target = "category.id")
-    @Mapping(source = "contractorProfileId", target = "contractorProfile.id")
     ProfessionalService saveDtoToEntity(ProfessionSaveRequest request);
 
     /** Este sirve para mapear cuando se ACTUALIZA un ProfessionalService existente */
