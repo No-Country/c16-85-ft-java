@@ -1,11 +1,15 @@
 package com.marketplace.security.auth.service;
 
-import com.marketplace.exceptions.user.InvalidEmailException;
+import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
+import com.marketplace.exceptions.user.persistenceexceptions.DuplicatedUserException;
+import com.marketplace.exceptions.user.persistenceexceptions.EmailNotFoundException;
+import com.marketplace.exceptions.user.persistenceexceptions.InvalidEmailOrPasswordException;
 import com.marketplace.security.auth.dto.AuthenticationRequest;
 import com.marketplace.security.auth.dto.AuthenticationResponse;
 import com.marketplace.security.auth.dto.RegisterRequest;
 import com.marketplace.security.userauth.model.UserAuth;
 import com.marketplace.security.config.service.JwtService;
+import com.marketplace.security.userauth.model.valueobjects.Username;
 import com.marketplace.security.userauth.repository.UserAuthRepository;
 
 import com.marketplace.service.impl.UserAccountServiceImpl;
@@ -14,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,7 +31,7 @@ import static com.marketplace.security.userauth.model.Role.USER;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationService {
+public class AuthenticationServiceImpl {
 
     private final UserAuthRepository userAuthRepository;
     private final UserAccountServiceImpl userAccountService;
@@ -36,24 +41,13 @@ public class AuthenticationService {
 
     public AuthenticationResponse userRegister(RegisterRequest request) {
 
-        //Email Validation (add request validation)
-        try{
-            validateEmail(request.username());
-
-        }catch(InvalidEmailException e){
-
-            return AuthenticationResponse.builder()
-                    .token("")
-                    .message(e.getMessage())
-                    .statusCode(400)
-                    .build();
-        }
+        validateEmail(request.username());
 
         //UserAuth and UserAccount creation and persistence
         try{
 
             var userAuth = UserAuth.builder()
-                    .username(request.username())
+                    .username(new Username(request.username()))
                     .password(passwordEncoder.encode(request.password()))
                     .role(USER)
                     .build();
@@ -69,43 +63,27 @@ public class AuthenticationService {
             var jwtToken = jwtService.generateToken(userAuth);
 
             return AuthenticationResponse.builder()
+                    .username(userAuth.getUsername())
+                    .role(String.valueOf(userAuth.getRole()))
                     .token(jwtToken)
                     .message("User Registered Successfully")
-                    .statusCode(200)
                     .build();
 
         }catch(DataAccessException e){
-
-            return AuthenticationResponse.builder()
-                    .token("N/A")
-                    .message("User Already Exists")
-                    .statusCode(400)
-                    .build();
+            throw new DuplicatedUserException("User Already Exists");
         }
-
     }
 
     //TEMPORAL - PRUEBAS
     public AuthenticationResponse adminRegister(RegisterRequest request) {
 
-        //Email Validation (add request validation)
-        //try{
-            validateEmail(request.username());
-
-        //}catch(InvalidEmailException e){
-
-//            return AuthenticationResponse.builder()
-//                    .token("")
-//                    .message(e.getMessage())
-//                    .statusCode(400)
-//                    .build();
-        //}
+        validateEmail(request.username());
 
         //UserAuth and UserAccount creation and persistence
         try{
 
             var userAuth = UserAuth.builder()
-                    .username(request.username())
+                    .username(new Username(request.username()))
                     .password(passwordEncoder.encode(request.password()))
                     .role(ADMIN)
                     .build();
@@ -115,30 +93,25 @@ public class AuthenticationService {
             var userAccount = userAccountService.save(request, userAuth);
 
             userAuth.setUserAccount(userAccount);
-
             userAuthRepository.save(userAuth);
-
             var jwtToken = jwtService.generateToken(userAuth);
 
             return AuthenticationResponse.builder()
+                    .username(userAuth.getUsername())
+                    .role(String.valueOf(userAuth.getRole()))
                     .token(jwtToken)
                     .message("User Registered Successfully")
-                    .statusCode(200)
                     .build();
 
         }catch(DataAccessException e){
-
-            return AuthenticationResponse.builder()
-                    .token("N/A")
-                    .message("User Already Exists")
-                    .statusCode(400)
-                    .build();
+            throw new DuplicatedUserException("User Already Exists");
         }
 
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
+        try{
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             request.username(),
@@ -146,8 +119,14 @@ public class AuthenticationService {
                     )
             );
 
-        var user = userAuthRepository.findByUsername(request.username())
-                .orElseThrow();
+        }catch(BadCredentialsException ex){
+
+            throw new InvalidEmailOrPasswordException("Email or password are incorrect");
+        }
+
+
+        var user = userAuthRepository.findByUsername(new Username(request.username()))
+                .orElseThrow(() -> new EmailNotFoundException("Email not found: " + request.username()));
 
         var jwtToken = jwtService.generateToken(user);
 
@@ -155,6 +134,7 @@ public class AuthenticationService {
                 .username(user.getUsername())
                 .role(String.valueOf(user.getRole()))
                 .token(jwtToken)
+                .message("User Authenticated")
                 .build();
 
     }

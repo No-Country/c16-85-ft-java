@@ -6,8 +6,7 @@ import lombok.Builder;
 public record AuthenticationResponse (String username,
                                       String role,
                                       String token,
-                                      String message,
-                                      int statusCode){
+                                      String message){
 
 
 

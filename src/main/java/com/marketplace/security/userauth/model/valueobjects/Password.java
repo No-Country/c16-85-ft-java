@@ -1,4 +1,4 @@
-package com.marketplace.models.valueobjets.useraccount;
+package com.marketplace.security.userauth.model.valueobjects;
 
 import jakarta.persistence.Embeddable;
 

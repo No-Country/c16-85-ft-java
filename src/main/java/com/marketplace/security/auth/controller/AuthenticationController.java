@@ -1,13 +1,12 @@
 package com.marketplace.security.auth.controller;
 
-import com.marketplace.security.auth.service.AuthenticationService;
+import com.marketplace.security.auth.service.AuthenticationServiceImpl;
 import com.marketplace.security.auth.dto.RegisterRequest;
 import com.marketplace.security.auth.dto.AuthenticationRequest;
 import com.marketplace.security.auth.dto.AuthenticationResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +20,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-    private final AuthenticationService service;
+    private final AuthenticationServiceImpl service;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> userRegister(
@@ -29,10 +28,8 @@ public class AuthenticationController {
     ) {
         AuthenticationResponse response = service.userRegister(request);
 
-        if (response.statusCode() == 200)
-            return ResponseEntity.ok(response);
-        else
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(service.userRegister(request));
+        return ResponseEntity.ok(response);
+
     }
 
     //ubicacion temporal del metodo
@@ -42,10 +39,8 @@ public class AuthenticationController {
     ) {
         AuthenticationResponse response = service.adminRegister(request);
 
-        if (response.statusCode() == 200)
-            return ResponseEntity.ok(response);
-        else
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(service.adminRegister(request));
+        return ResponseEntity.ok(response);
+
     }
 
 
