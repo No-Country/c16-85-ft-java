@@ -64,7 +64,7 @@ public class UserAuthServiceImpl implements IUserAuthService {
         if(!request.newPassword().equals(request.confirmationPassword()))
             throw new IllegalStateException("Passwords are not the same");//agregar excepcion personalizada
 
-        if(!request.currentPassword().equals(request.newPassword()))
+        if(request.currentPassword().equals(request.newPassword()))
             throw new IllegalStateException("Old and new passwords could not be the same");
 
         //update password
@@ -114,7 +114,7 @@ public class UserAuthServiceImpl implements IUserAuthService {
         var userAuth = (UserAuth) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
 
         if(!passwordEncoder.matches(request.password(), (userAuth.getPassword())))
-            throw new IllegalStateException("Wrong password"); //agregar excepcion personalizada
+            throw new InvalidPasswordException("Wrong password");
 
 
         var user = repository.findByUsername(new Username(userAuth.getUsername()));
