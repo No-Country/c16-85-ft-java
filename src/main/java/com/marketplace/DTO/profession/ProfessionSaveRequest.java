@@ -15,7 +15,6 @@ public class ProfessionSaveRequest {
     private String details;
     private boolean atHome;
 
-    private Long contractorProfileId;
     private Long categoryId;
 
 }
