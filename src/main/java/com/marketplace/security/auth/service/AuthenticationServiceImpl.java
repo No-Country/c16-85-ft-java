@@ -79,18 +79,6 @@ public class AuthenticationServiceImpl {
         }
     }
 
-    private void saveUserToken(UserAuth user, String jwtToken) {
-        var token = Token.builder()
-                .userAuth(user)
-                .token(jwtToken)
-                .tokenType(TokenType.BEARER)
-                .revoked(false)
-                .expired(false)
-                .build();
-
-        tokenRepository.save(token);
-    }
-
     //TEMPORAL - PRUEBAS
     public AuthenticationResponse adminRegister(RegisterRequest request) {
 
@@ -110,8 +98,9 @@ public class AuthenticationServiceImpl {
             var userAccount = userAccountService.save(request, userAuth);
 
             userAuth.setUserAccount(userAccount);
-            userAuthRepository.save(userAuth);
+            var savedUser = userAuthRepository.save(userAuth);
             var jwtToken = jwtService.generateToken(userAuth);
+            saveUserToken(savedUser, jwtToken);
 
             return AuthenticationResponse.builder()
                     .username(userAuth.getUsername())
@@ -142,18 +131,48 @@ public class AuthenticationServiceImpl {
         }
 
 
-        var user = userAuthRepository.findByUsername(new Username(request.username()))
+        var userAuth = userAuthRepository.findByUsername(new Username(request.username()))
                 .orElseThrow(() -> new EmailNotFoundException("Email not found: " + request.username()));
 
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(userAuth);
+        revokeAllUserTokens(userAuth);
+        saveUserToken(userAuth, jwtToken);
 
-        saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
-                .username(user.getUsername())
-                .role(String.valueOf(user.getRole()))
+                .username(userAuth.getUsername())
+                .role(String.valueOf(userAuth.getRole()))
                 .token(jwtToken)
                 .message("User Authenticated")
                 .build();
+
+    }
+
+    private void saveUserToken(UserAuth user, String jwtToken) {
+        var token = Token.builder()
+                .userAuth(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .revoked(false)
+                .expired(false)
+                .build();
+
+        tokenRepository.save(token);
+    }
+
+    private void revokeAllUserTokens(UserAuth userAuth){
+        //find all tokens validate until now
+        var validUserTokens = tokenRepository.findALlValidTokensByUser(userAuth.getId());
+
+        if (validUserTokens.isEmpty())
+            return;
+
+        //if validated tokens exist, turn expired and revoked
+        validUserTokens.forEach(t -> {
+            t.setExpired(true);
+            t.setRevoked(true);
+        });
+
+        tokenRepository.saveAll(validUserTokens);
 
     }
 
