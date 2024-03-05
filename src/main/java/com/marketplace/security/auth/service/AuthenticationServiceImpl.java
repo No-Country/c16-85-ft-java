@@ -70,7 +70,7 @@ public class AuthenticationServiceImpl {
             return AuthenticationResponse.builder()
                     .username(userAuth.getUsername())
                     .role(String.valueOf(userAuth.getRole()))
-                    .token(jwtToken)
+                    .accessToken(jwtToken)
                     .message("User Registered Successfully")
                     .build();
 
@@ -105,7 +105,7 @@ public class AuthenticationServiceImpl {
             return AuthenticationResponse.builder()
                     .username(userAuth.getUsername())
                     .role(String.valueOf(userAuth.getRole()))
-                    .token(jwtToken)
+                    .accessToken(jwtToken)
                     .message("User Registered Successfully")
                     .build();
 
@@ -141,7 +141,7 @@ public class AuthenticationServiceImpl {
         return AuthenticationResponse.builder()
                 .username(userAuth.getUsername())
                 .role(String.valueOf(userAuth.getRole()))
-                .token(jwtToken)
+                .accessToken(jwtToken)
                 .message("User Authenticated")
                 .build();
 

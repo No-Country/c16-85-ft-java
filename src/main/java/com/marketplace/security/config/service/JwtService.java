@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,8 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    //Averiguar si existe un metod de autogeneracion de secret keys!
-    private static final String SECRET_KEY = "362d4f5e7c2f3e497d63413e2f7a5077274e6a4d535d7264644f66724c4e3553";
+    @Value("${application.security.jwt.secret-key}")
+    private String secretKey;
 
     public String extractUsername(String token) {
 
@@ -81,7 +82,7 @@ public class JwtService {
 
     private Key getSignInKey() {
 
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
 
         return Keys.hmacShaKeyFor(keyBytes);
     }
