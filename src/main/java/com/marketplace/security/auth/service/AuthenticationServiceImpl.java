@@ -1,5 +1,6 @@
 package com.marketplace.security.auth.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marketplace.exceptions.user.authenticationexceptions.InvalidEmailException;
 import com.marketplace.exceptions.user.persistenceexceptions.DuplicatedUserException;
 import com.marketplace.exceptions.user.persistenceexceptions.EmailNotFoundException;
@@ -23,9 +24,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpHeaders;
 
+import java.io.IOException;
 import java.util.regex.Pattern;
 
 import static com.marketplace.security.userauth.model.Role.ADMIN;
@@ -64,6 +70,7 @@ public class AuthenticationServiceImpl {
             var savedUser = userAuthRepository.save(userAuth);
             //generate token
             var jwtToken = jwtService.generateToken(userAuth);
+            var refreshToken = jwtService.generateRefreshToken(userAuth);
             //persist token
             saveUserToken(savedUser, jwtToken);
 
@@ -71,6 +78,7 @@ public class AuthenticationServiceImpl {
                     .username(userAuth.getUsername())
                     .role(String.valueOf(userAuth.getRole()))
                     .accessToken(jwtToken)
+                    .refreshToken(refreshToken)
                     .message("User Registered Successfully")
                     .build();
 
@@ -100,12 +108,14 @@ public class AuthenticationServiceImpl {
             userAuth.setUserAccount(userAccount);
             var savedUser = userAuthRepository.save(userAuth);
             var jwtToken = jwtService.generateToken(userAuth);
+            var refreshToken = jwtService.generateRefreshToken(userAuth);
             saveUserToken(savedUser, jwtToken);
 
             return AuthenticationResponse.builder()
                     .username(userAuth.getUsername())
                     .role(String.valueOf(userAuth.getRole()))
                     .accessToken(jwtToken)
+                    .refreshToken(refreshToken)
                     .message("User Registered Successfully")
                     .build();
 
@@ -135,6 +145,8 @@ public class AuthenticationServiceImpl {
                 .orElseThrow(() -> new EmailNotFoundException("Email not found: " + request.username()));
 
         var jwtToken = jwtService.generateToken(userAuth);
+        var refreshToken = jwtService.generateRefreshToken(userAuth);
+
         revokeAllUserTokens(userAuth);
         saveUserToken(userAuth, jwtToken);
 
@@ -142,6 +154,7 @@ public class AuthenticationServiceImpl {
                 .username(userAuth.getUsername())
                 .role(String.valueOf(userAuth.getRole()))
                 .accessToken(jwtToken)
+                .refreshToken(refreshToken)
                 .message("User Authenticated")
                 .build();
 
@@ -176,7 +189,41 @@ public class AuthenticationServiceImpl {
 
     }
 
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) {
+    public void refreshToken(
+            HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+
+        final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        final String refreshToken;
+        final String userEmail;
+
+        if(authHeader == null || !authHeader.startsWith("Bearer ")){
+
+           return;
+        }
+
+        refreshToken = authHeader.substring(7);
+
+        userEmail = jwtService.extractUsername(refreshToken); //extract the userEmail from JWT token
+
+        if(userEmail != null){
+
+            var userAuth = this.userAuthRepository.findByUsername(new Username(userEmail))
+                    .orElseThrow(EmailNotFoundException::new);
+
+            if(jwtService.isTokenValid(refreshToken, userAuth)){
+                var accessToken = jwtService.generateToken(userAuth);
+                revokeAllUserTokens(userAuth);
+                saveUserToken(userAuth, accessToken);
+
+                var authResponse = AuthenticationResponse.builder()
+                        .accessToken(accessToken)
+                        .refreshToken(refreshToken)
+                        .build();
+
+                new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
+            }
+        }
     }
 
     public void validateEmail(String email){
