@@ -7,6 +7,9 @@ import com.marketplace.exceptions.user.persistenceexceptions.InvalidEmailOrPassw
 import com.marketplace.security.auth.dto.AuthenticationRequest;
 import com.marketplace.security.auth.dto.AuthenticationResponse;
 import com.marketplace.security.auth.dto.RegisterRequest;
+import com.marketplace.security.token.Token;
+import com.marketplace.security.token.TokenType;
+import com.marketplace.security.token.repository.TokenRepository;
 import com.marketplace.security.userauth.model.UserAuth;
 import com.marketplace.security.config.service.JwtService;
 import com.marketplace.security.userauth.model.valueobjects.Username;
@@ -34,6 +37,7 @@ import static com.marketplace.security.userauth.model.Role.USER;
 public class AuthenticationServiceImpl {
 
     private final UserAuthRepository userAuthRepository;
+    private final TokenRepository tokenRepository;
     private final UserAccountServiceImpl userAccountService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -51,16 +55,17 @@ public class AuthenticationServiceImpl {
                     .password(passwordEncoder.encode(request.password()))
                     .role(USER)
                     .build();
-
+            //persist UserAuth
             userAuthRepository.save(userAuth);
-
             var userAccount = userAccountService.save(request, userAuth);
-
+            //persist UserAuth
             userAuth.setUserAccount(userAccount);
-
-            userAuthRepository.save(userAuth);
-
+            //update UserAuth
+            var savedUser = userAuthRepository.save(userAuth);
+            //generate token
             var jwtToken = jwtService.generateToken(userAuth);
+            //persist token
+            saveUserToken(savedUser, jwtToken);
 
             return AuthenticationResponse.builder()
                     .username(userAuth.getUsername())
@@ -93,8 +98,9 @@ public class AuthenticationServiceImpl {
             var userAccount = userAccountService.save(request, userAuth);
 
             userAuth.setUserAccount(userAccount);
-            userAuthRepository.save(userAuth);
+            var savedUser = userAuthRepository.save(userAuth);
             var jwtToken = jwtService.generateToken(userAuth);
+            saveUserToken(savedUser, jwtToken);
 
             return AuthenticationResponse.builder()
                     .username(userAuth.getUsername())
@@ -125,17 +131,48 @@ public class AuthenticationServiceImpl {
         }
 
 
-        var user = userAuthRepository.findByUsername(new Username(request.username()))
+        var userAuth = userAuthRepository.findByUsername(new Username(request.username()))
                 .orElseThrow(() -> new EmailNotFoundException("Email not found: " + request.username()));
 
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(userAuth);
+        revokeAllUserTokens(userAuth);
+        saveUserToken(userAuth, jwtToken);
 
         return AuthenticationResponse.builder()
-                .username(user.getUsername())
-                .role(String.valueOf(user.getRole()))
+                .username(userAuth.getUsername())
+                .role(String.valueOf(userAuth.getRole()))
                 .token(jwtToken)
                 .message("User Authenticated")
                 .build();
+
+    }
+
+    private void saveUserToken(UserAuth user, String jwtToken) {
+        var token = Token.builder()
+                .userAuth(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .revoked(false)
+                .expired(false)
+                .build();
+
+        tokenRepository.save(token);
+    }
+
+    private void revokeAllUserTokens(UserAuth userAuth){
+        //find all tokens validate until now
+        var validUserTokens = tokenRepository.findALlValidTokensByUser(userAuth.getId());
+
+        if (validUserTokens.isEmpty())
+            return;
+
+        //if validated tokens exist, turn expired and revoked
+        validUserTokens.forEach(t -> {
+            t.setExpired(true);
+            t.setRevoked(true);
+        });
+
+        tokenRepository.saveAll(validUserTokens);
 
     }
 
