@@ -32,7 +32,7 @@ public interface IUserAccountMapper {
     @Mapping(source="lastname", target = "lastname.lastname")
     @Mapping(source="birthday", target = "birthday.birthday")
     @Mapping(source="mobile", target = "mobile.mobile")
-    @Mapping(source = "address", target="location.address")
+    @Mapping(source = "address", target="location.address.address")
     @Mapping(target="username", ignore = true)
     @Mapping(target="contractorProfile", ignore = true)
     @Mapping(target="servicesHistory", ignore = true)
