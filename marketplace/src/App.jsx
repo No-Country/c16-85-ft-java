@@ -10,6 +10,7 @@ import Review from "./componentes/Sv/Review"
 import ChargeService from './componentes/Sv/ChargeService';
 import CardDetail from './componentes/Sv/CardDetail';
 import UserProvider from './context/UserProvider'
+import Formulario from './componentes/User/Formulario';
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
           <Route path="Carga-del-servicio" element={<ChargeService/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login />} />
+          <Route path="/formulario" element={<Formulario />} />
+
         </Route>
         <Route path="/Detalle" element={<CardDetail/>} />
         <Route path="/review" element={<Review/>} />
