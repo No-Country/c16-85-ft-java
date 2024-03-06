@@ -23,7 +23,7 @@ const Formulario = () => {
     }
 
 
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -36,9 +36,6 @@ const Formulario = () => {
         })
 
     }
-
-
-
 
     return(
         <div className="flex justify-center items-center h-screen bg-slate-600">

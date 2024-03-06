@@ -1,6 +1,5 @@
 import { MdOutlineLabel } from "react-icons/md";
 
-
 const SelectProfession = () => {
   return (<>
     <div className="sm:hidden ml-4 mr-2 ">
@@ -12,15 +11,15 @@ const SelectProfession = () => {
         <option value="option-3">Carpintero</option>
         <option value="option-3">Albañil</option>
       </select>
-
-
     </div>
   </>)
 }
 
 
-
 const SideBar = () => {
+
+
+
   return (<>
 
 
@@ -84,6 +83,7 @@ const SideBar = () => {
         <a
           href="#"
           className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+         
         >
           <MdOutlineLabel />
 

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
 
-const CardServiceProvider = () => {
+const CardServiceProvider = ({tarjeta}) => {
+  const {nombre, profesion, empresa, direccion, precio, imagen } = tarjeta;
   return (<>
     <div
       href="#"
@@ -13,10 +14,9 @@ const CardServiceProvider = () => {
 
       <div className="sm:flex sm:justify-between sm:gap-4  ">
         <div className=" text-center sm:text-start">
-          <h3 className="text-lg font-bold text-gray-900 sm:text-xl ">
-            Nombre Apellido
-          </h3>
-          <h4 className="mt-1 text-xs sm:text-lg font-medium text-gray-600 ">Profesión</h4>
+          <h3 className="text-lg font-bold text-gray-900 sm:text-xl ">{nombre}</h3>
+          <h4 className="mt-1 text-xs sm:text-lg font-medium text-gray-600 ">{profesion}</h4>
+
           <div className="flex items-center mt-1  justify-center sm:justify-start">
             <svg className="w-4 h-4 fill-current text-yellow-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" /></svg>
             <svg className="w-4 h-4 fill-current text-yellow-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" /></svg>
@@ -30,7 +30,7 @@ const CardServiceProvider = () => {
 
           <img
             alt=""
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+            src={imagen}
             className="size-24 rounded-lg object-cover shadow-sm m-auto"
           />
         </div>
@@ -38,13 +38,13 @@ const CardServiceProvider = () => {
 
       <div className="mt-4   text-center   sm:text-start">
         <p className="text-pretty text-sm text-gray-500 ">
-          Empresa : Lorem, ipsum dolor.
+          {empresa}
         </p>
         <p className="text-pretty text-sm text-gray-500">
-          Dirección : Lorem, ipsum dolor.
+          {direccion}
         </p>
         <p className="text-pretty text-sm text-gray-500">
-          Precio estimado : Lorem, ipsum dolor.
+          {precio}
         </p>
 
       </div>
