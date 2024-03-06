@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import { CiMenuFries } from "react-icons/ci";
+import { UserContext } from "../../context/UserProvider";
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
+
+    const {user} = useContext(UserContext)
 
     return (
         <nav className="bg-slate-600">
@@ -22,12 +25,19 @@ const Navbar = () => {
                             <Link spy={true} smooth={true} to="/Servicios">
                                 <li className="hover:text-green-700 transition border-b-2 border-slate-600 hover:border-green-700 cursor-pointer">Servicios</li>
                             </Link>
+
+                            {!user.token ? (
+                                <>
                             <Link spy={true} smooth={true} to="Inicio">
                                 <li className="bg-black bg-opacity-50 rounded-xl py-1 px-2 hover:text-green-700  cursor-pointer">Sign In</li>
                             </Link>
                             <Link spy={true} smooth={true} to="register">
                                 <li className="bg-black bg-opacity-50 rounded-xl py-1 px-2 hover:text-green-700  cursor-pointer">Sign Up</li>
                             </Link>
+                                </>
+                            ) : ( 
+                                <li>Bienvenido, {user.username}</li>
+                            )}
                         </ul>
                     </div>
                 </div>

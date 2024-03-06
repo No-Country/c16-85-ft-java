@@ -13,8 +13,9 @@ import UserProvider from './context/UserProvider'
 
 function App() {
   return (
+    <UserProvider>
+    
     <Router>
-
       <Routes>
         <Route path="/" element={<Home/>}>
           <Route index element={<Index/>} />
@@ -25,12 +26,12 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Route>
         <Route path="/Detalle" element={<CardDetail/>} />
-      
-
         <Route path="/review" element={<Review/>} />
         <Route path="/Detalle" element={<CardDetail/>} />
       </Routes>
     </Router>
+    
+    </UserProvider>
   );
 }
 
