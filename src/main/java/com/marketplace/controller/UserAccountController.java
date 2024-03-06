@@ -1,6 +1,7 @@
 package com.marketplace.controller;
 
 import com.marketplace.DTO.useraccount.UserAccountResponse;
+import com.marketplace.DTO.useraccount.UserAccountUpdateRequest;
 import com.marketplace.service.IUserAccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,17 +29,17 @@ public class UserAccountController {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
+        @PatchMapping("/{id}")
+        public ResponseEntity<Void> update(@PathVariable Long id,
+                                           @RequestBody UserAccountUpdateRequest request
+                                            ){
+            service.update(id, request);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
     //metodos DELETE y UPDATE de username y password en security.controller.UserAuthController
     //@PatchMapping("users/change-password")
     //@PatchMapping("users/change-email")
     //@DeleteMapping("users/delete")
-
-
-    //    @PutMapping
-    //    public ResponseEntity<Void> update(@RequestBody RegisterRequest request
-    //                                        ){
-    //        service.update(id, request);
-    //        return new ResponseEntity<>(HttpStatus.OK);
-    //    }
 
 }

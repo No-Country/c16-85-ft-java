@@ -1,6 +1,7 @@
 package com.marketplace.service.impl;
 
 import com.marketplace.DTO.useraccount.UserAccountResponse;
+import com.marketplace.DTO.useraccount.UserAccountUpdateRequest;
 import com.marketplace.exceptions.user.persistenceexceptions.CannotPersistUserException;
 import com.marketplace.exceptions.user.persistenceexceptions.UserAccountNotFound;
 import com.marketplace.models.entity.UserAccount;
@@ -76,11 +77,11 @@ public class UserAccountServiceImpl implements IUserAccountService {
     }
 
     @Override
-    public void update(Long id, RegisterRequest request) {
+    public void update(Long id, UserAccountUpdateRequest request) {
         var optionalUser = repository.findById(id);
 
         if(optionalUser.isPresent()){
-            var user = IUserAccountMapper.INSTANCE.toEntity(request);
+            var user = IUserAccountMapper.INSTANCE.updateRequestToEntity(request);
             user.setId(id);
             repository.save(user);
         } else

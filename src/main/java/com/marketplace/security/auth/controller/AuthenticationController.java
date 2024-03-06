@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
     private final AuthenticationServiceImpl service;
 
-    @PostMapping("/register")
+    @PostMapping("/auth/register")
     public ResponseEntity<AuthenticationResponse> userRegister(
             @RequestBody RegisterRequest request
     ) {
@@ -43,8 +42,7 @@ public class AuthenticationController {
 
     }
 
-
-    @PostMapping("/authenticate")
+    @PostMapping("/auth/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
@@ -53,7 +51,7 @@ public class AuthenticationController {
 
     }
 
-    @PostMapping("/refresh-token")
+    @PostMapping("/auth/refresh-token")
     public void refreshToken(
             HttpServletRequest request,
             HttpServletResponse response
@@ -61,6 +59,5 @@ public class AuthenticationController {
 
         service.refreshToken(request, response);
     }
-
 
 }

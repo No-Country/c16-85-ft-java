@@ -13,8 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
-import static com.marketplace.security.userauth.model.Role.ADMIN;
-import static org.springframework.http.HttpMethod.GET;
+import static com.marketplace.security.userauth.model.Role.*;
+import static org.springframework.http.HttpMethod.*;
 
 @Configuration
 @EnableWebSecurity
@@ -31,36 +31,79 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authz -> authz
-                        //admin
+                        //ADMIN
                         .requestMatchers("/admin/**")
                         .hasRole(ADMIN.name())
-                        //auth
-                        .requestMatchers("/auth/admin/**")
-                        .hasRole(ADMIN.name())
-                        .requestMatchers("/auth/register")
+
+                        //AUTHENTICATION
+                        .requestMatchers("/auth/**")
                         .permitAll()
-                        .requestMatchers("/auth/authenticate")
+
+                        //USERS
+                        .requestMatchers(GET,"/users")
                         .permitAll()
-                        .requestMatchers("/auth/refresh-token")
+                        .requestMatchers(GET,"/users/{id}")
                         .permitAll()
-                        .requestMatchers("/auth/logout")
+                        .requestMatchers(PATCH,"/users/change-password")
+                        .hasAnyRole(ADMIN.name(), USER.name(), CONTRACTOR.name())
+                        .requestMatchers(PATCH,"/users/change-email")
+                        .hasAnyRole(ADMIN.name(), USER.name(), CONTRACTOR.name())
+                        .requestMatchers(PATCH,"/users/{id}")
+                        .hasAnyRole(ADMIN.name(), USER.name(), CONTRACTOR.name())
+                        .requestMatchers(DELETE,"/users")
+                        .hasAnyRole(ADMIN.name(), USER.name(), CONTRACTOR.name())
+
+                        //CONTRACTORS
+                        .requestMatchers(POST,"/api/v1/contractor/create")
+                        .hasAnyRole(ADMIN.name(), USER.name(), CONTRACTOR.name())
+
+                        //PROFESSIONS
+                        .requestMatchers(GET,"/professions/all")
                         .permitAll()
-                        //.requestMatchers(GET,"/professions/**")
-                        //.permitAll()
+                        .requestMatchers(GET,"/professions/{id}")
+                        .permitAll()
+                        .requestMatchers(GET,"/professions/category/{name}")
+                        .permitAll()
+                        .requestMatchers(GET,"/professions/contractor/{id}")
+                        .permitAll()
+                        .requestMatchers(GET,"/professions/title/{title}")
+                        .permitAll()
+                        .requestMatchers(POST,"/professions")
+                        .hasAnyRole(ADMIN.name(), CONTRACTOR.name())
+                        .requestMatchers(PUT,"/professions/{id}")
+                        .hasAnyRole(ADMIN.name(), CONTRACTOR.name())
+                        .requestMatchers(DELETE,"/professions/{id}")
+                        .hasAnyRole(ADMIN.name(), CONTRACTOR.name())
 
-                        //.requestMatchers("/profession/**").hasAnyRole(ADMIN.name(), USER.name())
-                        //.requestMatchers(GET,"/profession").hasAnyAuthority(ADMIN_READ.name(), USER_READ.name())
-//                        .requestMatchers(PUT,"/profession/{id}").hasAuthority(ADMIN_UPDATE.name())
-//                        .requestMatchers(DELETE,"/profession/{id}").hasAuthority(ADMIN_DELETE.name())
-//                        .requestMatchers(POST,"/profession").hasAuthority(USER_CREATE.name())
+                        //CATEGORIES
+                        .requestMatchers(GET,"/categories")
+                        .permitAll()
+                        .requestMatchers(GET,"/categories/id/{id}")
+                        .permitAll()
+                        .requestMatchers(GET,"/categories/name/{name}")
+                        .permitAll()
+                        .requestMatchers(POST,"/categories")
+                        .hasAnyRole(ADMIN.name())
+                        .requestMatchers(PUT,"/categories/{id}")
+                        .hasAnyRole(ADMIN.name())
+                        .requestMatchers(DELETE,"/categories/{id}")
+                        .hasAnyRole(ADMIN.name())
 
+                        //SERVICES-HISTORY
+                        .requestMatchers(GET,"/history/")
+                        .hasAnyRole(ADMIN.name(), USER.name(), CONTRACTOR.name())
+                        .requestMatchers(GET,"/history/find/{id}")
+                        .hasAnyRole(ADMIN.name(), USER.name(), CONTRACTOR.name())
+                        .requestMatchers(POST,"/history/create")
+                        .hasAnyRole(ADMIN.name(), USER.name(), CONTRACTOR.name())
+                        .requestMatchers(PUT,"/history/edit/{id}")
+                        .hasAnyRole(ADMIN.name(), USER.name(), CONTRACTOR.name())
+                        .requestMatchers(DELETE,"/history/delete/{id}")
+                        .hasAnyRole(ADMIN.name(), USER.name(), CONTRACTOR.name())
 
-
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-
-                        .anyRequest()
+                        //.anyRequest()
                         //.autenticated()
-                        .permitAll() // permitAll() para poder testear
+                        //.permitAll() // permitAll() para poder testear
                 ))
                 .sessionManagement(sess ->
                         sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

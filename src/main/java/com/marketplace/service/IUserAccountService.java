@@ -1,6 +1,7 @@
 package com.marketplace.service;
 
 import com.marketplace.DTO.useraccount.UserAccountResponse;
+import com.marketplace.DTO.useraccount.UserAccountUpdateRequest;
 import com.marketplace.models.entity.UserAccount;
 import com.marketplace.security.auth.dto.RegisterRequest;
 import com.marketplace.security.userauth.model.UserAuth;
@@ -19,5 +20,5 @@ public interface IUserAccountService {
 
     UserAccount save(RegisterRequest request, UserAuth userAuth);
 
-    void update(Long id, RegisterRequest request);
+    void update(Long id, UserAccountUpdateRequest request);
 }
