@@ -16,8 +16,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-04T22:27:44-0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Private Build)"
+    date = "2024-03-06T17:18:32-0300",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.7 (Oracle Corporation)"
 )
 public class IProfessionMapperImpl implements IProfessionMapper {
 
@@ -215,7 +215,9 @@ public class IProfessionMapperImpl implements IProfessionMapper {
         ceoName = contractorProfileCeoNameName( contractorProfile );
         ceoLastName = contractorProfileCeoLastNameLastName( contractorProfile );
 
-        ContractorProfileResponse contractorProfileResponse = new ContractorProfileResponse( businessName, ceoName, ceoLastName );
+        String address = null;
+
+        ContractorProfileResponse contractorProfileResponse = new ContractorProfileResponse( businessName, ceoName, ceoLastName, address );
 
         return contractorProfileResponse;
     }
