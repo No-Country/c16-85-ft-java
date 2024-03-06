@@ -13,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
+import static com.marketplace.security.userauth.model.Role.ADMIN;
 import static org.springframework.http.HttpMethod.GET;
 
 @Configuration
@@ -30,10 +31,22 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authz -> authz
-                        .requestMatchers("/auth/**")
+                        //admin
+                        .requestMatchers("/admin/**")
+                        .hasRole(ADMIN.name())
+                        //auth
+                        .requestMatchers("/auth/admin/**")
+                        .hasRole(ADMIN.name())
+                        .requestMatchers("/auth/register")
                         .permitAll()
-                        .requestMatchers(GET,"/professions/**")
+                        .requestMatchers("/auth/authenticate")
                         .permitAll()
+                        .requestMatchers("/auth/refresh-token")
+                        .permitAll()
+                        .requestMatchers("/auth/logout")
+                        .permitAll()
+                        //.requestMatchers(GET,"/professions/**")
+                        //.permitAll()
 
                         //.requestMatchers("/profession/**").hasAnyRole(ADMIN.name(), USER.name())
                         //.requestMatchers(GET,"/profession").hasAnyAuthority(ADMIN_READ.name(), USER_READ.name())
