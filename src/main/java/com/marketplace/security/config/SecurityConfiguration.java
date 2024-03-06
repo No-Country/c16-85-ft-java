@@ -13,6 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
+import static org.springframework.http.HttpMethod.GET;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -30,7 +32,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authz -> authz
                         .requestMatchers("/auth/**")
                         .permitAll()
-
+                        .requestMatchers(GET,"/professions/**")
+                        .permitAll()
 
                         //.requestMatchers("/profession/**").hasAnyRole(ADMIN.name(), USER.name())
                         //.requestMatchers(GET,"/profession").hasAnyAuthority(ADMIN_READ.name(), USER_READ.name())
