@@ -1,4 +1,4 @@
-package com.marketplace.security.demo.controller;
+package com.marketplace.security.userauth.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
