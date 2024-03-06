@@ -3,6 +3,7 @@ package com.marketplace.service.impl;
 import com.marketplace.DTO.contractor.ContractorProfileRequest;
 import com.marketplace.DTO.contractor.ContractorProfileResponse;
 import com.marketplace.exceptions.TokenNotFoundException;
+import com.marketplace.exceptions.contractor.ContractorNotFound;
 import com.marketplace.models.entity.ContractorProfile;
 import com.marketplace.models.entity.UserAccount;
 import com.marketplace.models.mapper.contractor.ContractorMapper;
@@ -55,5 +56,13 @@ public class ContractorProfileServiceImpl implements ContractorProfileService {
         contractorRepository.save(newContractor);
 
         return mapper.mapContractorToResponse(newContractor);
+    }
+
+    @Override
+    public ContractorProfileResponse findContractorByID(Long id) {
+        ContractorProfile findContractor = contractorRepository.findById(id)
+                .orElseThrow(()-> new ContractorNotFound("Contractor not found with: " + id));
+
+        return mapper.mapContractorToResponse(findContractor);
     }
 }
