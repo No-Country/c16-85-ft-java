@@ -29,7 +29,6 @@ public class Location {
     @OneToOne
     private UserAccount userAccount;
     @OneToOne
-    @JsonIgnore
     private ContractorProfile contractorProfile;
 
 

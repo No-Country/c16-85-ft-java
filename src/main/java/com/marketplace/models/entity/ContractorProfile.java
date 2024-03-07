@@ -29,7 +29,7 @@ public class ContractorProfile {
     @OneToMany(mappedBy = "contractorProfile")
     private final List<ProfessionalService> profService = new ArrayList<>();
 
-    @OneToOne(mappedBy = "contractorProfile")
+    @OneToOne
     @JoinColumn(name = "location_id")
     private Location location;
 
