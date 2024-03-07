@@ -16,7 +16,7 @@ const SelectProfession = () => {
 }
 
 
-const SideBar = () => {
+const SideBar = ({category}) => {
 
 
 
@@ -81,8 +81,11 @@ const SideBar = () => {
 
       <li className="hidden sm:block">
         <a
-          href="#"
-          className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+          href={ category === "Electricista" ? "Servicios" : "Servicios?categoria=Electricista"   }
+          className={
+             category === "Electricista" ? "flex items-center gap-2 rounded-lg px-4 py-2  bg-gray-200 text-gray-700" : "flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+          }
+      
          
         >
           <MdOutlineLabel />
@@ -93,8 +96,10 @@ const SideBar = () => {
 
       <li className="hidden sm:block" >
         <a
-          href="#"
-          className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+              href={ category === "Plomero" ? "Servicios" : "Servicios?categoria=Plomero"   }
+          className={
+            category === "Plomero" ? "flex items-center gap-2 rounded-lg px-4 py-2  bg-gray-200 text-gray-700" : "flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+         }
         >
           <MdOutlineLabel />
 
@@ -104,8 +109,11 @@ const SideBar = () => {
 
       <li className="hidden sm:block" >
         <a
-          href="#"
-          className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+        href = { category === "Carpintero" ? "Servicios" : "Servicios?categoria=Carpintero"   }
+         
+          className={
+            category === "Carpintero" ? "flex items-center gap-2 rounded-lg px-4 py-2  bg-gray-200 text-gray-700" : "flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+         }
         >
           <MdOutlineLabel />
 
@@ -115,8 +123,10 @@ const SideBar = () => {
 
       <li className="hidden sm:block">
         <a
-          href="#"
-          className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+          href = { category === "Albañil" ? "Servicios" : "Servicios?categoria=Albañil"   }
+          className={
+            category === "Albañil" ? "flex items-center gap-2 rounded-lg px-4 py-2  bg-gray-200 text-gray-700" : "flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+         }
         >
           <MdOutlineLabel />
 
