@@ -1,4 +1,5 @@
 import { MdOutlineLabel } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const SelectProfession = () => {
   return (<>
@@ -83,10 +84,10 @@ const SideBar = ({category}) => {
         <a
           href={ category === "Electricista" ? "Servicios" : "Servicios?categoria=Electricista"   }
           className={
-             category === "Electricista" ? "flex items-center gap-2 rounded-lg px-4 py-2  bg-gray-200 text-gray-700" : "flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+              category === "Electricista" ? "flex items-center gap-2 rounded-lg px-4 py-2  bg-gray-200 text-gray-700" : "flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
           }
       
-         
+        
         >
           <MdOutlineLabel />
 
@@ -136,11 +137,11 @@ const SideBar = ({category}) => {
 
       <li>
 
-
-        <button to="/register" className="sm:mt-2   sm:w-full sm:m-auto sm:mb-2 sm:h-[40px]  duration-200    md:py-2   sm: m-auto  ml-4 mr-2 py-1  md:mb-0 focus:shadow-outline   transition flex items-center justify-center  px-4  shadow-md font-medium tracking-wide  focus:outline-none  hover:text-green-600 rounded-2xl border bg-slate-600 text-stone-50 ">
+        <Link to="/Formulario">
+        <button  className="sm:mt-2   sm:w-full sm:m-auto sm:mb-2 sm:h-[40px]  duration-200    md:py-2   sm: m-auto  ml-4 mr-2 py-1  md:mb-0 focus:shadow-outline   transition flex items-center justify-center  px-4  shadow-md font-medium tracking-wide  focus:outline-none  hover:text-green-600 rounded-2xl border bg-slate-600 text-stone-50 ">
           <span className="m-auto">Crear publicación</span>
-
         </button>
+        </Link>
       </li>
     </ul>
 

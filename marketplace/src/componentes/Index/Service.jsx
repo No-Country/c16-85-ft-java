@@ -3,6 +3,7 @@ import imgElectrician from '../../../public/img/electricista.webp'
 import imgPlumber from '../../../public/img/Plomero.webp'
 import imgCarpenter from '../../../public/img/Gasista.webp'
 import imgConstructionWorker from '../../../public/img/albañil.webp'
+import { Link } from "react-router-dom"
 
 const CardService = ({ name, description, img }) => {
   console.log(name);
@@ -25,8 +26,13 @@ const CardService = ({ name, description, img }) => {
               {description}
             </p>
           </p>
-          <a class="inline-block mt-5 w-auto bg-slate-600 hover:cursor-pointer hover:bg-slate-700 text-white font-semibold py-2 px-4 border border-sky-800 rounded text-center">
-            Buscar {name}</a>
+
+          <Link to={`Servicios?categoria=${name}`} class="inline-block mt-5 w-auto bg-slate-600 hover:cursor-pointer hover:bg-slate-700 text-white font-semibold py-2 px-4 border border-sky-800 rounded text-center">
+            Buscar {name}
+          </Link>
+
+
+
         </div>
       </div>
     </div>
