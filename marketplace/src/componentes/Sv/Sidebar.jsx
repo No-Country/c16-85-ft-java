@@ -1,5 +1,7 @@
+import { useRef, useState } from "react";
 import { MdOutlineLabel } from "react-icons/md";
 import { Link } from "react-router-dom";
+
 
 const SelectProfession = () => {
   return (<>
@@ -17,8 +19,20 @@ const SelectProfession = () => {
 }
 
 
-const SideBar = ({category}) => {
+const SideBar = ({category , setName}) => {
+  const inputName = useRef(null);
+  const handleClick = (e) => {
 
+     setName(inputName.current.value);
+  } 
+
+
+  const generateUrlService = (name) => {
+
+    
+    
+      return `Servicios?categoria=${name}`
+  }
 
 
   return (<>
@@ -42,12 +56,14 @@ const SideBar = ({category}) => {
               id="simple-search"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder=""
-
+              ref={inputName}
+           
             />
           </div>
           <button
-            type="submit"
+            type="button"
             className="p-1.5 ml-1 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={handleClick}
           >
             <svg
               className="w-4 h-4"
@@ -65,7 +81,7 @@ const SideBar = ({category}) => {
               />
             </svg>
             <span className="sr-only">Search</span>
-          </button>
+          </button >
         </form>
 
       </li>
@@ -82,7 +98,7 @@ const SideBar = ({category}) => {
 
       <li className="hidden sm:block">
         <a
-          href={ category === "Electricista" ? "Servicios" : "Servicios?categoria=Electricista"   }
+          href={ category === "Electricista" ? "Servicios" :  generateUrlService("Electricista")  }
           className={
               category === "Electricista" ? "flex items-center gap-2 rounded-lg px-4 py-2  bg-gray-200 text-gray-700" : "flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
           }
@@ -97,7 +113,7 @@ const SideBar = ({category}) => {
 
       <li className="hidden sm:block" >
         <a
-              href={ category === "Plomero" ? "Servicios" : "Servicios?categoria=Plomero"   }
+              href={ category === "Plomero" ? "Servicios" : generateUrlService("Plomero")  }
           className={
             category === "Plomero" ? "flex items-center gap-2 rounded-lg px-4 py-2  bg-gray-200 text-gray-700" : "flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
          }
@@ -110,7 +126,7 @@ const SideBar = ({category}) => {
 
       <li className="hidden sm:block" >
         <a
-        href = { category === "Carpintero" ? "Servicios" : "Servicios?categoria=Carpintero"   }
+        href = { category === "Carpintero" ? "Servicios" : generateUrlService("Carpintero") }
          
           className={
             category === "Carpintero" ? "flex items-center gap-2 rounded-lg px-4 py-2  bg-gray-200 text-gray-700" : "flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
@@ -124,7 +140,7 @@ const SideBar = ({category}) => {
 
       <li className="hidden sm:block">
         <a
-          href = { category === "Albañil" ? "Servicios" : "Servicios?categoria=Albañil"   }
+          href = { category === "Albañil" ? "Servicios" :  generateUrlService("Albañil")   }
           className={
             category === "Albañil" ? "flex items-center gap-2 rounded-lg px-4 py-2  bg-gray-200 text-gray-700" : "flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
          }
