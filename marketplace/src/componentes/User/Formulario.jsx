@@ -1,14 +1,18 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { UserContext } from "../../context/UserProvider"
 
 
 
 const Formulario = () => {
+   
+   const user = useContext(UserContext)
+   
 
     const servicios = {
-        "businessName": "string",
-        "ceoName": "string",
-        "ceoLastName": "string",
-        "address": "string"
+        "businessName": "",
+        "ceoName": "",
+        "ceoLastName": "",
+        "address": ""
     }
 
 
@@ -18,8 +22,8 @@ const Formulario = () => {
     const handleChange = e => {
 
         const { name, value } = e.target
-        const valueServicios = { ...servicios, [name]: value };
-        setLogin(valueServicios)
+        const valueServicios = { ...service, [name]: value };
+        setService(valueServicios)
     }
 
 
@@ -27,13 +31,20 @@ const Formulario = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(Servicios);
-        let response = await fetch('https://c16-85-ft-java.onrender.com/auth/authenticate', {
+        console.log(service);
+        let response = await fetch(`https://c16-85-ft-java.onrender.com/api/v1/contractor/create?businessName=
+        ${service.businessName}&ceoName=${service.ceoName}&ceoLastName=${service.ceoLastName}&address=${service.address}`, {
             method: 'POST',
+            
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json' , 
+                Authorization: "Bearer " + user.token
             },
         })
+        
+        const data = await response.json();
+        console.log(data);
+
 
     }
 
