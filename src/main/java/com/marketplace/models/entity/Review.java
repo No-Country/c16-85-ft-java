@@ -1,28 +1,38 @@
 package com.marketplace.models.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Entity(name = "reviews")
-@Getter
+@ToString
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@Getter
+@EqualsAndHashCode
 public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
     private String description;
-    private Double score;
+    private int score;
     @OneToMany(mappedBy = "review")
     private List<ServicesHistory> servicesHistoryList;
+    @OneToOne
+    private ServicesHistory servicesHistory;
 
+    public Review() {}
 
+    public Review(String description, int score, ServicesHistory servicesHistory) {
+        this.description = description;
+        this.score = score;
+        this.servicesHistory = servicesHistory;
+    }
 
+    public static Review createReview(String description, int score, ServicesHistory servicesHistory) {
+        return new Review(description, score, servicesHistory);
+    }
 }

@@ -1,12 +1,14 @@
 package com.marketplace.models.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity(name = "service_histories")
 @Getter
@@ -19,6 +21,12 @@ public class ServicesHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long serviceHistoryId;
+
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column
     private LocalDate date;
     private BigDecimal price;
     @ManyToOne
@@ -30,11 +38,12 @@ public class ServicesHistory {
     private ContractorProfile contractorProfile;
     @ManyToOne
     @JoinColumn(name = "review_id")
+
+    @OneToOne
     private Review review;
 
     @ManyToOne
     @JoinColumn(name = "professional_service_id")
     private ProfessionalService professionalService;
-
 
 }

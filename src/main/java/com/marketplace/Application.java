@@ -1,7 +1,6 @@
 package com.marketplace;
 
-import com.marketplace.security.auth.service.AuthenticationService;
-import com.marketplace.security.auth.dto.RegisterRequest;
+import com.marketplace.security.auth.service.AuthenticationServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +15,7 @@ public class Application {
 
 	@Bean
 	public CommandLineRunner commandLineRunner(
-			AuthenticationService service
+			AuthenticationServiceImpl service
 	) {
 		return args -> {
 //			var admin23 = RegisterRequest.builder()

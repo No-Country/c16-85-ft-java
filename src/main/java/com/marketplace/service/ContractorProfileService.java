@@ -5,4 +5,6 @@ import com.marketplace.DTO.contractor.ContractorProfileResponse;
 
 public interface ContractorProfileService {
     ContractorProfileResponse createContractorProfile(ContractorProfileRequest contractorDetails);
+
+    ContractorProfileResponse findContractorByID(Long id);
 }

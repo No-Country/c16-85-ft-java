@@ -20,3 +20,7 @@ COPY --from=backend-builder /app/springdemo.jar ./
 COPY --from=frontend-builder /app/dist ./frontend
 EXPOSE 8080
 CMD ["java", "-jar", "springdemo.jar"]
+FROM eclipse-temurin:17-jre
+COPY target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app.jar"]

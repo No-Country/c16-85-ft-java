@@ -2,6 +2,8 @@ package com.marketplace.security.userauth.model;
 
 
 import com.marketplace.models.entity.UserAccount;
+import com.marketplace.security.token.Token;
+import com.marketplace.security.userauth.model.valueobjects.Username;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @Builder
@@ -24,10 +27,12 @@ public class UserAuth implements UserDetails {
     @GeneratedValue
     private Long id;
     @Column(unique = true)
-    private String username;
+    private Username username;
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToMany(mappedBy = "userAuth")
+    private List<Token> tokens;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_account_id")
     private UserAccount userAccount;
@@ -45,7 +50,7 @@ public class UserAuth implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return username.username();
     }
 
     @Override

@@ -1,21 +1,21 @@
 package com.marketplace.models.entity;
 
 import com.marketplace.models.valueobjets.address.Address;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+
+
 @Entity(name = "locations")
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long locationId;
-    @Column
     private String city;
     private String province;
     private String country;
@@ -25,5 +25,12 @@ public class Location {
     @OneToOne
     private UserAccount userAccount;
     @OneToOne
+    @JsonIgnore
     private ContractorProfile contractorProfile;
+
 }
+
+
+
+
+

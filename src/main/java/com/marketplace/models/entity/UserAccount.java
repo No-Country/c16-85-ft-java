@@ -3,7 +3,6 @@ package com.marketplace.models.entity;
 import com.marketplace.models.valueobjets.useraccount.Firstname;
 import com.marketplace.models.valueobjets.useraccount.Lastname;
 import com.marketplace.models.valueobjets.useraccount.Birthday;
-import com.marketplace.models.valueobjets.useraccount.Username;
 import com.marketplace.models.valueobjets.useraccount.Mobile;
 
 import com.marketplace.security.userauth.model.UserAuth;
@@ -42,7 +41,7 @@ public class UserAccount {
     @OneToOne
     @JoinColumn(name = "user_auth_id")
     private UserAuth userAuth;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "contractor_profile_id")
     private ContractorProfile contractorProfile;
     @OneToMany(mappedBy = "userAccount")

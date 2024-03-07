@@ -5,6 +5,7 @@ import com.marketplace.models.entity.Review;
 import com.marketplace.models.entity.ServicesHistory;
 import com.marketplace.repository.ReviewRepository;
 import com.marketplace.service.ReviewService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,36 +14,24 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
 
-    @Autowired
-    ReviewRepository reviewrepository;
+    private final ReviewRepository repository;
 
     @Override
     public List<Review> listReview() {
-        return reviewrepository.findAll();
+        return repository.findAll();
     }
 
     @Override
-    public Review buscarReviewPorId(Long id) {
-        Optional<Review> optionalReview = reviewrepository.findById(id);
-        return optionalReview.orElse(null);
-
+    public Review buscarReviewPorId(Long reviewId) {
+        return repository.findById(reviewId)
+                .orElseThrow();
     }
 
     @Override
     public Review guardarReview(Review newReview) {
-        return reviewrepository.save(newReview);
-    }
-
-    @Override
-    public Review editarReviewPorID(Long id, Review reviewUpDate) {
-        Optional<Review> optionalReview = reviewrepository.findById(id);
-        if (optionalReview.isPresent()) {
-            Review reviewexistente = optionalReview.get();
-            reviewexistente.setDescription(reviewUpDate.getDescription());
-            return reviewrepository.save(reviewexistente);
-        }
-        return null;
+        return repository.save(newReview);
     }
 }

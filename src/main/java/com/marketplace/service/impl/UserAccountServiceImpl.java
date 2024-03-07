@@ -1,8 +1,8 @@
 package com.marketplace.service.impl;
 
 import com.marketplace.DTO.useraccount.UserAccountResponse;
-import com.marketplace.exceptions.user.CannotPersistUserException;
-import com.marketplace.exceptions.user.UserAccountNotFound;
+import com.marketplace.exceptions.user.persistenceexceptions.CannotPersistUserException;
+import com.marketplace.exceptions.user.persistenceexceptions.UserAccountNotFound;
 import com.marketplace.models.entity.UserAccount;
 import com.marketplace.models.mapper.IUserAccountMapper;
 import com.marketplace.models.valueobjets.address.Address;
@@ -17,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,7 +29,8 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
     @Override
     public Page<UserAccountResponse> findAll(Pageable pageable) {
-        return repository.findAll(pageable).map(IUserAccountMapper.INSTANCE::toUserResponse);
+        return repository.findAll(pageable)
+                .map(IUserAccountMapper.INSTANCE::toUserResponse);
     }
 
     @Override
@@ -40,27 +40,18 @@ public class UserAccountServiceImpl implements IUserAccountService {
         if(requestedUser.isPresent()){
             var user = requestedUser.get();
 
-            return UserAccountResponse.builder()
-                    .username(user.getUsername())
-                    .firstname(user.getFirstname().toString())
-                    .lastname(user.getLastname().toString())
-                    .build();
-
+            return IUserAccountMapper.INSTANCE.toUserResponse(user);
         }
 
-        else{
-            throw new UserAccountNotFound();
-        }
-
-
+        else
+            throw new UserAccountNotFound("User not found");
 
     }
 
     @Override
     public UserAccount save(RegisterRequest request, UserAuth userAuth){
-        var location = locationService.guardarlocations(
-                locationService.createMarDelPlataLocation(
-                new Address(request.address())));
+        var location = locationService.createMarDelPlataLocation(
+                new Address(request.address()));
 
         var user = IUserAccountMapper.INSTANCE.toEntity(request);
         user.setUserAuth(userAuth);
@@ -78,7 +69,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
             userAuthRepository.deleteById(userAuth.getId());
 
-            throw new CannotPersistUserException();
+            throw new CannotPersistUserException("User cannot being saved. Internal Error");
 
         }
 
@@ -92,7 +83,8 @@ public class UserAccountServiceImpl implements IUserAccountService {
             var user = IUserAccountMapper.INSTANCE.toEntity(request);
             user.setId(id);
             repository.save(user);
-        }
+        } else
+            throw new UserAccountNotFound("User not found");
     }
 
 }

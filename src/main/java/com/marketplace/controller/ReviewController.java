@@ -2,8 +2,8 @@ package com.marketplace.controller;
 
 
 import com.marketplace.models.entity.Review;
-import com.marketplace.service.ReviewService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.marketplace.service.impl.ReviewServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,14 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/reviews")
+@RequiredArgsConstructor
 public class ReviewController {
 
-    private final ReviewService reviewService;
+    private final ReviewServiceImpl reviewService;
 
-    @Autowired
-    public ReviewController(ReviewService reviewService) {
-        this.reviewService = reviewService;
-    }
 
     /*Este controlador trae toda la lista de la entidad Review */
     @GetMapping
@@ -39,11 +36,5 @@ public class ReviewController {
     }
 
     /*Este controlador actualiza un dato por Id de la entidad Review */
-    @PutMapping("update/{id}")
-    public Review updateReview(@PathVariable Long reviewId, @RequestBody Review updatedReview) {
-        return reviewService.editarReviewPorID(reviewId, updatedReview);
-    }
-
-
 
 }

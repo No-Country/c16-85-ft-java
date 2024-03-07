@@ -7,6 +7,7 @@ import com.marketplace.models.valueobjets.contractor.CeoName;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @Entity(name = "ContractorProfiles")
 @ToString
 @EqualsAndHashCode
-@Getter
+@Getter @Setter
 public class ContractorProfile {
 
     @Id
@@ -69,7 +70,10 @@ public class ContractorProfile {
     public void addServicesHistory(ServicesHistory servicesHistory) {
         this.servicesHistory.add(servicesHistory);
     }
+
     public void addProfessionalService(ServicesHistory servicesHistory) {
-        this.servicesHistory.add(servicesHistory);
+        this.servicesHistory.add(servicesHistory);}
+    public void addProfessionalService(ProfessionalService profesionalService) {
+        this.profService.add(profesionalService);
     }
 }

@@ -8,7 +8,8 @@ public class ContractorProfileMapper {
         return new ContractorProfileResponse(
                 contractor.getBusinessName().businessName(),
                 contractor.getCeoName().name(),
-                contractor.getCeoLastName().lastName()
+                contractor.getCeoLastName().lastName(),
+                contractor.getLocation().getAddress().address()
         );
     }
 }
