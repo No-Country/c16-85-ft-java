@@ -20,6 +20,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ContractorProfileServiceImpl implements ContractorProfileService {
@@ -64,5 +67,17 @@ public class ContractorProfileServiceImpl implements ContractorProfileService {
                 .orElseThrow(()-> new ContractorNotFound("Contractor not found with: " + id));
 
         return mapper.mapContractorToResponse(findContractor);
+    }
+
+    @Override
+    public List<ContractorProfileResponse> findAllContractors() {
+        List<ContractorProfile> getAllContractors = contractorRepository.findAll();
+
+        if (getAllContractors.isEmpty()){
+            throw new ContractorNotFound("Contractors not found");
+        }
+
+        return getAllContractors.stream().map(mapper::mapContractorToResponse)
+                .collect(Collectors.toList());
     }
 }
