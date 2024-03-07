@@ -12,10 +12,8 @@ const Servicios = () => {
   const category = params.get("categoria");
 
 
-
   useEffect(() => {
     if (category) {
-   
       setShowCards(tarjetas.filter((item) => item.profesion === category));
     } else {
       setShowCards(tarjetas);

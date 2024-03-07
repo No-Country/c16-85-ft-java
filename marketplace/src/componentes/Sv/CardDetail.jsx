@@ -4,7 +4,6 @@ import { FaTimes } from 'react-icons/fa';
 import { TbPointFilled } from "react-icons/tb";
 
 
-
 // Importa las imágenes
 import imageUrl from "../../../public/img/electricista.webp";
 import imageUrl2 from "../../../public/img/albañil.webp";
