@@ -1,0 +1,14 @@
+#version: "3"
+#
+#services:
+#  nocountry_db:
+#    container_name: nocountry_db
+#    image: mysql:latest
+#    restart: unless-stopped
+#    environment:
+#      MYSQL_DATABASE: nocountry_db
+#      MYSQL_USER: dev
+#      MYSQL_PASSWORD: 1234
+#      MYSQL_ROOT_PASSWORD: root
+#    ports:
+#      - "3308:3306"
