@@ -13,28 +13,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class ReviewServiceImpl implements ReviewService {
+public class ReviewServiceImpl implements ReviewService {}
 
-    @Autowired
+  /*  @Autowired
     ReviewRepository reviewrepository;
-
-    @Override
-    public List<Review> listReview() {
-        return reviewrepository.findAll();
-    }
-
-    @Override
-    public Review buscarReviewPorId(Long id) {
-        Optional<Review> optionalReview = reviewrepository.findById(id);
-        return optionalReview.orElse(null);
-
-    }
-
-    @Override
-    public Review guardarReview(Review newReview) {
-        return reviewrepository.save(newReview);
-    }
-
     @Override
     public Review editarReviewPorID(Long id, Review reviewUpDate) {
         Optional<Review> optionalReview = reviewrepository.findById(id);
@@ -45,4 +27,4 @@ public class ReviewServiceImpl implements ReviewService {
         }
         return null;
     }
-}
+*/

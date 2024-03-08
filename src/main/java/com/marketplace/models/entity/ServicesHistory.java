@@ -1,7 +1,6 @@
 package com.marketplace.models.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.List;
 
 @Entity(name = "service_histories")
 @Getter
@@ -20,26 +19,26 @@ public class ServicesHistory {
 
     @Id
     @Column
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serviceHistoryId;
+    private Long id;
 
     @Column
-    @NotNull
     private LocalDate date;
     private BigDecimal price;
+
+    @ManyToOne
+    @JoinColumn(name = "user_account_id")
+    private UserAccount userAccount;
 
     @ManyToOne
     @JoinColumn(name = "contractor_profile_id")
     private ContractorProfile contractorProfile;
 
-    @ManyToOne
-    @JoinColumn(name = "review_id")
+    @OneToOne
     private Review review;
 
     @ManyToOne
     @JoinColumn(name = "professional_service_id")
     private ProfessionalService professionalService;
-
 
 }
